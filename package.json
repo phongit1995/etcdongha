@@ -1,0 +1,26 @@
+{
+  "name": "etcdongha",
+  "version": "1.0.0",
+  "description": "website",
+  "main": "no",
+  "scripts": {
+    "test": "no",
+    "start":"nodemon node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phongit1995/etcdongha.git"
+  },
+  "keywords": [
+    "no"
+  ],
+  "author": "phong nguyễn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phongit1995/etcdongha/issues"
+  },
+  "homepage": "https://github.com/phongit1995/etcdongha#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
