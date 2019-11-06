@@ -1,60 +1,44 @@
-const Sequelize = require('sequelize');
-const db = require("./connectdb");
-const TrackFields = {
-    Id:'Id',
-    LicensePlates:'LicensePlates', // Biển Số Xe
-    NameCustomer:'NameCustomer', // Tên Khách Hàng
-    Lane:'Lane', // Lane
-    TrackTime:'TrackTime', // Thời Gian 
-    CreateByUser:'CreateByUser', // Người Tạo
-    Image:'Image', // Hình Ảnh
-    TrackRate:'TrackRate', // Rate
-    Status:'Status', // Trạng Thái
-    Notes:'Notes' // Notes
+let {TrackFields, TrackDB} = require('./../databases/track');
+let sequelize = require('./../databases/connectdb');
+let Texthelper = require('./../commons/TextHelper');
+
+let create = async (data,IDUser)=>{
+    data[TrackFields.CreateByUser]=IDUser;
+    data[TrackFields.TrackId] = Texthelper.genId();
+    let Track = await TrackDB.create(data);
+    return Track ;
 }
-const TrackDB = db.sequelize.define('Track',{
-    [TrackFields.Id]:{
-        type:Sequelize.DataTypes.CHAR,
-        primaryKey:true
-    },
-    [TrackFields.LicensePlates]:{
-        type:Sequelize.DataTypes.STRING
-    },
-    [TrackFields.NameCustomer]:{
-        type:Sequelize.DataTypes.STRING
-    },
-    [TrackFields.Lane]:{
-        type:Sequelize.DataTypes.STRING
-    },
-    [TrackFields.TrackTime]: {
-        type:Sequelize.TIME
-    },
-    [TrackFields.CreateByUser]:{
-        type:Sequelize.DataTypes.STRING
-    },
-    [TrackFields.Image]:{
-        type:Sequelize.DataTypes.STRING
-    },
-    [TrackFields.TrackRate]:{
-        type:Sequelize.NUMBER
-    },
-    [TrackFields.Status]:{
-        type:Sequelize.BOOLEAN,
-        defaultValue:true
-    },
-    [TrackFields.Notes]:{
-        type:Sequelize.TEXT,
-        set(val){
-            this.setDataValue(TrackField.Notes,JSON.stringify(val))
-        },
-        get(){
-            if (this.getDataValue(TrackFields.Notes)) {
-                return JSON.parse(this.getDataValue(TrackField.Notes));
-            }
-        }
+let getListTrack = async (Role,Group)=>{
+    let TrackItem=[];
+    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Status ,Notes , Track.createdAt,Track.
+    updatedAt , Users.UserName, Users.Id ,Fees.IdFee , Fees.FeeNumbers from Track left join Lane on Track.Lane= Lane.LaneID left join Users on Track.CreateByUser = Users.Id  
+    left join Fees on Track.TrackFee = Fees.IdFee where Status=1`
+    if(Role!=1){
+        Sql+= ` and Users.Group= ${Group}`
     }
+    return await sequelize.query(Sql) ;
+}
+let DeleteTrack = async (data,Id)=>{
     
-})
-module.exports ={
-    TrackFields , TrackDB
+    let TrackList = await TrackDB.findAll({
+        where:{
+            [TrackFields.TrackId]:data.TrackId
+        }
+    });
+    let NotesAdmin= TrackList[0].dataValues[TrackFields.NotesAdmin] ;
+    let Note ={ type:'Delete',ID:Id,time:Date.now()};
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin.push(Note)
+    }
+    let result = await TrackDB.update({
+        [TrackFields.Status]:false,
+        [TrackFields.NotesAdmin]:NotesAdmin
+    },{
+        where:{[TrackFields.TrackId]:data.TrackId}
+    })
+    return result ;
+    
+}
+module.exports = {
+    create,getListTrack,DeleteTrack
 }

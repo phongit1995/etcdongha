@@ -1,0 +1,112 @@
+<div id="editForm" class="modal fade in" role="dialog" style="display: none; padding-right: 15px;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Cập nhật thông tin </h4>
+            </div>
+            <div class="modal-body" id="editor-body">
+                <form id="updateTrack">
+                    <p><b>BIỂN SỐ XE</b>:
+                        <input type="text" class="form-control" id="trackNo" name="trackNo" required="true" value="74A09909">
+                    </p>
+                    <p><b>TÊN KHÁCH HÀNG</b>:
+                        <input type="text" class="form-control" id="Name" name="Name" required="true" value="Đang cập nhật">
+                    </p>
+                    <p><b>LÀN</b>
+                        <br>
+                        <select class="form-control" id="Qty" name="Qty">
+                            <option value="0" selected="">CHỌN LÀN XE</option>
+                            <option value="1">LÀN 1</option>
+                            <option value="2">LÀN 2</option>
+                            <option value="3">LÀN 3</option>
+                            <option value="4">LÀN 4</option>
+                            <option value="5">LÀN 5</option>
+                            <option value="6">LÀN 6</option>
+                        </select>
+                    </p>
+                    <p><b>Ngày tháng</b>:
+                        <input type="text" class="datetimepicker form-control flatpickr-input" id="trackDate" name="trackDate" required="true" value="05/11/2019 13:21" readonly="readonly">
+                    </p>
+                    <p><b>GHI CHÚ</b>
+                        <br>
+                        <textarea class="form-control" id="trackData" name="trackData">Vượt trạm</textarea>
+                    </p>
+                    <p><b>MỆNH GIÁ</b>
+                        <br>
+                        <select class="form-control" id="trackRate" name="trackRate">
+                            <option value="1" selected="">0</option>
+                            <option value="2">18,000</option>
+                            <option value="3">20,000</option>
+                            <option value="4">25,000</option>
+                            <option value="5">30,000</option>
+                            <option value="6">45,000</option>
+                            <option value="7">50,000</option>
+                            <option value="8">70,000</option>
+                            <option value="9">75,000</option>
+                            <option value="10">100,000</option>
+                            <option value="11">120,000</option>
+                            <option value="12">180,000</option>
+                        </select>
+                    </p>
+                    <input type="hidden" id="id" name="id" value="1229">
+                    <button class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="addForm" class="modal fade" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title"><font color="green">Thêm thông tin</font></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addTrackForm" action="javascript:return false;" method="POST">
+                        <p><b>BIỂN SỐ XE</b>:
+                            <input type="text" class="form-control" id="LicensePlates" name="trackNo" required="true" value="">
+                            <!-- <div class="btn btn-search"><i class="fas fa-search"></i> </div> -->
+                        </p>
+                        <p><b>TÊN KHÁCH HÀNG</b>:
+                            <input type="text" class="form-control" id="NameCustomers" name="Name" required="true" value="Đang cập nhật">
+                        </p>
+                        <p><b>LÀN</b>
+                            <br>
+                            <select class="form-control" id="Lane" name="Lane">
+                                <% listLane.forEach((item)=>{ %>
+                                    <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
+                               <% }) %>
+                            </select>
+                        </p>
+                        <p><b>GHI CHÚ</b>
+                            <br>
+                            <textarea class="form-control" id="Notes" name="Notes" required="true">Vượt trạm</textarea>
+                        </p>
+                        <p><b>MỆNH GIÁ</b>
+                            <br>
+                            <select class="form-control" id="Fee" name="Fee">
+                                <% listFee.forEach(item=>{ %>
+                                    <option value="<%=item.IdFee %>"> <%=item.FeeNumbers%></option>
+                                <% }) %>
+                        
+                            </select>
+                        </p>
+                        <p><b>Ngày tháng</b>:
+                            <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput " id="TrackTime" name="trackDate" required="true" value="" readonly="readonly">
+                        </p>
+                        <button class="btn btn-success add-track"><i class="fa fa-plus"></i> Lưu</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>

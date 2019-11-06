@@ -1,0 +1,55 @@
+<div class="left side-menu">
+    <div class="slimscroll-menu" id="remove-scroll">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">ETC Đông Hà</li>
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="fi-air-play"></i><span class="badge badge-success pull-right">2</span> <span> Dashboard </span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded=false>
+                        <li><a href="index.html">Dashboard 1</a></li>
+                        <li><a href="dashboard-2.html">Dashboard 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/track"><i class="fi-paper"></i> <span> Vượt Trạm </span></a>
+                </li>
+                <li>
+                    <a href="taskboard.html"><i class="fi-paper-stack"></i> <span>Giảm Giá</span></a>
+                </li>
+                <li>
+                    <a href="taskboard.html"><i class="fi-briefcase"></i> <span>Nhật Ký Vận Hành</span></a>
+                </li>
+                <li>
+                    <a href="taskboard.html"><i class="fi-clock"></i> <span>Nhật Ký Trạm</span></a>
+                </li>
+                <li>
+                    <a href="taskboard.html"><i class="fi-layout"></i> <span>Hướng Dẫn</span></a>
+                </li>
+                <!-- <li>
+                    <a href="tickets.html"><i class="fi-help"></i><span class="badge badge-danger pull-right">New</span> <span> Tickets </span></a>
+                </li> -->
+                <% if(user.Role < 3) { %>
+                <li class="menu-title">Administration </li>
+                <li>
+                    <a href="javascript: void(0);"><i class="fi-box"></i><span> Người Dùng</span> <span class="menu-arrow"></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li><a href="icons-colored.html">Thành Viên</a></li>
+                        <li><a href="icons-materialdesign.html">Mã Giới Thiệu</a></li>
+                    </ul>
+                </li>
+                <% } %>
+            </ul>
+
+        </div>
+        <!-- Sidebar -->
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
