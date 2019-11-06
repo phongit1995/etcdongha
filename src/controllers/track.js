@@ -43,7 +43,6 @@ let getListTrack = async (req,res)=>{
         }
         return item;
     })
-    console.log(listResult);
     return ResponseHelper.json(res,null,listResult);
 }
 let DeleteTrack= async (req,res)=>{
@@ -52,7 +51,7 @@ let DeleteTrack= async (req,res)=>{
     }
     try{
         let result = await TrackModel.DeleteTrack(req.body,req.user.Id);
-        ResponseHelper.json(res,null,null);
+        ResponseHelper.json(res,null,result);
     }catch(error){
         return ResponseHelper.json(res,'Lỗi',null);
     }

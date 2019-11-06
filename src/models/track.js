@@ -16,6 +16,7 @@ let getListTrack = async (Role,Group)=>{
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`
     }
+    Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
 let DeleteTrack = async (data,Id)=>{
@@ -26,8 +27,9 @@ let DeleteTrack = async (data,Id)=>{
         }
     });
     let NotesAdmin= TrackList[0].dataValues[TrackFields.NotesAdmin] ;
-    let Note ={ type:'Delete',UserId:Id,time:Date.now()};
+    let Note ={ type:'Delete',UserId:Id,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")};
     if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
         NotesAdmin.push(Note)
     }
     let result = await TrackDB.update({

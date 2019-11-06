@@ -3,6 +3,7 @@ $(document).ready(function(){
     let table = $('#datatable').DataTable();
 
     console.log('phong');
+    // DateTime Picker
     document.querySelectorAll('.datetimeinput').flatpickr({
         enableTime: true,
         dateFormat: "Y-m-d H:i",
@@ -96,12 +97,12 @@ $(document).ready(function(){
             cancelButtonText:'Không'
           }).then((result) => {
             if (result.value) {
-                console.log(TrackId);
                 $.ajax({
                     url:'/track/delete',
                     method:'post',
                     data:{'TrackId':TrackId},
                     success:function(data){
+                        console.log(data);
                         if(!data.error){
                             Swal.fire(
                                 'Thành Công!',
