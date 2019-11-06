@@ -99,7 +99,7 @@
                                     <td>
                                         <div class="btn btn-group-xs">
                                         <% if(user.Role<3) {%>
-                                                <button type="button" class="edit btn btn-success" ><i class="fa fa-pencil"></i> Sửa</button>
+                                                <button type="button" class="edit btn btn-success" data-id= <%=item.TrackId %> ><i class="fa fa-pencil"></i> Sửa</button>
                                                 <button type="button" class="del btn btn-danger deleteTrack" data-id= <%=item.TrackId %> ><i class="fa fa-trash"></i> Xóa</button>
                                         <% }else if(user.Id==item.Id){ %>
                                         <button type="button" class="edit btn btn-success" ><i class="fa fa-pencil"></i> Sửa</button>

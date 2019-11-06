@@ -59,7 +59,7 @@ $(document).ready(function(){
                         <td>${item.LicensePlates}</td>
                         <td>${item.NameCustomer}</td>
                         <td>${item.Lane}</td>
-                        <td>${item.TrackTime}</td>
+                        <td>${ moment(item.TrackTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")}</td>
                         <td>${item.FeeNumbers}</td>
                         <td>${item.Notes}</td>
                         <td>
@@ -123,4 +123,61 @@ $(document).ready(function(){
             }
           })
     })
+    // Open Edit Form
+    $(document).on('click','.edit',function(){
+        
+        var id = $(this).data('id');
+        $.ajax({
+            url : "/track/getInfo",
+            method:'post',
+            data:{Id:id},
+            success:function(data){
+                console.log(data);
+                $("#LicensePlatesEdit").val(data.data.LicensePlates);
+                $("#NameCustomerEdit").val(data.data.NameCustomer);
+                $("#LaneEdit").val(data.data.Lane).change();
+                $("#TrackTimeEdit").val(moment(data.data.TrackTime).tz("Asia/Bangkok").format("YYYY-MM-DD HH:mm"));
+                $("#NotesEdit").val(data.data.Notes);
+                $("#FeeEdit").val(data.data.TrackFee).change();
+                $("#idTrackEdit").val(data.data.TrackId);
+                $('#editForm').modal('toggle');
+            }
+        })
+    })
+    // Click UpdateTrack
+    $(document).on('click','#UpdateTrack',function(){
+        let TrackId= $("#idTrackEdit").val();
+        let  LicensePlates =  $("#LicensePlatesEdit").val();
+        let NameCustomer = $("#NameCustomerEdit").val();
+        let Lane = $("#LaneEdit").val();
+        let TrackTime = $("#TrackTimeEdit").val();
+        let Notes= $("#NotesEdit").val();
+        let TrackFee = $("#FeeEdit").val();
+        $.ajax({
+            url:'/track/update',
+            method:'post',
+            data:{TrackId,LicensePlates,NameCustomer,Lane,TrackTime,Notes,TrackFee},
+            success:function(data){
+                if(!data.error){
+                    LoadTrack();
+                    $('#editForm').modal('hide');
+                    Swal.fire(
+                        'Thành Công!',
+                        'Cập Nhật Thông Tin Thành Công!',
+                        'success'
+                      )
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Đã Có Lỗi Xảy Ra!',
+                        
+                      })
+                }
+            }
+        })
+
+    })
+
 })

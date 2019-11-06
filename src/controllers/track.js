@@ -57,8 +57,22 @@ let DeleteTrack= async (req,res)=>{
         return ResponseHelper.json(res,'Lỗi',null);
     }
     
-
+}
+let GetInfo = async (req,res)=>{
+    let result = await TrackModel.GetInfoTrack(req.body.Id);
+    return ResponseHelper.json(res,null,result.dataValues);
+}
+let update = async (req,res)=>{
+    if(!(req.user.Role<3)){
+        return ResponseHelper.json(res,'Bạn Không Có Quyền',null);
+    }
+    try{
+        let Track = await TrackModel.updateTrack(req.body,req.user.Id);
+        ResponseHelper.json(res,null,Track);
+    }catch(error){
+        return ResponseHelper.json(res,'Lỗi',error);
+    }
 }
 module.exports = {
-    index,create,getListTrack,DeleteTrack
+    index,create,getListTrack,DeleteTrack,GetInfo,update
 }

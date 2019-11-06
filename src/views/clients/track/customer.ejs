@@ -9,49 +9,36 @@
             <div class="modal-body" id="editor-body">
                 <form id="updateTrack">
                     <p><b>BIỂN SỐ XE</b>:
-                        <input type="text" class="form-control" id="trackNo" name="trackNo" required="true" value="74A09909">
+                        <input type="text" class="form-control" id="LicensePlatesEdit" name="LicensePlatesEdit" required="true" >
                     </p>
                     <p><b>TÊN KHÁCH HÀNG</b>:
-                        <input type="text" class="form-control" id="Name" name="Name" required="true" value="Đang cập nhật">
+                        <input type="text" class="form-control" id="NameCustomerEdit" name="NameCustomerEdit" required="true" value="Đang cập nhật">
                     </p>
                     <p><b>LÀN</b>
                         <br>
-                        <select class="form-control" id="Qty" name="Qty">
-                            <option value="0" selected="">CHỌN LÀN XE</option>
-                            <option value="1">LÀN 1</option>
-                            <option value="2">LÀN 2</option>
-                            <option value="3">LÀN 3</option>
-                            <option value="4">LÀN 4</option>
-                            <option value="5">LÀN 5</option>
-                            <option value="6">LÀN 6</option>
+                        <select class="form-control" id="LaneEdit" name="LaneEdit">
+                            <% listLane.forEach((item)=>{ %>
+                                <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
+                           <% }) %>
                         </select>
                     </p>
                     <p><b>Ngày tháng</b>:
-                        <input type="text" class="datetimepicker form-control flatpickr-input" id="trackDate" name="trackDate" required="true" value="05/11/2019 13:21" readonly="readonly">
+                        <input type="text" class="datetimepicker form-control flatpickr-input" id="TrackTimeEdit" name="TrackTimeEdit" required="true" readonly="readonly">
                     </p>
                     <p><b>GHI CHÚ</b>
                         <br>
-                        <textarea class="form-control" id="trackData" name="trackData">Vượt trạm</textarea>
+                        <textarea class="form-control" id="NotesEdit" name="NotesEdit">Vượt trạm</textarea>
                     </p>
                     <p><b>MỆNH GIÁ</b>
                         <br>
-                        <select class="form-control" id="trackRate" name="trackRate">
-                            <option value="1" selected="">0</option>
-                            <option value="2">18,000</option>
-                            <option value="3">20,000</option>
-                            <option value="4">25,000</option>
-                            <option value="5">30,000</option>
-                            <option value="6">45,000</option>
-                            <option value="7">50,000</option>
-                            <option value="8">70,000</option>
-                            <option value="9">75,000</option>
-                            <option value="10">100,000</option>
-                            <option value="11">120,000</option>
-                            <option value="12">180,000</option>
+                        <select class="form-control" id="FeeEdit" name="FeeEdit">
+                            <% listFee.forEach(item=>{ %>
+                                <option value="<%=item.IdFee %>"> <%=item.FeeNumbers%></option>
+                            <% }) %>
                         </select>
                     </p>
-                    <input type="hidden" id="id" name="id" value="1229">
-                    <button class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
+                    <input type="hidden" id="idTrackEdit" name="idTrackEdit" >
+                    <button class="btn btn-primary " id="UpdateTrack" type="button"><i class="fa fa-save"></i> Update</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -60,6 +47,9 @@
         </div>
     </div>
 </div>
+
+
+
 <div id="addForm" class="modal fade" role="dialog" style="display: none;">
         <div class="modal-dialog">
             <!-- Modal content-->

@@ -7,4 +7,6 @@ router.get("/", checkIsLogin,trackController.index);
 router.post("/create",checkIsLogin,trackController.create);
 router.get("/getList",checkIsLogin,trackController.getListTrack);
 router.post('/delete',checkIsLogin,trackController.DeleteTrack);
+router.post('/getInfo',checkIsLogin,trackController.GetInfo);
+router.post('/update',checkIsLogin,trackController.update)
 module.exports  = router ;

@@ -12,7 +12,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(session({
     secret : "etcdongha",
     saveUninitialized: true,
-    resave: true
+    resave: true,
+    cookie: { maxAge: 60*60*1000 }
 }))
 app.use(passport.initialize());
 app.use(passport.session());
