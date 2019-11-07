@@ -9,6 +9,8 @@ const db = require("./databases/connectdb");
 const initPassportLocal = require("./commons/passport");
 let app = express();
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret : "etcdongha",
     saveUninitialized: true,
@@ -17,8 +19,7 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 app.use(require('flash')());
 initPassportLocal(); //  Passport Local
 app.set('views',path.join(__dirname,'/views'));

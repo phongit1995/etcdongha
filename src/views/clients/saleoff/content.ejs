@@ -1,0 +1,104 @@
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title float-left">Danh Sách Giảm Giá</h4>
+
+                        <ol class="breadcrumb float-right">
+                            <li class="breadcrumb-item"><a href="/">Quản Lý</a></li>
+                            <li class="breadcrumb-item"><a href="/saleoff">Giảm Giá</a></li>
+                            
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-12">
+                            <div class="panel-heading">
+                                    <p><i class="glyphicon glyphicon-search"></i> Tra cứu thông tin <span class="search-toggle hide"><span class="glyphicon glyphicon-plus"></span>
+                                        <span class="search-toggle"><span class="glyphicon glyphicon-minus"></span></span>
+                                        </span>
+                                    </p>
+                                    <div style="margin-top: 10px;" class="seach-form">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Biển số xe:</span>
+                                                    <input id="bienso" type="text" class="form-control" placeholder="VD:74A99999">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Từ ngày:</span>
+                                                    <input id="tungay" type="text" class="form-control datetimeinput flatpickr-input" placeholder="2019-10-01" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">Đến ngày:</span>
+                                                    <input id="denngay" type="text" class="form-control datetimeinput flatpickr-input" placeholder="2019-12-31" readonly="readonly">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:20px">
+                                            <div class="col-md-8">
+                                                <div class="message-search"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-success btn-search-form"><i class="fa fa-search"></i> Tìm Kiếm</button>
+                                                <button class="btn btn-success" type="button" id="addTrack" data-toggle="modal" data-target="#addForm"><i class="fa fa-plus"></i> Thêm xe</button>
+                                                <button type="button" class="btn btn-primary btn-clear"><i class="fa fa-spinner"></i> Làm lại</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-12">
+                    THêm Thông Tin
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive text-center">
+                        <table id="datatable" class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Biển Số Xe</th>
+                                <th>Tên Khách Hàng</th>
+                                <th>Làn</th>
+                                <th>Thời Gian</th>
+                                <th>Mệnh Giá</th>
+                                <th>Ghi Chú</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+            <!-- end row -->
+
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    <footer class="footer text-right">
+        2019 - 2022 © Etc đông hà. - Coder By Thành
+    </footer>
+
+</div>

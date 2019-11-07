@@ -1,0 +1,112 @@
+<div id="editForm" class="modal fade in" role="dialog" style="display: none; padding-right: 15px;">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Cập nhật thông tin </h4>
+            </div>
+            <div class="modal-body" id="editor-body">
+                <form id="updateTrack">
+                    <p><b>Biển số</b>:
+                        <input type="text" class="form-control" id="LicensePlatesEdit" name="trackNo" required="true" value="">
+                        <!-- <div class="btn btn-search"><i class="fas fa-search"></i> </div> -->
+                    </p>
+                    <p><b>Tên Khách hàng</b>:
+                        <input type="text" class="form-control" id="NameCustomersEdit" name="Name" required="true" value="Đang cập nhật">
+                    </p>
+                    <p><b>Loại giảm giá</b>
+                        <br>
+                        <select class="form-control" id="TypeOffSaleOffEdit" name="TypeOffSaleOffEdit">
+                            <% listTypeOffSaleOff.forEach((item)=>{ %>
+                                <option value="<%=item.TypeOfSaleOffID%>"><%=item.TypeOfSaleOffName%></option>
+                           <% }) %>
+                        </select>
+                    </p>
+                    <p><b>Mệnh giá</b>
+                        <br>
+                        <select class="form-control" id="DenomintationsEdit" name="DenomintationsEdit">
+                            <% listDenomintations.forEach((item)=>{ %>
+                                <option value="<%=item.DenominationsID%>"><%=item.DenominationsNumbers%></option>
+                           <% }) %>
+                        </select>
+                    </p>
+                    <p><b>Ngày bắt đầu</b>:
+                        <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput " id="DateStartEdit"" name="DateStartEdit" required="true" value="" readonly="readonly">
+                    </p>
+                    <p><b>Ngày kết thúc:</b>:
+                        <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput " id="DateEndEdit" name="DateEndEdit" required="true" value="" readonly="readonly">
+                    </p>
+                    <p><b>GHI CHÚ</b>
+                        <br>
+                        <textarea class="form-control" id="Notes" name="NotesEdit" required="true">Vượt trạm</textarea>
+                    </p>
+                   
+                    <p><b>Hình ảnh</b>: <input type="file" class="form-control" id="ImageEdit" name="ImageEdit" required="true"></p>
+                    <button class="btn btn-success add-track"><i class="fa fa-plus"></i> Lưu</button>
+                    <button class="btn btn-primary " id="UpdateTrack" type="button"><i class="fa fa-save"></i> Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="addForm" class="modal fade" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title"><font color="green">Thêm thông tin</font></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addTrackForm" action="javascript:return false;" method="POST">
+                        <p><b>Biển số</b>:
+                            <input type="text" class="form-control" id="LicensePlates" name="trackNo" required="true" value="">
+                            <!-- <div class="btn btn-search"><i class="fas fa-search"></i> </div> -->
+                        </p>
+                        <p><b>Tên Khách hàng</b>:
+                            <input type="text" class="form-control" id="NameCustomers" name="Name" required="true" value="Đang cập nhật">
+                        </p>
+                        <p><b>Loại giảm giá</b>
+                            <br>
+                            <select class="form-control" id="TypeOffSaleOff" name="TypeOffSaleOff">
+                                <% listTypeOffSaleOff.forEach((item)=>{ %>
+                                    <option value="<%=item.TypeOfSaleOffID%>"><%=item.TypeOfSaleOffName%></option>
+                               <% }) %>
+                            </select>
+                        </p>
+                        <p><b>Mệnh giá</b>
+                            <br>
+                            <select class="form-control" id="Denominations" name="Denominations">
+                                <% listDenomintations.forEach((item)=>{ %>
+                                    <option value="<%=item.DenominationsID%>"><%=item.DenominationsNumbers%></option>
+                               <% }) %>
+                            </select>
+                        </p>
+                        <p><b>Ngày bắt đầu</b>:
+                            <input type="text" class="datetimepicker form-control flatpickr-input dateinput " id="DateStart"" name="DateStart" required="true" value="" readonly="readonly">
+                        </p>
+                        <p><b>Ngày kết thúc:</b>:
+                            <input type="text" class="datetimepicker form-control flatpickr-input dateinput " id="DateEnd"" name="DateEnd" required="true" value="" readonly="readonly">
+                        </p>
+                        <p><b>GHI CHÚ</b>
+                            <br>
+                            <textarea class="form-control" id="Notes" name="Notes" required="true">Vượt trạm</textarea>
+                        </p>
+                        <p id="image-priview-add"></p>
+                        <p><b>Hình ảnh</b>: <input type="file" class="form-control" id="SaleoffImage" name="SaleoffImage"></p>
+                        <button class="btn btn-success add-saleoff"><i class="fa fa-plus"></i> Lưu</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>

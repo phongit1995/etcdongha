@@ -3,6 +3,7 @@ let router = express.Router();
 let passport = require("passport");
 let users = require("./users") ;
 let Track = require('./track');
+let SaleOff = require('./saleoff');
 let {checkIsLogin} = require('./../commons/checkPermisson');
 
 router.get("/",checkIsLogin,(req,res)=>{
@@ -27,4 +28,5 @@ failureRedirect: '/login' }));
 // User others router
 router.use("/users" ,users); // User Router
 router.use("/track",Track); // Track Router
+router.use("/saleoff",SaleOff); // Sale Off Router
 module.exports  = router ;

@@ -13,6 +13,9 @@ const  TypeOfSaleOffDB=  db.define('TypeOfSaleOff',{
     [TypeOfSaleOffFields.TypeOfSaleOffName]:{
         type:Sequelize.DataTypes.STRING
     }
+},{
+    freezeTableName: true,
+    timestamps: false
 })
 module.exports = {
     TypeOfSaleOffFields, TypeOfSaleOffDB
