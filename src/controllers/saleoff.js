@@ -68,6 +68,9 @@ let getInfo = async (req,res)=>{
     
 
 }
+let updateSaleOff = async (req,res)=>{
+    console.log(req.body);
+}
 module.exports = {
-    index,create,getlistSaleOff,deleteSaleoff,getInfo
+    index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff
 }

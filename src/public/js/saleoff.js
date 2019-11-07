@@ -9,7 +9,6 @@ $(document).ready(function(){
     $(".add-saleoff").on('click',function(){
         console.log('add saleoff');
         let LicensePlates = $('#LicensePlates').val();
-
         let TypeOfSaleOff = $('#TypeOffSaleOff').val();
         let Denominations = $('#Denominations').val();
         let DateStart = $('#DateStart').val();
@@ -22,7 +21,6 @@ $(document).ready(function(){
         }
         let formData = new FormData();
         formData.append('LicensePlates',LicensePlates);
-
         formData.append('TypeOfSaleOff',TypeOfSaleOff);
         formData.append('Denominations',Denominations);
         formData.append('DateStart',DateStart);
@@ -200,7 +198,38 @@ $(document).ready(function(){
         }
     })
     // Submit SaleOff Edit
-    $(document).on('click','UpdateSaleOff',function(){
+    $(document).on('click','#UpdateSaleOff',function(){
         console.log('update sale off');
+        let LicensePlates = $("#LicensePlatesEdit").val();
+        let TypeOffSaleOff = $("#TypeOffSaleOffEdit").val();
+        let Denomintations = $("#DenomintationsEdit").val();
+        let DateStart = $("#DateStartEdit").val();
+        let DateEnd = $("#DateEndEdit").val();
+        let Notes = $("#NotesEdit").val();
+        let idSaleOffEdit = $("#idSaleOffEdit").val();
+        let File = $('#ImageEdit')[0].files[0];
+        if(LicensePlates=='' || DateStart==''||DateEnd==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin');
+        }
+        let formData = new FormData();
+        formData.append('LicensePlates',LicensePlates);
+        formData.append('TypeOfSaleOff',TypeOffSaleOff);
+        formData.append('Denominations',Denomintations);
+        formData.append('DateStart',DateStart);
+        formData.append('DateEnd',DateEnd);
+        formData.append('Notes',Notes);
+        formData.append('FileImages',File);
+        formData.append('SaleOffId',idSaleOffEdit);
+        $.ajax({
+            url:'/saleoff/update',
+            method:'post',
+            data:formData,
+            cache : false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log(data);
+            }
+        })
     })
 })

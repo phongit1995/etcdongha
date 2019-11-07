@@ -18,5 +18,6 @@ router.get('/',checkIsLogin, SaleOffController.index);
 router.post('/create',checkIsLogin, upload.single('FileImages'),SaleOffController.create);
 router.post('/getlist',checkIsLogin,SaleOffController.getlistSaleOff);
 router.post('/delete',checkIsLogin,SaleOffController.deleteSaleoff);
-router.post('/getInfo',checkIsLogin,SaleOffController.getInfo)
+router.post('/getInfo',checkIsLogin,SaleOffController.getInfo);
+router.post('/update',checkIsLogin,upload.single('FileImages'),SaleOffController.updateSaleOff);
 module.exports  = router ;
