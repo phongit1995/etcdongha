@@ -75,16 +75,40 @@
                                 <th>ID</th>
                                 <th>User</th>
                                 <th>Biển Số Xe</th>
-                                <th>Tên Khách Hàng</th>
-                                <th>Làn</th>
-                                <th>Thời Gian</th>
+                                <th>Loại Giảm Giá</th>
                                 <th>Mệnh Giá</th>
+                                <th>Ngày Bắt Đầu</th>
+                                <th>Ngày Kết Thúc</th>
                                 <th>Ghi Chú</th>
+                                <!-- <th>Ngày Khởi Tạo</th> -->
+                                <th>...</th>
                                 <th>Thao Tác</th>
                             </tr>
                             </thead>
                             <tbody>
-                            
+                                <% listSaleOff.forEach((item,index)=>{ %>
+                                    <tr>
+                                        <td><%=index+1 %></td>
+                                        <td><%=item.UserName %></td>
+                                        <td><%=item.LicensePlates %></td>
+                                        <td><%=item.TypeOfSaleOffName %></td>
+                                        <td><%=item.DenominationsNumbers %></td>
+                                        <td><%=moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY")  %></td>
+                                        <td><%=moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")  %></td>
+                                        <td><%=item.Notes %></td>
+                                        <td><i class="glyphicon glyphicon-eye-open"  data-link="<%=item.Image%>"></i></td>
+                                        <td>
+                                            <div class="btn btn-group-xs">
+                                            <% if(user.Role<3) {%>
+                                                    <button type="button" class="edit btn btn-success" data-id= <%=item.SaleOffID %> ><i class="fa fa-pencil"></i> Sửa</button>
+                                                    <button type="button" class="del btn btn-danger deleteSaleOff" data-id= <%=item.SaleOffID %> ><i class="fa fa-trash"></i> Xóa</button>
+                                            <% }else if(user.Id==item.Id){ %>
+                                            <button type="button" class="edit btn btn-success" ><i class="fa fa-pencil" data-id= <%=item.SaleOffID %> ></i> Sửa</button>
+                                            <%} %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <%}) %>
                             </tbody>
                         </table>
                     </div>

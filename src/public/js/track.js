@@ -69,7 +69,7 @@ $(document).ready(function(){
                         if(item.canDelete){ text+= `<button type="button" class="del btn btn-danger deleteTrack" data-id=${item.TrackId}><i class="fa fa-trash"></i> Xóa</button>`}
                          text+= `
                             </div>
-                        </td>`
+                        </td></tr> `
                         return text ;
                         
                     })
@@ -180,5 +180,6 @@ $(document).ready(function(){
         })
 
     })
+    // Click To Edit
 
 })

@@ -16,4 +16,7 @@ let upload = multer({ storage: storage })
 
 router.get('/',checkIsLogin, SaleOffController.index);
 router.post('/create',checkIsLogin, upload.single('FileImages'),SaleOffController.create);
+router.post('/getlist',checkIsLogin,SaleOffController.getlistSaleOff);
+router.post('/delete',checkIsLogin,SaleOffController.deleteSaleoff);
+router.post('/getInfo',checkIsLogin,SaleOffController.getInfo)
 module.exports  = router ;
