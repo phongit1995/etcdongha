@@ -11,7 +11,7 @@ let initPassportLocal = ()=>{
         try{
             let user = await checkLogin(username,password);
             if(user.length>0){
-                return done(null, user[0].dataValues.Id);
+                return done(null, user[0].dataValues);
             }
             else{
                 return done(null,false,req.flash("errors",'Sai tài khoản hoặc mật khẩu !'));
@@ -22,12 +22,11 @@ let initPassportLocal = ()=>{
 
         }
     }))
-    passport.serializeUser((id,done)=>{
-        done(null,id);
+    passport.serializeUser((user,done)=>{
+        done(null,user);
     })
     passport.deserializeUser( async (id,done)=>{
-        let user = await GetInfoUserById(id);
-        done(null,user[0].dataValues);
+        done(null,id);
     })
 }
 module.exports = initPassportLocal;

@@ -4,7 +4,9 @@ let passport = require("passport");
 let users = require("./users") ;
 let Track = require('./track');
 let SaleOff = require('./saleoff');
+let OperatingDiary = require('./operatingdiary');
 let {checkIsLogin} = require('./../commons/checkPermisson');
+
 
 router.get("/",checkIsLogin,(req,res)=>{
     console.log(req.user);
@@ -29,4 +31,5 @@ failureRedirect: '/login' }));
 router.use("/users" ,users); // User Router
 router.use("/track",Track); // Track Router
 router.use("/saleoff",SaleOff); // Sale Off Router
+router.use("/operatingdiary",OperatingDiary);
 module.exports  = router ;
