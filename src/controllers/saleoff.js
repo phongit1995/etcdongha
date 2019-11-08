@@ -69,7 +69,15 @@ let getInfo = async (req,res)=>{
 
 }
 let updateSaleOff = async (req,res)=>{
-    console.log(req.body);
+    try {
+        console.log(req.body);
+        let result = await SaleOffModel.updateSaleOff(req.body,req.user.Id,req.file);
+        return ResponseHelper.json(res,null,result);
+    } catch (error) {
+        console.log(error);
+        return ResponseHelper.json(res,'Lỗi',null);
+    }
+    
 }
 module.exports = {
     index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff

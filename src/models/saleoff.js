@@ -53,6 +53,31 @@ let GetInfoSaleOff = async (Id)=>{
     })
     return SaleOffList[0];
 }
+let updateSaleOff = async (data,IdUser,Image)=>{
+    delete data.FileImages;
+    console.log(data);
+    let IdSaleOff = data[SaleOffFields.SaleOffID];
+    if(Image){
+        data[SaleOffFields.Image] = Image.filename ;
+    }
+    let SaleOff = await GetInfoSaleOff(IdSaleOff);
+    let NotesAdmin = SaleOff.dataValues[SaleOffFields.NotesAdmin];
+    delete SaleOff.dataValues[SaleOffFields.NotesAdmin];
+    let Note = {type:'UpdateSaleOff',UserId:IdUser , Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm") ,oldValue:SaleOff.dataValues} ;
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    delete data[SaleOffFields.SaleOffID];
+    data[SaleOffFields.NotesAdmin] = NotesAdmin;
+    console.log(data);
+    let resultUpdate = await SaleOffDB.update(data,{
+        where:{
+            [SaleOffFields.SaleOffID]:IdSaleOff
+        }
+    })
+    return resultUpdate ;
+}
 module.exports= {
-    create ,GetListSaleOff ,deleteSaleoff,GetInfoSaleOff
+    create ,GetListSaleOff ,deleteSaleoff,GetInfoSaleOff,updateSaleOff
 }

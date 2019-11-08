@@ -219,7 +219,7 @@ $(document).ready(function(){
         formData.append('DateEnd',DateEnd);
         formData.append('Notes',Notes);
         formData.append('FileImages',File);
-        formData.append('SaleOffId',idSaleOffEdit);
+        formData.append('SaleOffID',idSaleOffEdit);
         $.ajax({
             url:'/saleoff/update',
             method:'post',
@@ -228,7 +228,23 @@ $(document).ready(function(){
             contentType: false,
             processData: false,
             success:function(data){
-                console.log(data);
+                if(!data.error){
+                    LoadSaleOff();
+                    $('#editForm').modal('hide');
+                    Swal.fire(
+                        'Thành Công!',
+                        'Cập Nhật Thông Tin Thành Công!',
+                        'success'
+                      )
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Đã Có Lỗi Xảy Ra!',
+                        
+                      })
+                }
             }
         })
     })
