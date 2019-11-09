@@ -27,6 +27,62 @@ let getListOperationgDiary = async (Role,Group)=>{
     Sql+= ` ORDER  BY OperatingDiary.createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
+let deleteOperatingDiary = async (Id,UserId)=>{
+    let ListOperatingDiary = await OperatingDiaryDB.findAll({
+        where:{
+            [OperatingDiaryFileds.OperatingDiaryId]:Id
+        }
+    })
+    let NotesAdmin= ListOperatingDiary[0].dataValues[OperatingDiaryFileds.NotesAdmin] ;
+    let Note ={ type:'Delete',UserId:UserId,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")};
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    let result = await OperatingDiaryDB.update({
+        [OperatingDiaryFileds.Status]:false,
+        [OperatingDiaryFileds.NotesAdmin]:NotesAdmin
+    },{
+        where:{
+            [OperatingDiaryFileds.OperatingDiaryId]:Id
+        }
+    })
+    return result ;
+}
+let getInfoOperatingDary = async (Id)=>{
+    let ListOperatingDiary = await OperatingDiaryDB.findAll({
+        where:{
+            [OperatingDiaryFileds.OperatingDiaryId]:Id
+        }
+    })
+    return ListOperatingDiary[0];
+}
+let updateOperatingDiary = async(data,UserId, Image)=>{
+    delete data.FileImages;
+    let IDOperatingDiary = data[OperatingDiaryFileds.OperatingDiaryId];
+    if(Image){
+        data[OperatingDiaryFileds.Image]= Image.filename ;
+    }
+    let InfoOperatingDary  = await getInfoOperatingDary(IDOperatingDiary);
+    let NotesAdmin = InfoOperatingDary.dataValues[OperatingDiaryFileds.NotesAdmin];
+    delete InfoOperatingDary.dataValues[OperatingDiaryFileds.NotesAdmin];
+    let Note = {type:'Update',UserId:UserId , Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm") ,oldValue:InfoOperatingDary.dataValues} ;
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    delete data[OperatingDiaryFileds.OperatingDiaryId];
+    data[OperatingDiaryFileds.NotesAdmin] = NotesAdmin ;
+    console.log(data);
+    let resultUpdate = await OperatingDiaryDB.update({
+        ...data
+    },{
+        where:{
+            [OperatingDiaryFileds.OperatingDiaryId]:IDOperatingDiary
+        }
+    })
+    return resultUpdate ;
+}
 module.exports = {
-    create,getListOperationgDiary
+    create,getListOperationgDiary,deleteOperatingDiary,getInfoOperatingDary,updateOperatingDiary
 }

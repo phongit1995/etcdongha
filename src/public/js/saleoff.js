@@ -156,7 +156,6 @@ $(document).ready(function(){
     })
     // Open Edit Form 
     $(document).on('click','.edit',function(){
-        
         var id = $(this).data('id');
         $.ajax({
             url : "/saleoff/getInfo",
@@ -174,6 +173,7 @@ $(document).ready(function(){
                     $("#NotesEdit").val(data.data.Notes);
                     $("#idSaleOffEdit").val(data.data.SaleOffID);
                     $('#image-priview-edit').empty();
+                    
                     if(data.data.Image){
                         let img =`<img src="/images/saleoffimages/${data.data.Image}" class='image-preview'/>`;
                         $('#image-priview-edit').append(img);

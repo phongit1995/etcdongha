@@ -21,11 +21,11 @@
                         </select>
                     </p>
                     <p><b>Ngày tháng</b>:
-                        <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput" id="TrackTimeEdit" name="TrackTimeEdit" required="true" readonly="readonly">
+                        <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput" id="OperatingDiaryTimeEdit" name="OperatingDiaryTimeEdit" required="true" readonly="readonly">
                     </p>
                     <p><b>Mô Tả</b>
                         <br>
-                        <select class="form-control" id="Denominations" name="Denominations">
+                        <select class="form-control" id="DescriptorEdit" name="DescriptorEdit">
                             <% ListDescriptor.forEach((item)=>{ %>
                                 <option value="<%=item.DescriptorId%>"><%=item.DescriptorContent%></option>
                            <% }) %>
@@ -33,8 +33,8 @@
                     </p>
                     <p><b>Xử Lý</b>
                         <br>
-                        <select class="form-control" id="Denominations" name="Denominations">
-                            <% ListDescriptor.forEach((item)=>{ %>
+                        <select class="form-control" id="HandleEdit" name="HandleEdit">
+                            <% Listhandleerror.forEach((item)=>{ %>
                                 <option value="<%=item.HandleErrorId%>"><%=item.HandleErrorContent%></option>
                            <% }) %>
                         </select>
@@ -44,8 +44,9 @@
                         <textarea class="form-control" id="NotesEdit" name="NotesEdit" required="true"></textarea>
                     </p>
                     <p id="image-priview-edit"></p>
-                    <p><b>Hình ảnh</b>: <input type="file" class="form-control" id="SaleoffImage" name="SaleoffImage"></p>
-                    <button class="btn btn-success add-saleoff"><i class="fa fa-plus"></i> Lưu</button>
+                    <input type="hidden" id="idOperatingDiary" name="idOperatingDiary" >
+                    <p><b>Hình ảnh</b>: <input type="file" class="form-control" id="ImageEdit" name="ImageEdit"></p>
+                    <button class="btn btn-primary " id="OperatingDiaryUpdate" type="button"><i class="fa fa-save"></i> Update</button>
                 </form>
             </div>
             <div class="modal-footer">

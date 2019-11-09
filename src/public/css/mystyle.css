@@ -1,0 +1,34 @@
+#imageshow {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.hide {
+    display: none!important;
+}
+.closepup {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.translucent {  
+    position:absolute;  
+    top:0; /* Add a top and bottom position so the element */  
+    left:0;  
+    width:100%;  
+    background-color:#FFF;  
+    opacity: 0.3;  
+    -moz-opacity: 0.3;  
+    filter:alpha(opacity=30);  
+}  

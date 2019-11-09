@@ -5,6 +5,7 @@ $(document).ready(function(){
         enableTime: true,
         dateFormat: "Y-m-d H:i",
     })
+    let table = $('#datatable').DataTable();
     document.querySelectorAll('.dateinput').flatpickr({
         enableTime: false,
         dateFormat: "Y-m-d",
@@ -78,6 +79,179 @@ $(document).ready(function(){
     }
     // Load Table 
     function loadOperatingdiary(){
+        console.log('Table');
+        $.ajax({
+            url:'/operatingdiary/getlist',
+            method:'post',
+            success:function(data){
+                if(!data.error){
+                    console.log(data);
+                    let array = data.data.map((item,index)=>{
+                        let text = `
+                        <tr>
+                        <td>${index+1 }</td>
+                        <td>${item.UserName }</td>
+                        <td>${item.LicensePlates }</td>
+                        <td>${item.LaneName }</td>
+                        <td>${moment(item.OperatingDiaryTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")  }</td>
+                        <td>${item.DescriptorContent }</td>
+                        <td>${item.HandleErrorContent }</td>
+                        <td>${item.Notes }</td>
+                        <td><i class="glyphicon glyphicon-eye-open"  data-link="${item.Image}"></i></td>
+                        <td>
+                            <div class="btn btn-group-xs"> ` ;
+                            if(item.canEdit){ text +=`<button type="button" class="edit btn btn-success" data-id= ${item.OperatingDiaryId } ><i class="fa fa-pencil"></i> Sửa</button>` }
+                             if(item.canDelete){text +=` <button type="button" class="del btn btn-danger deleteOperatingDiary" data-id= ${item.OperatingDiaryId } ><i class="fa fa-trash"></i> Xóa</button>` }    
+                                   
+                           
 
+                            text+=` </div>
+                        </td>
+                    </tr>
+                        `
+                        return text ;
+                    })
+                    let result = array.join('');
+                    $("#datatable > tbody").empty();
+                    table.clear();
+                    table.destroy();
+                    $("#datatable> tbody").append(result);
+                    table = $('#datatable').DataTable();
+                }
+            }
+        })
     }
+    //  deleteOperatingDiary
+    $(document).on('click','.deleteOperatingDiary',function(){
+        let OperatingDiary= $(this).attr("data-id");
+        console.log(OperatingDiary);
+        Swal.fire({
+            title: 'Xóa Thông Tin?',
+            text: "Bạn Có Chắc Chắn Xóa Thông Tin này không!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng Ý ',
+            cancelButtonText:'Không'
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url:'/operatingdiary/delete',
+                    method:'post',
+                    data:{OperatingDiaryId:OperatingDiary},
+                    success:function(data){
+                        console.log(data);
+                        if(!data.error){
+                            Swal.fire(
+                                'Thành Công!',
+                                'Xóa Thành Công !',
+                                'success'
+                              )
+                              loadOperatingdiary();
+                        }
+                        else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Đã Có Lỗi Xảy Ra!',
+                                
+                              })
+                        }}
+                })
+                
+            }
+          })
+    })
+    // open Edit Form 
+    $(document).on('click','.edit',function(){
+        let id = $(this).data('id');
+        $.ajax({
+            url : "/operatingdiary/getInfo",
+            method:'post',
+            data:{OperatingDiaryId:id},
+            success:function(data){
+                if(!data.error){
+                    console.log(data);
+                    $("#LicensePlatesEdit").val(data.data.LicensePlates);
+                    $("#LaneEdit").val(data.data.Lane).change();
+                    $("#DescriptorEdit").val(data.data.Descriptor).change();
+                    $("#OperatingDiaryTimeEdit").val(moment(data.data.OperatingDiaryTime).tz("Asia/Bangkok").format("YYYY-MM-DD HH:mm"));
+                    $('#HandleEdit').val(data.data.Handle).change();
+                    $("#NotesEdit").val(data.data.Notes);
+                    $('#image-priview-edit').empty();
+                    $('#idOperatingDiary').val(data.data.OperatingDiaryId);
+                    if(data.data.Image){
+                        let img =`<img src="/images/operatingdiaryimages/${data.data.Image}" class='image-preview'/>`;
+                     
+                        $('#image-priview-edit').append(img);
+                    }
+                    $('#editForm').modal('toggle');
+                }
+               
+            }
+        })
+    })
+    $('#ImageEdit').change(function(){
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            
+                let img =`<img src=${e.target.result} class='image-preview'/>`;
+                $('#image-priview-edit').empty();
+                $('#image-priview-edit').append(img);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    })
+    $(document).on('click','#OperatingDiaryUpdate',function(){
+        console.log('update');
+        let IdOperatingDiary =  $('#idOperatingDiary').val();
+        let LicensePlates = $("#LicensePlatesEdit").val();
+        let Lane = $("#LaneEdit").val();
+        let Descriptor =  $("#DescriptorEdit").val();
+        let OperatingDiaryTime = $("#OperatingDiaryTimeEdit").val();
+        let Handle = $('#HandleEdit').val();
+        let Notes = $("#NotesEdit").val();
+        let Files = $('#ImageEdit')[0].files[0];
+        if(LicensePlates=='' || OperatingDiaryTime==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin');
+        }
+        let formData = new FormData();
+        formData.append('OperatingDiaryId',IdOperatingDiary);
+        formData.append('LicensePlates',LicensePlates);
+        formData.append('Lane',Lane);
+        formData.append('Descriptor',Descriptor);
+        formData.append('Handle',Handle);
+        formData.append('Notes',Notes);
+        formData.append('OperatingDiaryTime',OperatingDiaryTime);
+        formData.append('FileImages',Files);
+        $.ajax({
+            url:'/operatingdiary/update',
+            method:'post',
+            data:formData,
+            cache : false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(!data.error){
+                    loadOperatingdiary();
+                    $('#editForm').modal('hide');
+                    Swal.fire(
+                        'Thành Công!',
+                        'Cập Nhật Thông Tin Thành Công!',
+                        'success'
+                      )
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Đã Có Lỗi Xảy Ra!',
+                        
+                      })
+                }
+            }
+        })
+    })
 })

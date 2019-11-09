@@ -14,5 +14,9 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage })
 let OperatingDiaryController = require('./../controllers/operatingdiary');
 router.get('/',checkIsLogin,OperatingDiaryController.index);
-router.post('/create',checkIsLogin,upload.single('FileImages'),OperatingDiaryController.create)
+router.post('/create',checkIsLogin,upload.single('FileImages'),OperatingDiaryController.create);
+router.post('/getlist',checkIsLogin,OperatingDiaryController.getlist);
+router.post('/delete',checkIsLogin,OperatingDiaryController.deleteOperatingDiary);
+router.post('/getInfo',checkIsLogin,OperatingDiaryController.getInfo);
+router.post('/update',checkIsLogin,checkIsLogin,upload.single('FileImages'),OperatingDiaryController.update)
 module.exports = router ;
