@@ -79,10 +79,10 @@ let searchTrack = async(Role,Group,data)=>{
         Sql+= ` and LicensePlates= '${data.LicensePlates}'`
     }
     if(data.DateStart){
-        Sql+= ` and TrackTime > '${data.DateStart}'`
+        Sql+= ` and TrackTime >= '${data.DateStart}'`
     }
     if(data.DateEnd){
-        Sql+= ` and TrackTime < '${data.DateEnd}'`
+        Sql+= ` and TrackTime <= '${data.DateEnd}'`
     }
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;

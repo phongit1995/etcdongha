@@ -250,4 +250,11 @@ $(document).ready(function(){
             }
         })
     })
+    // Reset Info
+    $('.btn-clear-search').on('click',function(){
+        $('#LicensePlatesSearch').val('');
+        $('#DateStartSearch').val('');
+        $('#DateEndSearch').val('');
+        LoadTrack();
+    })
 })
