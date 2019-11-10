@@ -8,6 +8,9 @@ $(document).ready(function(){
         enableTime: true,
         dateFormat: "Y-m-d H:i",
     })
+    document.querySelectorAll('.dateinput').flatpickr({
+        dateFormat: "Y-m-d",
+    })
     $('.add-track').on('click',function(){
         console.log('phong');
        let LicensePlates = $('#LicensePlates').val();
@@ -181,5 +184,70 @@ $(document).ready(function(){
 
     })
     // Click To Edit
-
+    // Search
+    $('.btn-search-form').on('click',function(){
+        console.log('click');
+        let LicensePlates = $('#LicensePlatesSearch').val();
+        let DateStart = $('#DateStartSearch').val();
+        let DateEnd = $('#DateEndSearch').val();
+        console.log(LicensePlates,DateStart,DateEnd);
+        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
+        }
+       
+        let data = {};
+        if(LicensePlates!=''){
+            data['LicensePlates']=LicensePlates;
+        }
+        if(DateStart!=''){
+            data['DateStart']=DateStart;
+        }
+        if(DateEnd!=''){
+            data['DateEnd']=DateEnd;
+        }
+        $.ajax({
+            url:'/track/search',
+            method:'post',
+            data:data,
+            success:function(data){
+                console.log(data);
+                if(!data.error){
+                    if(data.data.length==0){
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'Không Có Giá trị nào',
+                           
+                          })
+                          return ;
+                    }
+                    let array = data.data.map((item,index)=>{
+                        let text= `<tr>  <td>${index+1}</td> 
+                        <td>${item.UserName}</td>
+                        <td>${item.LicensePlates}</td>
+                        <td>${item.NameCustomer}</td>
+                        <td>${item.Lane}</td>
+                        <td>${ moment(item.TrackTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")}</td>
+                        <td>${item.FeeNumbers}</td>
+                        <td>${item.Notes}</td>
+                        <td>
+                            <div class="btn btn-group-xs">`;
+                        if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id=${item.TrackId}><i class="fa fa-pencil"></i> Sửa</button>`}
+                        if(item.canDelete){ text+= `<button type="button" class="del btn btn-danger deleteTrack" data-id=${item.TrackId}><i class="fa fa-trash"></i> Xóa</button>`}
+                         text+= `
+                            </div>
+                        </td></tr> `
+                        return text ;
+                        
+                    })
+                    let result = array.join('');
+                    $("#datatable > tbody").empty();
+                    table.clear();
+                    table.destroy();
+                    $("#datatable> tbody").append(result);
+                    table = $('#datatable').DataTable();
+                }
+            }
+        })
+    })
 })

@@ -68,6 +68,25 @@ let updateTrack = async(data,Id)=>{
     )
     return resultUpdate ;
 }
+let searchTrack = async(Role,Group,data)=>{
+    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Status ,Notes , Track.createdAt,Track.
+    updatedAt , Users.UserName, Users.Id ,Fees.IdFee , Fees.FeeNumbers from Track left join Lane on Track.Lane= Lane.LaneID left join Users on Track.CreateByUser = Users.Id  
+    left join Fees on Track.TrackFee = Fees.IdFee where Status=1`
+    if(Role!=1){
+        Sql+= ` and Users.Group= ${Group}`
+    }
+    if(data.LicensePlates){
+        Sql+= ` and LicensePlates= '${data.LicensePlates}'`
+    }
+    if(data.DateStart){
+        Sql+= ` and TrackTime > '${data.DateStart}'`
+    }
+    if(data.DateEnd){
+        Sql+= ` and TrackTime < '${data.DateEnd}'`
+    }
+    Sql+= ` ORDER  BY createdAt DESC` ;
+    return await sequelize.query(Sql) ;
+}
 module.exports = {
-    create,getListTrack,DeleteTrack,GetInfoTrack,updateTrack
+    create,getListTrack,DeleteTrack,GetInfoTrack,updateTrack,searchTrack
 }

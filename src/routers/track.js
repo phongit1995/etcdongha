@@ -8,5 +8,6 @@ router.post("/create",checkIsLogin,trackController.create);
 router.get("/getList",checkIsLogin,trackController.getListTrack);
 router.post('/delete',checkIsLogin,trackController.DeleteTrack);
 router.post('/getInfo',checkIsLogin,trackController.GetInfo);
-router.post('/update',checkIsLogin,trackController.update)
+router.post('/update',checkIsLogin,trackController.update);
+router.post('/search',checkIsLogin,trackController.search);
 module.exports  = router ;

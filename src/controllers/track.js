@@ -72,6 +72,33 @@ let update = async (req,res)=>{
         return ResponseHelper.json(res,'Lỗi',error);
     }
 }
+let search = async (req,res)=>{
+    try {
+        console.log(req.body);
+        let {Group,Role} = req.user ;
+        let result = await TrackModel.searchTrack(Role,Group,req.body);
+        let listResult = result[0].map(item=>{
+            if(req.user.Role<3){
+                item['canEdit']=true;
+                item['canDelete']=true;
+            }
+            else if(req.user.Id==item.CreateByUser) {
+                item['canEdit']=true;
+                item['canDelete']=false;
+            }
+            else{
+                item['canEdit']=false;
+                item['canDelete']=false;
+            }
+            return item;
+        })
+        return ResponseHelper.json(res,null,listResult);
+    } catch (error) {
+        console.log(error);
+        return ResponseHelper.json(res,'Lỗi',error);
+    }
+    
+}
 module.exports = {
-    index,create,getListTrack,DeleteTrack,GetInfo,update
+    index,create,getListTrack,DeleteTrack,GetInfo,update,search
 }
