@@ -70,7 +70,7 @@ $(document).ready(function(){
                         <td>${ moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY ")}</td>
                         <td>${ moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td>
                         <td>${item.Notes}</td>
-                        <td><i class="glyphicon glyphicon-eye-open"  data-link="${item.Image}"></i></td>
+                        <td><i class="fa fa-eye show-image"  data-link="${item.Image}"></i></td>
                         <td>
                             <div class="btn btn-group-xs">`;
                         if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id=${item.SaleOffID}><i class="fa fa-pencil"></i> Sửa</button>`}
@@ -247,5 +247,35 @@ $(document).ready(function(){
                 }
             }
         })
+    })
+    // Open Show Image
+    $(".closepup").on('click',function(){
+        console.log('click');
+        var imageshow = document.getElementById("imageshow");
+        imageshow.classList.add("hide");
+    })
+    $('.popup-iamge').click(function(e){
+        
+        if(e.target != this) return;
+        console.log('click');
+        var imageshow = document.getElementById("imageshow");
+        imageshow.classList.add("hide");
+    });
+    $(document).on('click','.show-image',function(){
+        let link =  $(this).attr("data-link");
+        if(!link){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Chưa Có Hình Ảnh Nào!',
+              })
+        }else{
+            let imageshow = document.getElementById("imageshow");
+            imageshow.classList.remove("hide");
+            let Imagesshows = document.querySelector('#imageshow > div.popup-iamge > div > img');
+            Imagesshows.src = `/images/saleoffimages/${link}`;
+            let linkimageshow = document.querySelector('#imageshow > div.popup-iamge > a');
+            linkimageshow.href = `/images/saleoffimages/${link}`;
+        }
     })
 })
