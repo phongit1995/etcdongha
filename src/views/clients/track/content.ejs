@@ -19,6 +19,7 @@
             </div>
             <div class="row">
                     <div class="col-12">
+                            <div class="card-box table-responsive text-center">
                             <div class="panel-heading">
                                     <p><i class="glyphicon glyphicon-search"></i> Tra cứu thông tin <span class="search-toggle hide"><span class="glyphicon glyphicon-plus"></span>
                                         <span class="search-toggle"><span class="glyphicon glyphicon-minus"></span></span>
@@ -26,21 +27,26 @@
                                     </p>
                                     <div style="margin-top: 10px;" class="seach-form">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">Biển số xe:</span>
-                                                    <input id="LicensePlatesSearch" type="text" class="form-control" placeholder="VD:74A99999">
+
+                                            <div class="input-group col-md-4">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text"><strong>Biển số:</strong></div>
                                                 </div>
+                                                <input id="LicensePlatesSearch" type="text" class="form-control" placeholder="VD:74A99999">
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Từ ngày:</span>
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text"><strong>Từ ngày:</strong></span>
+                                                    </div>
                                                     <input id="DateStartSearch" type="text" class="form-control dateinput flatpickr-input"  readonly="readonly">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon">Đến ngày:</span>
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text"><strong>Đến ngày:</strong></span>
+                                                    </div>
                                                     <input id="DateEndSearch" type="text" class="form-control dateinput flatpickr-input"  readonly="readonly">
                                                 </div>
                                             </div>
@@ -50,25 +56,23 @@
                                                 <div class="message-search"></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <button type="button" class="btn btn-success btn-search-form "><i class="fa fa-search"></i> Tìm Kiếm</button>
+                                                <button type="button" class="btn btn-success waves-effect btn-search-form "><i class="fa fa-search"></i> Tìm Kiếm</button>
                                                 <button class="btn btn-success" type="button" id="addTrack" data-toggle="modal" data-target="#addForm"><i class="fa fa-plus"></i> Thêm xe</button>
                                                 <button type="button" class="btn btn-primary btn-clear-search"><i class="fa fa-spinner"></i> Làm lại</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                     </div>
                 </div>
             <!-- end row -->
-            <div class="row">
-                <div class="col-12">
-                    THêm Thông Tin
-                </div>
-            </div>
-
+          
             <div class="row">
                 <div class="col-12">
                     <div class="card-box table-responsive text-center">
+                            <h4 class="text-uppercase  font-18">Danh sách vượt trạm:</h4>
+                            <div class="border m-b-30"></div>
                         <table id="datatable" class="table table-bordered">
                             <thead>
                             <tr>
@@ -113,7 +117,8 @@
                         </table>
                     </div>
                 </div>
-            </div> <!-- end row -->
+            </div>
+        <!-- end row -->
             <!-- end row -->
 
 

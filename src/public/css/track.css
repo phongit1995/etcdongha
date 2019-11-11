@@ -1,0 +1,11 @@
+.text-uppercase{
+    float: left;
+}
+
+.border{
+    height: 4px;
+    width: 48px;
+    border-radius: 5px;
+    background-color: #4489e4;
+    border:1px solid #dee2e6!important;
+}
