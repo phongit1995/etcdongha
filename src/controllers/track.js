@@ -8,6 +8,7 @@ let index = async (req,res)=>{
     let listTrack = await TrackModel.getListTrack(Role,Group);
     let listLane = await getListLane();
     let listFee = await getListFee();
+    console.log(listTrack[0]);
     res.render('clients/track/index',{user:req.user,listTrack:listTrack[0],moment:moment,listLane:JSON.parse(JSON.stringify(listLane)),
         listFee:JSON.parse(JSON.stringify(listFee))});
 }
