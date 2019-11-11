@@ -9,3 +9,15 @@
     background-color: #4489e4;
     border:1px solid #dee2e6!important;
 }
+
+ .title-bg{
+     background-color: #32c861 ;
+     color:white;
+ }
+
+.title-etc{
+    font-size: 20px;
+    color:white;
+    margin-left: 20px;
+    font:bold;
+}
