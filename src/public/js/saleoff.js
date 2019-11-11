@@ -1,6 +1,8 @@
 $(document).ready(function(){
     console.log('saleoff page');
-    let table = $('#datatable').DataTable();
+    let table = $('#datatable').DataTable({
+        "searching": false
+    });
     document.querySelectorAll('.dateinput').flatpickr({
         enableTime: false,
         dateFormat: "Y-m-d",
@@ -70,7 +72,7 @@ $(document).ready(function(){
                         <td>${ moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY ")}</td>
                         <td>${ moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td>
                         <td>${item.Notes}</td>
-                        <td><i class="fa fa-eye show-image"  data-link="${item.Image}"></i></td>
+                        <td><i class="fa fa-eye show-image"  data-link=${item.Image}></i></td>
                         <td>
                             <div class="btn btn-group-xs">`;
                         if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id=${item.SaleOffID}><i class="fa fa-pencil"></i> Sửa</button>`}
@@ -157,6 +159,7 @@ $(document).ready(function(){
     // Open Edit Form 
     $(document).on('click','.edit',function(){
         var id = $(this).data('id');
+        console.log(id);
         $.ajax({
             url : "/saleoff/getInfo",
             method:'post',
@@ -263,7 +266,7 @@ $(document).ready(function(){
     });
     $(document).on('click','.show-image',function(){
         let link =  $(this).attr("data-link");
-        if(!link){
+        if(!link ||link=='null'){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -275,7 +278,79 @@ $(document).ready(function(){
             let Imagesshows = document.querySelector('#imageshow > div.popup-iamge > div > img');
             Imagesshows.src = `/images/saleoffimages/${link}`;
             let linkimageshow = document.querySelector('#imageshow > div.popup-iamge > a');
-            linkimageshow.href = `/images/saleoffimages/${link}`;
+            // linkimageshow.href = `/images/saleoffimages/${link}`;
         }
+    })
+    // Search form 
+    $('.btn-search-form').on('click',function(){
+        let LicensePlates = $('#LicensePlatesSearch').val();
+        let DateStart = $('#DateStartSearch').val();
+        let DateEnd = $('#DateEndSearch').val();
+        console.log(LicensePlates,DateStart,DateEnd);
+        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
+        }
+       
+        let data = {};
+        if(LicensePlates!=''){
+            data['LicensePlates']=LicensePlates;
+        }
+        if(DateStart!=''){
+            data['DateStart']=DateStart;
+        }
+        if(DateEnd!=''){
+            data['DateEnd']=DateEnd;
+        }
+        $.ajax({
+            url:'/saleoff/search',
+            method:'post',
+            data:data,
+            success:function(data){
+                console.log(data);
+                if(!data.error){
+                    if(data.data.length==0){
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'Không Có Giá trị nào',
+                           
+                          })
+                          return ;
+                    }
+                    let array = data.data.map((item,index)=>{
+                        let text= `<tr>  <td>${index+1}</td> 
+                        <td>${item.UserName}</td>
+                        <td>${item.LicensePlates}</td>
+                        <td>${item.TypeOfSaleOffName}</td>
+                        <td>${item.DenominationsNumbers }</td>
+                        <td>${ moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY ")}</td>
+                        <td>${ moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td>
+                        <td>${item.Notes}</td>
+                        <td><i class="fa fa-eye show-image"  data-link=${item.Image}></i></td>
+                        <td>
+                            <div class="btn btn-group-xs">`;
+                        if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id=${item.SaleOffID}><i class="fa fa-pencil"></i> Sửa</button>`}
+                        if(item.canDelete){ text+= `<button type="button" class="del btn btn-danger deleteSaleOff" data-id=${item.SaleOffID}><i class="fa fa-trash"></i> Xóa</button>`}
+                         text+= `
+                            </div>
+                        </td>`
+                        return text ;
+                    })
+                    let result = array.join('');
+                    $("#datatable > tbody").empty();
+                    table.clear();
+                    table.destroy();
+                    $("#datatable> tbody").append(result);
+                    table = $('#datatable').DataTable();
+                }
+            }
+        })
+    })
+    // Reset Info
+    $('.btn-clear-search').on('click',function(){
+        $('#LicensePlatesSearch').val('');
+        $('#DateStartSearch').val('');
+        $('#DateEndSearch').val('');
+        LoadSaleOff();
     })
 })

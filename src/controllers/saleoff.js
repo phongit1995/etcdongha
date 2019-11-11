@@ -63,7 +63,8 @@ let getInfo = async (req,res)=>{
         let result = await SaleOffModel.GetInfoSaleOff(req.body.Id);
         return ResponseHelper.json(res,null,result);
     } catch (error) {
-        return ResponseHelper.json(res,'Lỗi',result);
+        console.log(error);
+        return ResponseHelper.json(res,'Lỗi',error);
     }
     
 
@@ -79,6 +80,33 @@ let updateSaleOff = async (req,res)=>{
     }
     
 }
+let search = async (req,res)=>{
+    try {
+        let {Group,Role} = req.user ;
+        console.log(req.body);
+        let result = await  SaleOffModel.searchSaleoff(Role,Group,req.body);
+        let listResult = result[0].map(item=>{
+            if(req.user.Role<3){
+                item['canEdit']=true;
+                item['canDelete']=true;
+            }
+            else if(req.user.Id==item.CreateByUser) {
+                item['canEdit']=true;
+                item['canDelete']=false;
+            }
+            else{
+                item['canEdit']=false;
+                item['canDelete']=false;
+            }
+            return item;
+        })
+        return ResponseHelper.json(res,null,listResult);
+    } catch (error) {
+        console.log(error);
+        return ResponseHelper.json(res,'Lỗi',error);
+    }
+    
+}
 module.exports = {
-    index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff
+    index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff,search
 }

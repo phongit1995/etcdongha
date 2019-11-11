@@ -1,6 +1,8 @@
 $(document).ready(function(){
         //Buttons examples
-    let table = $('#datatable').DataTable();
+    let table = $('#datatable').DataTable({
+        "searching": false
+    });
 
     console.log('phong');
     // DateTime Picker
@@ -43,6 +45,10 @@ $(document).ready(function(){
                     showConfirmButton: false,
                     timer: 1500
                 })
+                $('#LicensePlates').val('');
+                $('#NameCustomers').val('');
+                $('#Notes').val('');
+                $('#TrackTime').val('');
                 LoadTrack();
             }
         }
@@ -245,7 +251,7 @@ $(document).ready(function(){
                     table.clear();
                     table.destroy();
                     $("#datatable> tbody").append(result);
-                    table = $('#datatable').DataTable();
+                    table = $('#datatable').DataTable({ "searching": false});
                 }
             }
         })
