@@ -80,6 +80,29 @@ let update = async (req,res)=>{
         return ResponseHelper.json(res,'Lỗi',null);
     }
 }
+let search = async (req,res)=>{
+    console.log(req.body);
+    let {Group,Role} = req.user ;
+    let result = await OperatingDiaryController.searchOperatingDiary(Role,Group,req.body);
+    let listResult = result[0].map(item=>{
+        if(req.user.Role<3){
+            item['canEdit']=true;
+            item['canDelete']=true;
+        }
+        else if(req.user.Id==item.CreateByUser) {
+            item['canEdit']=true;
+            item['canDelete']=false;
+        }
+        else{
+            item['canEdit']=false;
+            item['canDelete']=false;
+        }
+        return item;
+    })
+    return ResponseHelper.json(res,null,listResult);
+    console.log(error);
+    return ResponseHelper.json(res,'Lỗi',error);
+}
 module.exports = {
-    index,create,getlist,deleteOperatingDiary,getInfo,update
+    index,create,getlist,deleteOperatingDiary,getInfo,update,search
 }

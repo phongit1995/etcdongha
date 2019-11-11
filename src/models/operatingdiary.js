@@ -83,6 +83,29 @@ let updateOperatingDiary = async(data,UserId, Image)=>{
     })
     return resultUpdate ;
 }
+let searchOperatingDiary = async (Role,Group,data)=>{
+    let Sql = `
+    select OperatingDiary.OperatingDiaryId , OperatingDiary.LicensePlates, OperatingDiary.OperatingDiaryTime, OperatingDiary.Lane,OperatingDiary.Image,OperatingDiary.Descriptor,OperatingDiary.Handle,OperatingDiary.Status ,OperatingDiary.Notes , OperatingDiary.NotesAdmin
+    ,Lane.LaneName , HandleError.HandleErrorContent, Descriptor.DescriptorContent, Users.Id , Users.UserName 
+    from OperatingDiary LEFT JOIN Lane on  OperatingDiary.Lane = Lane.LaneID left join Descriptor on OperatingDiary.
+    Descriptor = Descriptor.DescriptorId left join HandleError on OperatingDiary.Handle = HandleError.HandleErrorId left join Users on 
+    OperatingDiary.CreateByUser = Users.Id where Status =1
+    `
+    if(Role!=1){
+        Sql+= ` and Users.Group= ${Group}`
+    }
+    if(data.LicensePlates){
+        Sql+= ` and LicensePlates= '${data.LicensePlates}'`
+    }
+    if(data.DateStart){
+        Sql+= ` and  DATE_FORMAT(OperatingDiaryTime,'%Y-%m-%d') >= '${data.DateStart}'`
+    }
+    if(data.DateEnd){
+        Sql+= ` and DATE_FORMAT(OperatingDiaryTime,'%Y-%m-%d') <= '${data.DateEnd}'`
+    }
+    Sql+= ` ORDER  BY OperatingDiary.createdAt DESC` ;
+    return await sequelize.query(Sql) ;
+}
 module.exports = {
-    create,getListOperationgDiary,deleteOperatingDiary,getInfoOperatingDary,updateOperatingDiary
+    create,getListOperationgDiary,deleteOperatingDiary,getInfoOperatingDary,updateOperatingDiary,searchOperatingDiary
 }

@@ -269,7 +269,7 @@ $(document).ready(function(){
     });
     $(document).on('click','.show-image',function(){
         let link =  $(this).attr("data-link");
-        if(!link){
+        if(!link || link=='null'){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -281,8 +281,86 @@ $(document).ready(function(){
             let Imagesshows = document.querySelector('#imageshow > div.popup-iamge > div > img');
             Imagesshows.src = `/images/operatingdiaryimages/${link}`;
             let linkimageshow = document.querySelector('#imageshow > div.popup-iamge > a');
-            linkimageshow.href = `/images/operatingdiaryimages/${link}`;
+            // linkimageshow.href = `/images/operatingdiaryimages/${link}`;
         }
     })
     // End toogle form
+    // Click search
+    $('.btn-search-form').on('click',function(){
+        console.log('click');
+        let LicensePlates = $('#LicensePlatesSearch').val();
+        let DateStart = $('#DateStartSearch').val();
+        let DateEnd = $('#DateEndSearch').val();
+        console.log(LicensePlates,DateStart,DateEnd);
+        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
+        }
+       
+        let data = {};
+        if(LicensePlates!=''){
+            data['LicensePlates']=LicensePlates;
+        }
+        if(DateStart!=''){
+            data['DateStart']=DateStart;
+        }
+        if(DateEnd!=''){
+            data['DateEnd']=DateEnd;
+        }
+        $.ajax({
+            url:'/operatingdiary/search',
+            method:'post',
+            data:data,
+            success:function(data){
+                console.log(data);
+                if(!data.error){
+                    if(data.data.length==0){
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'Không Có Giá trị nào',
+                          })
+                          return ;
+                    }
+                    let array = data.data.map((item,index)=>{
+                        let text = `
+                        <tr>
+                        <td>${index+1 }</td>
+                        <td>${item.UserName }</td>
+                        <td>${item.LicensePlates }</td>
+                        <td>${item.LaneName }</td>
+                        <td>${moment(item.OperatingDiaryTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")  }</td>
+                        <td>${item.DescriptorContent }</td>
+                        <td>${item.HandleErrorContent }</td>
+                        <td>${item.Notes }</td>
+                        <td><i class="fa fa-eye show-image"  data-link="${item.Image}"></i></td>
+                        <td>
+                            <div class="btn btn-group-xs"> ` ;
+                            if(item.canEdit){ text +=`<button type="button" class="edit btn btn-success" data-id= ${item.OperatingDiaryId } ><i class="fa fa-pencil"></i> Sửa</button>` }
+                             if(item.canDelete){text +=` <button type="button" class="del btn btn-danger deleteOperatingDiary" data-id= ${item.OperatingDiaryId } ><i class="fa fa-trash"></i> Xóa</button>` }    
+                                   
+                           
+
+                            text+=` </div>
+                        </td>
+                    </tr>
+                        `
+                        return text ;
+                    })
+                    let result = array.join('');
+                    $("#datatable > tbody").empty();
+                    table.clear();
+                    table.destroy();
+                    $("#datatable> tbody").append(result);
+                    table = $('#datatable').DataTable({ "searching": false});
+                }
+            }
+        })
+    })
+    // clear search
+    $('.btn-clear-search').on('click',function(){
+        $('#LicensePlatesSearch').val('');
+        $('#DateStartSearch').val('');
+        $('#DateEndSearch').val('');
+        loadOperatingdiary();
+    })
 })

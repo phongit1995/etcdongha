@@ -18,5 +18,6 @@ router.post('/create',checkIsLogin,upload.single('FileImages'),OperatingDiaryCon
 router.post('/getlist',checkIsLogin,OperatingDiaryController.getlist);
 router.post('/delete',checkIsLogin,OperatingDiaryController.deleteOperatingDiary);
 router.post('/getInfo',checkIsLogin,OperatingDiaryController.getInfo);
-router.post('/update',checkIsLogin,checkIsLogin,upload.single('FileImages'),OperatingDiaryController.update)
+router.post('/update',checkIsLogin,upload.single('FileImages'),OperatingDiaryController.update);
+router.post('/search',checkIsLogin,OperatingDiaryController.search);
 module.exports = router ;
