@@ -27,13 +27,13 @@
                                     <div style="margin-top: 10px;" class="seach-form">
                                         <div class="row">
 
-                                            <div class="input-group col-md-4">
+                                            <div class="input-group col-md-3">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Biển số:</div>
                                                 </div>
                                                 <input id="LicensePlatesSearch" type="text" class="form-control" placeholder="VD:74A99999">
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text">Từ ngày:</span>
@@ -41,13 +41,27 @@
                                                     <input id="DateStartSearch" type="text" class="form-control dateinput flatpickr-input"  readonly="readonly">
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-3">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                     <span class="input-group-text">Đến ngày:</span>
                                                     </div>
                                                     <input id="DateEndSearch" type="text" class="form-control dateinput flatpickr-input"  readonly="readonly">
                                                 </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                    <div class="input-group" >
+                                                        <div class="input-group-prepend"><span class="input-group-text">Làn xe:</span></div>
+                                                        <select class="form-control" id="">
+                                                           
+                                                        <option value="1">Làn 1</option>
+                                                        <option value="2">Làn 2</option>
+                                                        <option value="3">Làn 3</option>
+                                                        <option value="4">Làn 4</option>
+                                                        <option value="5">Làn 5</option>
+                                                        <option value="6">Làn 6</option>
+                                                        </select>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top:20px">
@@ -57,7 +71,7 @@
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-success waves-effect btn-search-form "><i class="fa fa-search"></i> Tìm Kiếm</button>
                                                 <button class="btn btn-success" type="button" id="addTrack" data-toggle="modal" data-target="#addForm"><i class="fa fa-plus"></i> Thêm xe</button>
-                                                <button type="button" class="btn btn-primary btn-clear-search"><i class="fa fa-spinner"></i> Làm lại</button>
+                                                <button type="button" class="btn btn-purple waves-effect w-md waves-light btn-clear-search"><i class="fa fa-spinner"></i> Làm lại</button>
                                             </div>
                                         </div>
                                         </div>
