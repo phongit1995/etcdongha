@@ -263,4 +263,42 @@ $(document).ready(function(){
         $('#DateEndSearch').val('');
         LoadTrack();
     })
+    // Import Track
+    $('#importTrack').change(function(){
+        let Fee = [{id:1,fee:0},{id:2,fee:18000},{id:3,fee:20000},{id:4,fee:25000},{id:5,fee:30000},{id:6,fee:45000},{id:7,fee:50000},{id:8,fee:70000},{id:9,fee:75000},{id:10,fee:100000},{id:11,fee:120000},{id:12,fee:180000}];
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            var result = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+            result.map(item=>{
+                item.fee=1;
+                item.time= moment(item['Thời gian']).format("YYYY-MM-DD HH:mm");
+                if(item.time=='Invalid date') {item.time="2019-10-05 13:17"} ;
+                Fee.forEach(item2=>{if(item2.fee==item['Mệnh giá']) {item.fee=item2.id}})
+                return item ;
+            })
+          
+            console.log(moment('22/10/2019 15:43').format("YYYY-MM-DD HH:mm"));
+            console.log(result);
+            result.map(item=>{
+                let data = {};
+                data['LicensePlates']=item['Biển số xe'];
+                data['NameCustomer']=item['Tên khách hàng'];
+                data['Lane']=item['Làn'];
+                data['Notes']=' ';
+                data['TrackFee']=item.fee;
+                data['TrackTime']=item.time;
+                $.ajax({
+                    url : "/track/create",
+                    method:'post',
+                    data:data,
+                    success: function(data){
+                        
+                    }
+                })
+            })
+        }
+        reader.readAsBinaryString(event.target.files[0]);
+    })
 })

@@ -21,7 +21,8 @@ let create = async(req,res)=>{
          return ResponseHelper.json(res,null,result);
     }
     catch (error){
-        return ResponseHelper.json(res,error,result);
+        console.log(error);
+        return ResponseHelper.json(res,error,null);
     }
     
     
