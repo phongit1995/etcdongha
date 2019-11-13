@@ -22,6 +22,9 @@ let GetInfoUserById = async (ID)=>{
     })
     return User;
 }
+let index = async (req,res)=>{
+    res.render('clients/users/index',{user:req.user});
+}
 module.exports ={
-    createUser,GetInfoUser,checkLogin,GetInfoUserById
+    createUser,GetInfoUser,checkLogin,GetInfoUserById,index
 }

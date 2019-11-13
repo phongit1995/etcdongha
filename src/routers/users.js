@@ -1,8 +1,7 @@
 let express= require("express");
-let UsersController = require("./../controllers/user");
+let {checkIsLogin,CheckIsSuperAdmin,checkIsAdmin} = require('./../commons/checkPermisson');
 let router = express.Router();
+let UserController = require('./../controllers/user');
 
-router.get("/", async (req,res)=>{
-    res.send( await UsersController.GetInfoUser());
-});
+router.get("/" ,checkIsLogin,checkIsAdmin,UserController.index);
 module.exports  = router ;
