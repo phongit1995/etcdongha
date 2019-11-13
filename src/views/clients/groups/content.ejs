@@ -1,0 +1,68 @@
+<div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+    
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <h4 class="page-title float-left">Nhóm Quản Lý</h4>
+    
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item"><a href="/">Quản Lý</a></li>
+                                <li class="breadcrumb-item"><a href="/group">Nhóm Quản Lý</a></li>
+                            </ol>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-custom waves-effect waves-light m-b-20"  id='addgroups'><i class="md md-add"></i> Thêm Nhóm</button>
+                        </div><!-- end col -->
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                            <div class="card-box ribbon-box">
+                                    <div class="ribbon ribbon-success">Danh sách các nhóm:</div>
+                                
+                               <div class="card-box table-responsive text-center">
+                            <table id="datatable" class="table table-bordered">
+                                <thead class="title-bg">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên Nhóm</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <% listgroup.forEach((item,index)=>{ %>
+                                        <tr>
+                                            <td><%=item.GroupID%></td>
+                                            <td><%=item.GroupName %></td>
+                                            <td>
+                                                <div class="btn btn-group-xs">
+                                                    <button type="button" class="del btn btn-danger deleteSaleOff" data-id= <%=item.SaleOffID %> ><i class="fa fa-trash"></i> Xóa</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <%}) %>
+                                </tbody>
+                            </div>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end row -->
+                <!-- end row -->
+    
+    
+            </div> <!-- container -->
+    
+        </div> <!-- content -->
+    
+        <footer class="footer text-right">
+            2019 - 2022 © Etc đông hà. - Coder By Thành
+        </footer>
+    
+    </div>
+    

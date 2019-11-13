@@ -4,6 +4,7 @@ const UsersField = {
     Id:'Id',
     UserName:'UserName',
     Password:'Password',
+    Name:'Name',
     Avatar:'Avatar',
     Email:'Email',
     Role:'Role',
@@ -23,6 +24,9 @@ const UsersDB=  db.define('Users',{
         type:Sequelize.DataTypes.STRING 
     },
     [UsersField.Password]:{
+        type:Sequelize.DataTypes.STRING 
+    },
+    [UsersField.Name]:{
         type:Sequelize.DataTypes.STRING 
     },
     [UsersField.Avatar]:{

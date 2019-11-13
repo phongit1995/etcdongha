@@ -38,8 +38,10 @@
                 <li>
                     <a href="javascript: void(0);"><i class="fi-box"></i><span> Người dùng</span> <span class="menu-arrow"></span></a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="icons-colored.html">Thành viên</a></li>
-                        <li><a href="icons-materialdesign.html">Mã giới thiệu</a></li>
+                            <% if(user.Role==1){%>
+                                <li><a href="/groups">Nhóm</a></li>
+                             <% } %>
+                        <li><a href="/members">Thành Viên</a></li>
                     </ul>
                 </li>
                 <% } %>
