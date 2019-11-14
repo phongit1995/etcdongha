@@ -68,7 +68,7 @@
                                         <h4 class="m-b-5 m-t-0 font-18">Tổ: <%=item.GroupName%></h4>
                                         <h4 class="m-b-5 m-t-0 font-18">Tên Đăng Nhập: <%=item.UserName%></h4>
                                         <h4 class="m-b-5 m-t-0 font-18">Tên thành viên : <%=item.Name%></h4>
-                                        <p class="text-muted">Phone: 0968 302 302 <span> | </span> <span> <a href="#" class="text-custom">DOB: 28/12/1992</a> </span></p>
+                                        <p class="text-muted">Phone: <%=item.Phone %> <span> | </span> <span> <a href="#" class="text-custom">DOB: <%= moment(item.DateOfBirth).tz("Asia/Bangkok").format("DD-MM-YYYY") %></a> </span></p>
                                         <p class="text-muted font-13">
                                             Số bài đăng: <strong>2812</strong> | Đăng nhập: <strong>17:00 14/11/19</strong>
                                         </p>

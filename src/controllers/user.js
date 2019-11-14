@@ -2,6 +2,7 @@ let UsersModel = require('../databases/users');
 let users = require('./../models/users');
 let ResponseHelper = require('./../commons/ResponseHelper');
 let {getList:ListGroup} = require('./../models/group');
+let moment = require('moment-timezone');
 let createUser = async (req,res)=>{
     try {
         // console.log(req.body);
@@ -44,7 +45,8 @@ let index = async (req,res)=>{
     // console.log(Role,Id,Group);
     let listUser = await users.getUserByPermissions(Role,Id,Group);
     let ListGroups =  await ListGroup();
-    res.render('clients/users/index',{user:req.user,listusers:listUser[0],UsersRole:UsersModel.UsersRole,ListGroups:JSON.parse(JSON.stringify(ListGroups))});
+    res.render('clients/users/index',{user:req.user,listusers:listUser[0],UsersRole:UsersModel.UsersRole,ListGroups:JSON.parse(JSON.stringify(ListGroups)),
+        moment:moment});
 }
 let changepassword = async (req,res)=>{
     try {

@@ -92,14 +92,23 @@ $(document).ready(function(){
           cancelButtonColor: '#d33',
           confirmButtonText: 'Đồng Ý!'
         }).then((result) => {
+          if(result.value){
             $.ajax({
               url:'/users/delete',
               method:'post',
               data:{ID:IdUsers},
               success:function(data){
-                  console.log(data);
+                  if(!data.error){
+                    Swal.fire(
+                      'Thành Công!',
+                      'Tạo Thành Công',
+                      'success'
+                    )
+                    location.reload();
+                  }
               }
             })
+          }
         })
     })
 })
