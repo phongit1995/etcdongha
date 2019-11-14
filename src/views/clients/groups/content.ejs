@@ -1,68 +1,193 @@
-<div class="content-page">
-        <!-- Start content -->
-        <div class="content">
-            <div class="container-fluid">
-    
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <h4 class="page-title float-left">Nhóm Quản Lý</h4>
-    
-                            <ol class="breadcrumb float-right">
-                                <li class="breadcrumb-item"><a href="/">Quản Lý</a></li>
-                                <li class="breadcrumb-item"><a href="/group">Nhóm Quản Lý</a></li>
-                            </ol>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                        <div class="col-sm-4">
-                            <button class="btn btn-custom waves-effect waves-light m-b-20"  id='addgroups'><i class="md md-add"></i> Thêm Nhóm</button>
-                        </div><!-- end col -->
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                            <div class="card-box ribbon-box">
-                                    <div class="ribbon ribbon-success">Danh sách các nhóm:</div>
-                                
-                               <div class="card-box table-responsive text-center">
-                            <table id="datatable" class="table table-bordered">
-                                <thead class="title-bg">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tên Nhóm</th>
-                                    <th>Hành Động</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <% listgroup.forEach((item,index)=>{ %>
-                                        <tr>
-                                            <td><%=item.GroupID%></td>
-                                            <td><%=item.GroupName %></td>
-                                            <td>
-                                                <div class="btn btn-group-xs">
-                                                    <button type="button" class="del btn btn-danger deleteSaleOff" data-id= <%=item.SaleOffID %> ><i class="fa fa-trash"></i> Xóa</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <%}) %>
-                                </tbody>
+ 
+
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title float-left">Nhóm</h4>
+
+                                    <ol class="breadcrumb float-right">
+                                        <li class="breadcrumb-item"><a href="#">Adminox</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Extras</a></li>
+                                        <li class="breadcrumb-item active">Companies</li>
+                                    </ol>
+
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
-                            </table>
                         </div>
-                    </div>
-                </div> <!-- end row -->
-                <!-- end row -->
-    
-    
-            </div> <!-- container -->
-    
-        </div> <!-- content -->
-    
-        <footer class="footer text-right">
-            2019 - 2022 © Etc đông hà. - Coder By Thành
-        </footer>
-    
-    </div>
-    
+                        <!-- end row -->
+
+
+                        <div class="row">
+                                <div class="col-sm-4">
+                                        <a href="#custom-modal" class="btn btn-custom waves-effect waves-light m-b-20" data-animation="fadein" data-plugin="custommodal"
+                                           data-overlaySpeed="200" data-overlayColor="#36404a"><i class="md md-add"></i> Add Group</a>
+                                    </div><!-- end col --><br />
+                                    <!-- Phân trang -->
+                                    <div class="col-sm-8">
+                                            <div class="text-right">
+                                                <ul class="pagination pagination-split mt-0 pull-right">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">«</span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="#" aria-label="Next">
+                                                            <span aria-hidden="true">»</span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                          <!-- End Phân trang -->      
+                            <div class="col-md-6 col-lg-3">
+                                <div class="company-card card-box">
+                                    <img src="assets/images/companies/airbnb.png" alt="logo" class="company-logo">
+                                    <div class="company-detail">
+                                        <h4 class=" m-b-5">Tổ 1</h4>
+                                        <p>Trưởng ca: Trần văn A</p>
+                                    </div>
+
+                                    <hr/>
+
+                                    <h5 class="text-muted font-normal"><span class="pull-right text-danger"><i class="mdi mdi-arrow-down"></i> 1.22%</span> Số thành viên: 5</h5>
+
+                                    <div class="text-center m-t-20">
+                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
+                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> 2536 <small>Lần</small></h3>
+                                    </div>
+
+                                    <div id="company-1" class="text-center"></div>
+
+                                </div>
+                            </div><!-- end col -->
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="company-card card-box">
+                                    <img src="assets/images/companies/apple.png" alt="logo" class="company-logo">
+                                    <div class="company-detail">
+                                        <h4 class=" m-b-5">Tổ 2</h4>
+                                        <p>Trưởng ca : Nguyễn Văn B</p>
+                                    </div>
+
+                                    <hr/>
+
+                                    <h5 class="text-muted font-normal"><span class="pull-right text-success"><i class="mdi mdi-arrow-up"></i> 8.51%</span> Số thành viên: 7</h5>
+
+                                    <div class="text-center m-t-20">
+                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
+                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> 89521 <small>Lần</small></h3>
+                                    </div>
+
+                                    <div id="company-2" class="text-center"></div>
+
+                                </div>
+                            </div><!-- end col -->
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="company-card card-box">
+                                    <img src="assets/images/companies/google.png" alt="logo" class="company-logo">
+                                    <div class="company-detail">
+                                        <h4 class=" m-b-5">Tổ 3</h4>
+                                        <p>Trưởng ca: Lê Văn C</p>
+                                    </div>
+
+                                    <hr/>
+
+                                    <h5 class="text-muted font-normal"><span class="pull-right text-success"><i class="mdi mdi-arrow-up"></i> 3.38%</span> Số thành viên: 7</h5>
+
+                                    <div class="text-center m-t-20">
+                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
+                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> 23657 <small>Lần</small></h3>
+                                    </div>
+
+                                    <div id="company-3" class="text-center"></div>
+
+                                </div>
+                            </div><!-- end col -->
+
+                            <div class="col-md-6 col-lg-3">
+                                <div class="company-card card-box">
+                                    <img src="assets/images/companies/amazon.png" alt="logo" class="company-logo">
+                                    <div class="company-detail">
+                                        <h4 class=" m-b-5">Hậu kiểm</h4>
+                                        <p>Trưởng ca: Hoàng Văn D</p>
+                                    </div>
+
+                                    <hr/>
+
+                                    <h5 class="text-muted font-normal"><span class="pull-right text-danger"><i class="mdi mdi-arrow-down"></i> 6.35%</span> Số thành viên: 4</h5>
+
+                                    <div class="text-center m-t-20">
+                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
+                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> 85412 <small>Lần</small></h3>
+                                    </div>
+
+                                    <div id="company-4" class="text-center"></div>
+
+                                </div>
+                            </div><!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+
+                        </div>
+                        <!-- end row -->
+
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <footer class="footer text-right">
+                    2017 - 2018 © Adminox. - Coderthemes.com
+                </footer>
+
+            </div>
+
+
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+
+
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script><!-- Popper for Bootstrap -->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/metisMenu.min.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+
+        <!-- Sparkline charts -->
+        <script src="../plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <script src="assets/pages/jquery.companies.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/jquery.core.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+
+    </body>
+</html>
