@@ -19,7 +19,7 @@ let getListOperationgDiary = async (Role,Group)=>{
     ,Lane.LaneName , HandleError.HandleErrorContent, Descriptor.DescriptorContent, Users.Id , Users.UserName 
     from OperatingDiary LEFT JOIN Lane on  OperatingDiary.Lane = Lane.LaneID left join Descriptor on OperatingDiary.
     Descriptor = Descriptor.DescriptorId left join HandleError on OperatingDiary.Handle = HandleError.HandleErrorId left join Users on 
-    OperatingDiary.CreateByUser = Users.Id where Status =1
+    OperatingDiary.CreateByUser = Users.Id where OperatingDiary.Status =1
     `
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`
@@ -89,7 +89,7 @@ let searchOperatingDiary = async (Role,Group,data)=>{
     ,Lane.LaneName , HandleError.HandleErrorContent, Descriptor.DescriptorContent, Users.Id , Users.UserName 
     from OperatingDiary LEFT JOIN Lane on  OperatingDiary.Lane = Lane.LaneID left join Descriptor on OperatingDiary.
     Descriptor = Descriptor.DescriptorId left join HandleError on OperatingDiary.Handle = HandleError.HandleErrorId left join Users on 
-    OperatingDiary.CreateByUser = Users.Id where Status =1
+    OperatingDiary.CreateByUser = Users.Id where OperatingDiary.Status =1
     `
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`

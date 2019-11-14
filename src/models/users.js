@@ -1,7 +1,78 @@
 let {UsersDB,UsersField,UsersRole} = require('./../databases/users');
-let createUser = async (data)=>{
-
+let sequelize = require('./../databases/connectdb');
+let moment = require('moment-timezone');
+let Texthelper = require('./../commons/TextHelper');
+let createUser = async (data,role,group)=>{
+    if(role==2){
+        data[UsersField.Role]=3,
+        data[UsersField.Group]=group;
+    }
+    data[UsersField.Id]= Texthelper.genId();
+    console.log(data);
+    let result = await  UsersDB.create({...data});
+    return result ;
+}
+let getUserByPermissions = async (Role,ID,Group)=>{
+    let Sql=`
+    SELECT * FROM users LEFT JOIN groupusers ON users.Group = groupusers.GroupID WHERE Id != ${ID} 
+    and users.Role>= ${Role} 
+    `
+    if(Role==2){
+        Sql+= `  AND users.Group=${Group} ` ;
+    }
+    Sql+= ` and Status >0 ORDER  BY users.createdAt DESC` ;
+    return await sequelize.query(Sql) ;
+}
+let changePasswordUser = async (data,IDUser,Role)=>{
+    let {Id,newpassword} = data;
+    let user = await  UsersDB.findOne({
+        where:{
+            [UsersField.Id]:Id
+        }
+    })
+    let NotesAdmin= user.dataValues[UsersField.NotesAdmin] ;
+    let Note ={ type:'Changepassword',UserId:IDUser,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm"),
+    oldPassword: user.dataValues[UsersField.Password] , newPassword:data.newpassword};
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    let result = UsersDB.update({
+      [UsersField.Password]:data.newpassword,
+      [UsersField.NotesAdmin]:NotesAdmin
+    },{
+        where:{[UsersField.Id]:Id}
+    })
+    return result ;
+}
+let getUserByUsername = async (username)=>{
+    let User = await UsersDB.findAll({
+        where:{
+            [UsersField.UserName]:username
+        }
+    })
+    return User;
+}
+let delteUser = async (data,IdUser)=>{
+    let user = await UsersDB.findOne({
+        where:{
+            [UsersField.Id]:data.ID
+        }
+    })
+    let NotesAdmin= user.dataValues[UsersField.NotesAdmin] ;
+    let Note ={ type:'DeleteUser',UserId:IdUser,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")};
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    let result = UsersDB.update({
+        [UsersField.Status]:false,
+        [UsersField.NotesAdmin]:NotesAdmin
+      },{
+          where:{[UsersField.Id]:data.ID}
+      })
+      return result ;
 }
 module.exports={
-    createUser
+    createUser,getUserByPermissions,changePasswordUser,getUserByUsername,delteUser
 }

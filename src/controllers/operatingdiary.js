@@ -81,6 +81,7 @@ let update = async (req,res)=>{
     }
 }
 let search = async (req,res)=>{
+    
     console.log(req.body);
     let {Group,Role} = req.user ;
     let result = await OperatingDiaryController.searchOperatingDiary(Role,Group,req.body);

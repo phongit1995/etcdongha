@@ -10,9 +10,9 @@ let create = async (data,IDUser)=>{
     return Track ;
 }
 let getListTrack = async (Role,Group)=>{
-    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Status ,Notes , Track.createdAt,Track.
+    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Track.Status ,Notes , Track.createdAt,Track.
     updatedAt , Users.UserName, Users.Id ,Fees.IdFee , Fees.FeeNumbers from Track left join Lane on Track.Lane= Lane.LaneID left join Users on Track.CreateByUser = Users.Id  
-    left join Fees on Track.TrackFee = Fees.IdFee where Status=1`
+    left join Fees on Track.TrackFee = Fees.IdFee where Track.Status=1`
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`
     }
@@ -69,9 +69,9 @@ let updateTrack = async(data,Id)=>{
     return resultUpdate ;
 }
 let searchTrack = async(Role,Group,data)=>{
-    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Status ,Notes , Track.createdAt,Track.
+    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Track.Status ,Notes , Track.createdAt,Track.
     updatedAt , Users.UserName, Users.Id ,Fees.IdFee , Fees.FeeNumbers from Track left join Lane on Track.Lane= Lane.LaneID left join Users on Track.CreateByUser = Users.Id  
-    left join Fees on Track.TrackFee = Fees.IdFee where Status=1`
+    left join Fees on Track.TrackFee = Fees.IdFee where Track.Status=1`
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`
     }

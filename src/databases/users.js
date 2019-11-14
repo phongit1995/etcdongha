@@ -7,14 +7,29 @@ const UsersField = {
     Name:'Name',
     Avatar:'Avatar',
     Email:'Email',
+    Phone:'Phone',
+    DateOfBirth:'DateOfBirth',
     Role:'Role',
-    Group:'Group'
+    Group:'Group',
+    NotesAdmin:'NotesAdmin',
+    Status:'Status'
 }
-const UsersRole = {
-    ADMIN:1,
-    MANAGER:2,
-    MEMBER:3
-}
+const UsersRole = [
+    {
+        type:1,
+        name:'admin'
+    },
+    {
+        type:2,
+        name:'manger'
+    },
+    {
+        type:3,
+        name:'member'
+    }
+]
+
+
 const UsersDB=  db.define('Users',{
     [UsersField.Id]:{
         type:Sequelize.DataTypes.CHAR,
@@ -36,11 +51,32 @@ const UsersDB=  db.define('Users',{
     [UsersField.Email]:{
         type:Sequelize.DataTypes.STRING 
     },
+    [UsersField.Phone]:{
+        type:Sequelize.DataTypes.STRING 
+    },
+    [UsersField.DateOfBirth]:{
+        type:Sequelize.TIME
+    },
     [UsersField.Role]:{
         type:Sequelize.DataTypes.NUMBER
     },
     [UsersField.Group]:{
         type:Sequelize.DataTypes.NUMBER
+    },
+    [UsersField.Status]:{
+        type:Sequelize.BOOLEAN,
+        defaultValue:true
+    },
+    [UsersField.NotesAdmin]:{
+        type:Sequelize.TEXT,
+        set(val){
+            this.setDataValue(UsersField.NotesAdmin,JSON.stringify(val))
+        },
+        get(){
+            if (this.getDataValue(UsersField.NotesAdmin)) {
+                return JSON.parse(this.getDataValue(UsersField.NotesAdmin));
+            }
+        }
     }
 })
 module.exports = {

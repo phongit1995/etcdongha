@@ -69,24 +69,25 @@
         <!-- Begin page -->
         <div id="wrapper">
             <!-- Top Bar Start -->
-            <%- include('../common/topbar'); %>
+            <%- include('../common/topbar') %>
             
             <!-- Top Bar End -->
 
 
             <!-- ========== Left Sidebar Start ========== -->
-            <%- include('../common/left-menu'); %>
+            <%- include('../common/left-menu') %>
             <!-- Left Sidebar End -->
 
 
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
-            <%- include('content'); %>
+            <%-include('content'); %>
 
             <!-- ============================================================== -->
             <!-- End Right content here -->
             <!-- ============================================================== -->
+            <%-include('custom'); %>
 
 
         </div>
