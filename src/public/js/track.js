@@ -4,7 +4,7 @@ $(document).ready(function(){
         "searching": false
     });
 
-    console.log('phong');
+    // console.log('phong');
     // DateTime Picker
     document.querySelectorAll('.datetimeinput').flatpickr({
         enableTime: true,
@@ -196,8 +196,9 @@ $(document).ready(function(){
         let LicensePlates = $('#LicensePlatesSearch').val();
         let DateStart = $('#DateStartSearch').val();
         let DateEnd = $('#DateEndSearch').val();
-        console.log(LicensePlates,DateStart,DateEnd);
-        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+        let Lane = $('#LaneSearch').val();
+        console.log(LicensePlates,DateStart,DateEnd,Lane);
+        if(LicensePlates==''&& DateStart=='' && DateEnd==''&& Lane=='all'){
             return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
         }
        
@@ -210,6 +211,9 @@ $(document).ready(function(){
         }
         if(DateEnd!=''){
             data['DateEnd']=DateEnd;
+        }
+        if(Lane!='all'){
+            data['Lane']=Lane;
         }
         $.ajax({
             url:'/track/search',

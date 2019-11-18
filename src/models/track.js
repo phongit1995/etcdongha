@@ -84,6 +84,9 @@ let searchTrack = async(Role,Group,data)=>{
     if(data.DateEnd){
         Sql+= ` and DATE_FORMAT(TrackTime,'%Y-%m-%d') <= '${data.DateEnd}'`
     }
+    if(data.Lane){
+        Sql+= ` and Track.Lane = ${data.Lane}`
+    }
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }

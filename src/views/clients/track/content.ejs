@@ -52,14 +52,11 @@
                                             <div class="col-md-3">
                                                     <div class="input-group" >
                                                         <div class="input-group-prepend"><span class="input-group-text">Làn xe:</span></div>
-                                                        <select class="form-control" id="">
-                                                           
-                                                        <option value="1">Làn 1</option>
-                                                        <option value="2">Làn 2</option>
-                                                        <option value="3">Làn 3</option>
-                                                        <option value="4">Làn 4</option>
-                                                        <option value="5">Làn 5</option>
-                                                        <option value="6">Làn 6</option>
+                                                        <select class="form-control" id="LaneSearch">
+                                                            <option value="all"">TẤT CẢ</option>
+                                                            <% listLane.forEach((item)=>{ %>
+                                                                 <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
+                                                            <% }) %>
                                                         </select>
                                                     </div>
                                             </div>
