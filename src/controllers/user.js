@@ -61,7 +61,6 @@ let changepassword = async (req,res)=>{
     
 }
 let deleteuser = async (req,res)=>{
-   
     try {
         console.log(req.body);
         let {Id,Group}= req.user ;

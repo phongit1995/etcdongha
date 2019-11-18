@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 const db = require("./connectdb");
 const GroupUsersFields = {
     GroupID:'GroupID',
-    GroupName:'GroupName'
+    GroupName:'GroupName',
+    Images:'Images'
 }
 const  GroupUsersDB=  db.define('GroupUsers',{
     [GroupUsersFields.GroupID]:{
@@ -11,6 +12,9 @@ const  GroupUsersDB=  db.define('GroupUsers',{
         autoIncrement:true
     },
     [GroupUsersFields.GroupName]:{
+        type:Sequelize.DataTypes.STRING
+    },
+    [GroupUsersFields.Images]:{
         type:Sequelize.DataTypes.STRING
     }
 })

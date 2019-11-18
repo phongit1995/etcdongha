@@ -14,13 +14,13 @@ let createUser = async (data,role,group)=>{
 }
 let getUserByPermissions = async (Role,ID,Group)=>{
     let Sql=`
-    SELECT * FROM users LEFT JOIN groupusers ON users.Group = groupusers.GroupID WHERE Id != ${ID} 
-    and users.Role>= ${Role} 
+    SELECT * FROM Users LEFT JOIN GroupUsers ON Users.Group = GroupUsers.GroupID WHERE Id != ${ID} 
+    and Users.Role>= ${Role} 
     `
     if(Role==2){
-        Sql+= `  AND users.Group=${Group} ` ;
+        Sql+= `  AND Users.Group=${Group} ` ;
     }
-    Sql+= ` and Status >0 ORDER  BY users.createdAt DESC` ;
+    Sql+= ` and Status >0 ORDER  BY Users.createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
 let changePasswordUser = async (data,IDUser,Role)=>{

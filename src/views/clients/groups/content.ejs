@@ -56,94 +56,36 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                          <!-- End Phân trang -->      
-                            <div class="col-md-6 col-lg-3">
-                                <div class="company-card card-box">
-                                    <img src="assets/images/companies/airbnb.png" alt="logo" class="company-logo">
-                                    <div class="company-detail">
-                                        <h4 class=" m-b-5">Tổ 1</h4>
-                                        <p>Trưởng ca: Trần văn A</p>
+                                          <!-- End Phân trang -->
+                            <% listgroup.forEach((item)=>{ %>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="company-card card-box">
+                                        <img src="<%=item.dataValues.Images%>" alt="logo" class="company-logo">
+                                        <div class="company-detail">
+                                            <h4 class=" m-b-5"> <%=item.dataValues.GroupName%> </h4>
+                                            <p>Trưởng ca: 
+                                                <% item.dataValues.Manager.forEach(itemmanager=>{ %>
+                                                    <%=itemmanager.Name %> 
+                                               <% }) %>
+                                            </p>
+
+                                        </div>
+    
+                                        <hr/>
+    
+                                        <h5 class="text-muted font-normal"><span class="pull-right text-danger"><i class="mdi mdi-arrow-down"></i> 1.22%</span> Số thành viên: <%=item.dataValues.numberUser%></h5>
+    
+                                        <div class="text-center m-t-20">
+                                            <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
+                                            <h3 class="m-b-30"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> 2536 <small>Lần</small></h3>
+                                        </div>
+    
+                                        <div id="company-1" class="text-center"></div>
+    
                                     </div>
+                                </div><!-- end col -->
+                            <% })%>      
 
-                                    <hr/>
-
-                                    <h5 class="text-muted font-normal"><span class="pull-right text-danger"><i class="mdi mdi-arrow-down"></i> 1.22%</span> Số thành viên: 5</h5>
-
-                                    <div class="text-center m-t-20">
-                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
-                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> 2536 <small>Lần</small></h3>
-                                    </div>
-
-                                    <div id="company-1" class="text-center"></div>
-
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-lg-3">
-                                <div class="company-card card-box">
-                                    <img src="assets/images/companies/apple.png" alt="logo" class="company-logo">
-                                    <div class="company-detail">
-                                        <h4 class=" m-b-5">Tổ 2</h4>
-                                        <p>Trưởng ca : Nguyễn Văn B</p>
-                                    </div>
-
-                                    <hr/>
-
-                                    <h5 class="text-muted font-normal"><span class="pull-right text-success"><i class="mdi mdi-arrow-up"></i> 8.51%</span> Số thành viên: 7</h5>
-
-                                    <div class="text-center m-t-20">
-                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
-                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> 89521 <small>Lần</small></h3>
-                                    </div>
-
-                                    <div id="company-2" class="text-center"></div>
-
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-lg-3">
-                                <div class="company-card card-box">
-                                    <img src="assets/images/companies/google.png" alt="logo" class="company-logo">
-                                    <div class="company-detail">
-                                        <h4 class=" m-b-5">Tổ 3</h4>
-                                        <p>Trưởng ca: Lê Văn C</p>
-                                    </div>
-
-                                    <hr/>
-
-                                    <h5 class="text-muted font-normal"><span class="pull-right text-success"><i class="mdi mdi-arrow-up"></i> 3.38%</span> Số thành viên: 7</h5>
-
-                                    <div class="text-center m-t-20">
-                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
-                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> 23657 <small>Lần</small></h3>
-                                    </div>
-
-                                    <div id="company-3" class="text-center"></div>
-
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-md-6 col-lg-3">
-                                <div class="company-card card-box">
-                                    <img src="assets/images/companies/amazon.png" alt="logo" class="company-logo">
-                                    <div class="company-detail">
-                                        <h4 class=" m-b-5">Hậu kiểm</h4>
-                                        <p>Trưởng ca: Hoàng Văn D</p>
-                                    </div>
-
-                                    <hr/>
-
-                                    <h5 class="text-muted font-normal"><span class="pull-right text-danger"><i class="mdi mdi-arrow-down"></i> 6.35%</span> Số thành viên: 4</h5>
-
-                                    <div class="text-center m-t-20">
-                                        <h5 class="font-normal text-muted">Tổng số lần vượt trạm</h5>
-                                        <h3 class="m-b-30"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> 85412 <small>Lần</small></h3>
-                                    </div>
-
-                                    <div id="company-4" class="text-center"></div>
-
-                                </div>
-                            </div><!-- end col -->
                         </div>
                         <!-- end row -->
 
