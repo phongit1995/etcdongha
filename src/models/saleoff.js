@@ -94,6 +94,9 @@ let searchSaleoff = async (Role,Group,data)=>{
     if(data.DateEnd){
         Sql+= ` and DATE_FORMAT(SaleOff.DateStart,'%Y-%m-%d') <= '${data.DateEnd}'`
     }
+    if(data.TypeOffSaleOff){
+        Sql+= ` and SaleOff.TypeOfSaleOff = ${data.TypeOffSaleOff}` ;
+    }
     Sql+= ` ORDER  BY SaleOff.createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }

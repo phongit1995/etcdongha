@@ -50,14 +50,11 @@
                                             <div class="col-md-3">
                                                     <div class="input-group" >
                                                         <div class="input-group-prepend"><span class="input-group-text">Loại giảm giá:</span></div>
-                                                        <select class="form-control" id="">
-                                                           
-                                                        <option value="1">BTC</option>
-                                                        <option value="2">PCTT</option>
-                                                        <option value="3">Giảm 40%</option>
-                                                        <option value="4">Giảm 50%</option>
-                                                        <option value="5">Ưu tiên TT 35</option>
-                                                        <option value="6">Miễn giảm địa phương</option>
+                                                        <select class="form-control" id="TypeOffSaleOffSearch" name="TypeOffSaleOffSearch">
+                                                                <option value="all"">TẤT CẢ</option>
+                                                            <% listTypeOffSaleOff.forEach((item)=>{ %>
+                                                                    <option value="<%=item.TypeOfSaleOffID%>"><%=item.TypeOfSaleOffName%></option>
+                                                            <% }) %>
                                                         </select>
                                                     </div>
                                             </div>

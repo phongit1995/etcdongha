@@ -3,7 +3,7 @@ let moment = require('moment-timezone');
 let GroupModels = require('./../models/group');
 let index = async (req,res)=>{
     let listgroup = await GroupModels.getList();
-    console.log(listgroup);
+    // console.log(listgroup);
     res.render('clients/groups/index',{user:req.user,listgroup:listgroup});
 }
 let create = async (req,res)=>{

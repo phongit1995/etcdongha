@@ -286,8 +286,9 @@ $(document).ready(function(){
         let LicensePlates = $('#LicensePlatesSearch').val();
         let DateStart = $('#DateStartSearch').val();
         let DateEnd = $('#DateEndSearch').val();
+        let TypeOffSaleOff = $('#TypeOffSaleOffSearch').val();
         console.log(LicensePlates,DateStart,DateEnd);
-        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+        if(LicensePlates==''&& DateStart=='' && DateEnd==''&& TypeOffSaleOff=='all'){
             return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
         }
        
@@ -300,6 +301,9 @@ $(document).ready(function(){
         }
         if(DateEnd!=''){
             data['DateEnd']=DateEnd;
+        }
+        if(TypeOffSaleOff!='all'){
+            data['TypeOffSaleOff']=TypeOffSaleOff;
         }
         $.ajax({
             url:'/saleoff/search',
@@ -351,6 +355,7 @@ $(document).ready(function(){
         $('#LicensePlatesSearch').val('');
         $('#DateStartSearch').val('');
         $('#DateEndSearch').val('');
+        $('#TypeOffSaleOffSearch').val('all').change();
         LoadSaleOff();
     })
 })
