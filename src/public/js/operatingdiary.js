@@ -291,8 +291,9 @@ $(document).ready(function(){
         let LicensePlates = $('#LicensePlatesSearch').val();
         let DateStart = $('#DateStartSearch').val();
         let DateEnd = $('#DateEndSearch').val();
+        let Lane = $('#LaneSearch').val();
         console.log(LicensePlates,DateStart,DateEnd);
-        if(LicensePlates==''&& DateStart=='' && DateEnd==''){
+        if(LicensePlates==''&& DateStart=='' && DateEnd=='' && Lane=='all'){
             return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
         }
        
@@ -305,6 +306,9 @@ $(document).ready(function(){
         }
         if(DateEnd!=''){
             data['DateEnd']=DateEnd;
+        }
+        if(Lane!='all'){
+            data['Lane']=Lane;
         }
         $.ajax({
             url:'/operatingdiary/search',
@@ -361,6 +365,7 @@ $(document).ready(function(){
         $('#LicensePlatesSearch').val('');
         $('#DateStartSearch').val('');
         $('#DateEndSearch').val('');
+        $('#LaneSearch').val('all').change();
         loadOperatingdiary();
     })
 })

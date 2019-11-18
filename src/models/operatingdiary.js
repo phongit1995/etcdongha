@@ -103,6 +103,10 @@ let searchOperatingDiary = async (Role,Group,data)=>{
     if(data.DateEnd){
         Sql+= ` and DATE_FORMAT(OperatingDiaryTime,'%Y-%m-%d') <= '${data.DateEnd}'`
     }
+    if(data.Lane){
+        Sql+= ` and OperatingDiary.Lane= ${data.Lane} `
+    }
+
     Sql+= ` ORDER  BY OperatingDiary.createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
