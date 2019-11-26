@@ -6,7 +6,7 @@ let Track = require('./track');
 let SaleOff = require('./saleoff');
 let Groups = require('./group');
 let Guide = require('./guide');
-let Dh1 = require('./dh1');
+let Me = require('./me');
 let Dh2 = require('./dh2');
 let Dh3 = require('./dh3');
 let OperatingDiary = require('./operatingdiary');
@@ -39,7 +39,7 @@ router.use("/saleoff",SaleOff); // Sale Off Router
 router.use("/operatingdiary",OperatingDiary);
 router.use("/groups",Groups);
 router.use('/guide',Guide); // Page Hướng Dẫn
-router.use('/dh1',Dh1);  // Page Loading
+router.use('/me',Me);  // User Info
 router.use('/dh2',Dh2); // Page Loading
 router.use('/dh3',Dh3); // Page Loading
 module.exports  = router ;

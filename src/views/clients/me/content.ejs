@@ -30,11 +30,11 @@
                                             <div class="profile-user-box">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <span class="pull-left m-r-15"><img src="https://vetc.com.vn/cms/uploads/9646d28d-593c-4bc8-aa2d-896715aad068-210x197.jpg" alt="" class="thumb-lg rounded-circle"></span>
+                                                        <span class="pull-left m-r-15"><img src="images/avatarusers/<%=user.Avatar%>" alt="" class="thumb-lg rounded-circle" width="80px" height="80px"></span>
                                                         <div class="media-body">
-                                                            <h4 class="m-t-5 m-b-5 font-18 ellipsis">Trần Tiểu Mẫn</h4>
+                                                            <h4 class="m-t-5 m-b-5 font-18 ellipsis"><%=user.Name %></h4>
                                                             <p class="font-13"> Chức vụ: Nhân viên</p>
-                                                            <p class="text-muted m-b-0"><span>IG: ttm2812</span></p>
+                                                            <p class="text-muted m-b-0"><span><input type="file" ></span></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -188,7 +188,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="field-3" class="control-label">Họ tên:</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="Trần Tiểu Mẫn">
+                            <input type="text" class="form-control" id="field-1" value="<%=user.UserName%>">
                         </div>
                     </div>
                 </div>
@@ -196,13 +196,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Ngày sinh:</label>
-                            <input type="text" class="form-control" id="field-2" placeholder="28/12/1992">
+                            <input type="text" class="form-control" id="field-2" value="<%=user.DateofBirth%>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Số điện thoại:</label>
-                            <input type="text" class="form-control" id="field-3" placeholder="0968 302 302">
+                            <input type="text" class="form-control" id="field-3" value="<%=user.Phone%>">
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Email:</label>
-                            <input type="text" class="form-control" id="field-4" placeholder="Thanhtd@vetc.com.vn">
+                            <input type="text" class="form-control" id="field-4" value="<%=user.Email %>">
                         </div>
                     </div>
                     <div class="col-md-6">
