@@ -3,69 +3,124 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Cập nhật thông tin </h4>
-            </div>
-            <div class="modal-body" id="editor-body">
-                <form id="updateTrack">
-                    <p><b>BIỂN SỐ XE</b>:
-                        <input type="text" class="form-control" id="LicensePlatesEdit" name="LicensePlatesEdit" required="true" >
-                    </p>
-                    <p><b>TÊN KHÁCH HÀNG</b>:
-                        <input type="text" class="form-control" id="NameCustomerEdit" name="NameCustomerEdit" required="true" value="Đang cập nhật">
-                    </p>
-                    <p><b>LÀN</b>
-                        <br>
-                        <select class="form-control" id="LaneEdit" name="LaneEdit">
-                            <% listLane.forEach((item)=>{ %>
-                                <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
-                           <% }) %>
-                        </select>
-                    </p>
-                    <p><b>Ngày tháng</b>:
-                        <input type="text" class="datetimepicker form-control flatpickr-input datetimeinput" id="TrackTimeEdit" name="TrackTimeEdit" required="true" readonly="readonly">
-                    </p>
-                    <p><b>GHI CHÚ</b>
-                        <br>
-                        <textarea class="form-control" id="NotesEdit" name="NotesEdit">Vượt trạm</textarea>
-                    </p>
-                    <p><b>MỆNH GIÁ</b>
-                        <br>
-                        <select class="form-control" id="FeeEdit" name="FeeEdit">
-                            <% listFee.forEach(item=>{ %>
-                                <option value="<%=item.IdFee %>"> <%=item.FeeNumbers%></option>
-                            <% }) %>
-                        </select>
-                    </p>
-                    <input type="hidden" id="idTrackEdit" name="idTrackEdit" >
-                    <button class="btn btn-primary " id="UpdateTrack" type="button"><i class="fa fa-save"></i> Update</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-            </div>
+                <!-- Để ẩn đi vậy nha--><!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                 <h4 class="modal-title">Cập nhật xe vượt trạm</h4>
+             </div>
+             <div class="modal-body">
+                 <div class="row">
+                     <div class="col-md-10">
+                         <div class="form-group">
+                             <label for="field-3" class="control-label">Biển số xe:</label>
+                             <input type="text" class="form-control" id="field-1" placeholder="">
+                         </div>
+                     </div>
+ 
+                 </div>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="field-2" class="control-label">Tên khách hàng:</label>
+                             <input type="text" class="form-control" id="field-2" placeholder="">
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="field-2" class="control-label">Làn:</label>
+                             <input type="text" class="form-control" id="field-3" placeholder="">
+                         </div>
+                     </div>
+                 </div>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="field-4" class="control-label">Thời gian:</label>
+                             <input type="text" class="form-control" id="field-4" placeholder="">
+                         </div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                             <label for="field-4" class="control-label">Mệnh giá:</label>
+                             <input type="text" class="form-control" id="field-4" placeholder="">
+                         </div>
+                     </div>    
+                 </div>
+                 <div class="row">
+                     <div class="col-md-12">
+                         <div class="form-group no-margin">
+                             <label for="field-7" class="control-label">Ghi chú:</label>
+                             <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
+                 <button type="button" class="btn btn-success waves-effect waves-light">Lưu thay đổi</button>
+             </div>
         </div>
     </div>
 </div>
 
 
+<!-- sample modal content -->
+<div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <!-- Để ẩn đi vậy nha--><!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <h4 class="modal-title">Thêm xe vượt trạm</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Biển số xe:</label>
+                            <input type="text" class="form-control" id="field-1" placeholder="">
+                        </div>
+                    </div>
 
-<div id="addForm" class="modal fade" role="dialog" style="display: none;">
-        <div class="modal-dialog" class="col-md-6">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4 class="modal-title"><font color="green">Thêm thông tin</font></h4>
                 </div>
-                <!---->
-                
-
-                
-                <!---->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Tên khách hàng:</label>
+                            <input type="text" class="form-control" id="field-2" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Làn:</label>
+                            <input type="text" class="form-control" id="field-3" placeholder="">
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Thời gian:</label>
+                            <input type="text" class="form-control" id="field-4" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Mệnh giá:</label>
+                            <input type="text" class="form-control" id="field-4" placeholder="">
+                        </div>
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Ghi chú:</label>
+                            <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
+                <button type="button" class="btn btn-success waves-effect waves-light">Lưu</button>
             </div>
         </div>
     </div>
+</div><!-- /.modal -->
