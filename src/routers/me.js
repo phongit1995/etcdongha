@@ -1,7 +1,7 @@
 let express= require("express");
 let router = express.Router();
-let {checkIsLogin} = require('./../commons/checkPermisson');
+let {checkIsLogin} = require('../commons/checkPermisson');
 router.get("/",checkIsLogin ,async (req,res)=>{
-    res.render('clients/dh1/index',{user:req.user});
+    res.render('clients/me/index',{user:req.user});
 });
 module.exports  = router ;
