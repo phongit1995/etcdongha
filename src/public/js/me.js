@@ -20,7 +20,33 @@ $(document).ready(function(){
                 Introduce:Introduce
             },
             success:function(data){
-                
+                if(!data.error){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Cập Nhật Thành Công',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    location.reload();
+                }
+            }
+        })
+    })
+    $('#changeImage').change(function(){
+        var formData = new FormData();
+        let fileData = $(this).prop("files")[0];
+        formData.append('image',fileData);
+        console.log(fileData);
+        $.ajax({
+            url:'/me/updateavatar',
+            type:"post",
+            cache:false,
+            contentType:false,
+            processData:false,
+            data:formData,
+            success:function(data){
+
             }
         })
     })

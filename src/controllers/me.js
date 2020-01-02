@@ -16,7 +16,13 @@ let updateUser = async (req,res)=>{
     console.log(req.body);
     let {Id} = req.user;
     let User = await UserModels.UpdateUser(Id,req.body);
+    return res.json({error:null})
+}
+let updateImage = async (req,res)=>{
+    let {Id} = req.user;
+    let users = await UserModels.UpdateUser(Id,{Avatar:req.file.filename});
+    console.log(req.file);
 }
 module.exports = {
-    index,updateUser
+    index,updateUser,updateImage
 }
