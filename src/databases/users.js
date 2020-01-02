@@ -8,6 +8,7 @@ const UsersField = {
     Avatar:'Avatar',
     Email:'Email',
     Phone:'Phone',
+    Introduce:'Introduce',
     DateOfBirth:'DateOfBirth',
     Role:'Role',
     Group:'Group',
@@ -17,15 +18,15 @@ const UsersField = {
 const UsersRole = [
     {
         type:1,
-        name:'admin'
+        name:'ADMIN'
     },
     {
         type:2,
-        name:'manger'
+        name:'Tổ Trưởng'
     },
     {
         type:3,
-        name:'member'
+        name:'Nhân Viên'
     }
 ]
 
@@ -49,6 +50,9 @@ const UsersDB=  db.define('Users',{
         defaultValue: "default.jpeg"
     },
     [UsersField.Email]:{
+        type:Sequelize.DataTypes.STRING 
+    },
+    [UsersField.Introduce]:{
         type:Sequelize.DataTypes.STRING 
     },
     [UsersField.Phone]:{

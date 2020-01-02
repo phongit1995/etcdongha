@@ -59,19 +59,19 @@
                                                 <h4 class="header-title mt-0 m-b-20">Thông tin cá nhân</h4>
                                                 <div class="panel-body">
                                                     <p class="text-muted font-13">
-                                                        Nhân viên Công ty TNHH thu phí tự động VETC
+                                                            <%=user.Introduce %>
                                                     </p>
             
                                                     <hr/>
             
                                                     <div class="text-left">
-                                                        <p class="text-muted font-15"><strong>Tên đầy đủ :</strong> <span class="m-l-15">Trần Tiểu Mẫn</span></p>
+                                                        <p class="text-muted font-15"><strong>Tên đầy đủ :</strong> <span class="m-l-15"><%=user.Name %></span></p>
             
-                                                        <p class="text-muted font-15"><strong>Điện thoại :</strong><span class="m-l-15">(+84) 968 302 302</span></p>
+                                                        <p class="text-muted font-15"><strong>Điện thoại :</strong><span class="m-l-15"><%=user.Phone %></span></p>
             
-                                                        <p class="text-muted font-15"><strong>Email :</strong> <span class="m-l-15">Trantieuman@gmail.com</span></p>
+                                                        <p class="text-muted font-15"><strong>Email :</strong> <span class="m-l-15"><%=user.Email %></span></p>
             
-                                                        <p class="text-muted font-15"><strong>Team :</strong> <span class="m-l-15">Đội ETC Đông Hà</span></p>
+                                                        <p class="text-muted font-15"><strong>Team :</strong> <span class="m-l-15"><%=user.GroupName %></span></p>
             
                                                         <p class="text-muted font-15"><strong>Ngôn ngữ :</strong>
                                                             <span class="m-l-5">
@@ -110,57 +110,19 @@
                                                     <div class="ribbon ribbon-primary">Thành viên trong tổ:</div>
                                                     <div class="clearfix"></div>
                                                     <div class="inbox-widget">
+                                                       <%  user.groups.forEach((group)=>{%>
                                                         <a href="#">
-                                                            <div class="inbox-item">
-                                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
-                                                                <p class="inbox-item-author">Nguyễn Văn A</p>
-                                                                <p class="inbox-item-text">Tổ trưởng</p>
-                                                                <p class="inbox-item-date m-t-10">
-                                                                    <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
-                                                                </p>
-                                                            </div>
+                                                                <div class="inbox-item">
+                                                                    <div class="inbox-item-img"><img src="images/avatarusers/<%=group.Avatar%>" class="rounded-circle" alt="" height="40px;"></div>
+                                                                    <p class="inbox-item-author"><%=group.Name %></p>
+                                                                    <p class="inbox-item-text"><%=group.position %></p>
+                                                                    <p class="inbox-item-date m-t-10">
+                                                                        <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
+                                                                    </p>
+                                                                </div>
                                                         </a>
-                                                        <a href="#">
-                                                            <div class="inbox-item">
-                                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-3.jpg" class="rounded-circle" alt=""></div>
-                                                                <p class="inbox-item-author">Lê Văn B</p>
-                                                                <p class="inbox-item-text">Nhân viên</p>
-                                                                <p class="inbox-item-date m-t-10">
-                                                                    <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#">
-                                                            <div class="inbox-item">
-                                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-4.jpg" class="rounded-circle" alt=""></div>
-                                                                <p class="inbox-item-author">Trần Văn C</p>
-                                                                <p class="inbox-item-text">Nhân viên</p>
-                                                                <p class="inbox-item-date m-t-10">
-                                                                    <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                
-                                                        <a href="#">
-                                                            <div class="inbox-item">
-                                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-5.jpg" class="rounded-circle" alt=""></div>
-                                                                <p class="inbox-item-author">Hoàng Văn D</p>
-                                                                <p class="inbox-item-text">Nhân viên</p>
-                                                                <p class="inbox-item-date m-t-10">
-                                                                    <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#">
-                                                            <div class="inbox-item">
-                                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-6.jpg" class="rounded-circle" alt=""></div>
-                                                                <p class="inbox-item-author">Ngô Văn E</p>
-                                                                <p class="inbox-item-text">Nhân viên</p>
-                                                                <p class="inbox-item-date m-t-10">
-                                                                    <button type="button" class="btn btn-icon btn-xs waves-effect waves-light btn-success"> Reply </button>
-                                                                </p>
-                                                            </div>
-                                                        </a>
+                                                      <% })%>
+                                                        
                                                     </div>
                                                 </div>
             
@@ -188,7 +150,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="field-3" class="control-label">Họ tên:</label>
-                            <input type="text" class="form-control" id="field-1" value="<%=user.UserName%>">
+                            <input type="text" class="form-control" id="Name" value="<%=user.Name%>">
                         </div>
                     </div>
                 </div>
@@ -196,13 +158,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Ngày sinh:</label>
-                            <input type="text" class="form-control" id="field-2" value="<%=user.DateofBirth%>">
+                            <input type="text" class="form-control dateinput" id="Dateofbirth" value="<%=user.DateOfBirth%>">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Số điện thoại:</label>
-                            <input type="text" class="form-control" id="field-3" value="<%=user.Phone%>">
+                            <input type="text" class="form-control" id="Phone" value="<%=user.Phone%>">
                         </div>
                     </div>
                 </div>
@@ -210,13 +172,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Email:</label>
-                            <input type="text" class="form-control" id="field-4" value="<%=user.Email %>">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="field-5" class="control-label">Đổi mật khẩu:</label>
-                            <input type="password" class="form-control" id="field-5" placeholder="">
+                            <input type="text" class="form-control" id="Email"" value="<%=user.Email %>">
                         </div>
                     </div>
                 </div>
@@ -224,14 +180,14 @@
                     <div class="col-md-12">
                         <div class="form-group no-margin">
                             <label for="field-7" class="control-label">Giới thiệu bản thân:</label>
-                            <textarea class="form-control" id="field-7" placeholder="Nhân viên Công ty TNHH thu phí tự động VETC "></textarea>
+                            <textarea class="form-control" id="Introduce"  ><%=user.Introduce %></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                <button type="button" class="btn btn-success waves-effect waves-light">Lưu thay đổi</button>
+                <button type="button" class="btn btn-success waves-effect waves-light saveusers">Lưu thay đổi</button>
             </div>
         </div>
     </div>

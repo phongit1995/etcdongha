@@ -53,6 +53,14 @@ let getUserByUsername = async (username)=>{
     })
     return User;
 }
+let getUserById = async (ID)=>{
+    let User = await UsersDB.findAll({
+        where:{
+            [UsersField.Id]:ID
+        }
+    })
+    return User;
+}
 let delteUser = async (data,IdUser)=>{
     let user = await UsersDB.findOne({
         where:{
@@ -73,6 +81,53 @@ let delteUser = async (data,IdUser)=>{
       })
       return result ;
 }
+let getListUserInGroup  = async (idGroup)=>{
+    let listUser = await UsersDB.findAll({
+        where:{
+            [UsersField.Group]:idGroup
+        },
+        order:[
+            ['Role','ASC']
+        ]
+    })
+    let data = listUser.map((item)=>{
+        let info = item.dataValues ;
+        UsersRole.map((itemRole)=>{
+            if(itemRole.type==info.Role){
+                info.position = itemRole.name ;
+            }
+
+        })
+        return info ;
+    });
+    return data;
+}
+let UpdateUser = async (idUser,data) =>{
+    let user = await UsersDB.findOne({
+        where:{
+            [UsersField.Id]:idUser
+        }
+    })
+    delete user.dataValues[UsersField.NotesAdmin];
+    let NotesAdmin= user.dataValues[UsersField.NotesAdmin] ;
+    let Note ={ type:'UpdateInfo',UserId:idUser,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm"),OldData:user};
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    data[UsersField.NotesAdmin] = NotesAdmin;
+    let newUser = await UsersDB.update({
+       ...data
+    }, {
+        where:{
+            [UsersField.Id]:idUser
+        }
+    })
+     return newUser ;
+}
 module.exports={
-    createUser,getUserByPermissions,changePasswordUser,getUserByUsername,delteUser
+    createUser,getUserByPermissions,changePasswordUser,getUserByUsername,delteUser,
+    getListUserInGroup,
+    getUserById,
+    UpdateUser
 }

@@ -20,8 +20,16 @@ let createGroup = async (nameGroup)=>{
     })
     return result ;
 }
+let GetInfoGroups = async (idGroup)=>{
+    let result = await GroupUsersDB.findOne({
+        where:{
+            [GroupUsersFields.GroupID]:idGroup
+        }
+    });
+    return result;
+}
 module.exports = {
-    getList,createGroup
+    getList,createGroup,GetInfoGroups
 }
 let getNameManger = async (Group)=>{
     let listManager = await UsersDB.findAll({
