@@ -51,6 +51,53 @@ let deleteTicket = async (IdTicket,IdUser) =>{
     return result ;
 
 }
+let getinfoTicket = async (idTicket)=>{
+    return await TicketMonthDB.findOne({
+        where:{
+            [TicketMonthFiles.TicketId]:idTicket
+        }
+    })
+}
+let updateTicket  = async (data,Iduser)=>{
+    let {TicketId} = data ;
+    let tickets = await getinfoTicket(TicketId);
+    let NotesAdmin = tickets.dataValues[TicketMonthFiles.NotesAdmin];
+    delete tickets.dataValues[TicketMonthFiles.NotesAdmin];
+    let Note = {type:'Update',UserId:Iduser , Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm") ,oldValue:tickets.dataValues} ;
+    if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
+        NotesAdmin= JSON.parse(NotesAdmin);
+        NotesAdmin.push(Note)
+    }
+    delete data.TicketId ;
+    data[TicketMonthFiles.NotesAdmin] = NotesAdmin ;
+    let resultUpdate = await TicketMonthDB.update(data,{
+        where:{
+            [TicketMonthFiles.TicketId]:TicketId
+        }
+    })
+    return resultUpdate ;
+}
+let  searchTicket = async (Role,Group,data)=>{
+    let Sql = `SELECT Ticket.* , Users.UserName, Users.Id,TypeOfTicket.TypeOfTicketName ,Stations.StationsName    FROM Ticket LEFT JOIN Users ON Ticket.CreateByUser =Users.Id LEFT JOIN Stations On Ticket.NameStations=Stations.StationsID  LEFT JOIN TypeOfTicket ON 
+    Ticket.TypeOfTicket = TypeOfTicket.TypeOfTicketID where Ticket.Status=1 `;
+    if(Role!=1){
+        Sql+= ` and Users.Group= ${Group}`
+    }
+    if(data.LicensePlates){
+        Sql+= ` and Ticket.LicensePlates= '${data.LicensePlates}'` ;
+    }
+    if(data.Stations){
+        Sql+= ` and Ticket.NameStations= ${data.Stations}` ;
+    }
+    if(data.DateEnd){
+        Sql+= ` and Date(Ticket.DateEnd)= DATE('${data.DateEnd}')` ;
+    }
+    Sql+= ` ORDER  BY createdAt DESC` ;
+    return await sequelize.query(Sql) ;
+}
 module.exports ={
-    getlistTicketMonth,createTicket,deleteTicket ,getListTicketExpired
+    getlistTicketMonth,createTicket,deleteTicket ,getListTicketExpired ,
+    getinfoTicket,
+    updateTicket,
+    searchTicket
 }

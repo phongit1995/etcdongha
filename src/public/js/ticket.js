@@ -6,6 +6,9 @@ $(document).ready(function(){
         dateFormat: "Y-m-d",
         defaultDate:new Date()
     })
+    document.querySelectorAll('.dateinputSearch').flatpickr({
+        dateFormat: "Y-m-d"
+    })
     $('#AddTicket').click(function(){
         let LicensePlates = $('#LicensePlatesName').val();
         let MoneyAdd = $("#MoneyAdd").val();
@@ -126,4 +129,133 @@ $(document).ready(function(){
             }
         })
     }
+    // Click Edit 
+    $(document).on('click',".edit",function(){
+        let id = $(this).data("id");
+        $.ajax({
+            url:'/ticketmonth/getinfo',
+            method:'post',
+            data:{
+                id:id
+            },
+            success:function(data){
+                console.log(data);
+                $("#LicensePlatesNameEdit").val(data.data.LicensePlates);
+                $("#TypeOfTicketEdit").val(data.data.TypeOfTicket).change();
+                $("#MoneyEdit").val(data.data.Money) ;
+                $("#StationsEdit").val(data.data.NameStations).change();
+                $("#dateStartEdit").val( moment(data.data.DateStart).tz("Asia/Bangkok").format("YYYY-MM-DD"));
+                $("#dateEndEdit").val(moment(data.data.DateEnd).tz("Asia/Bangkok").format("YYYY-MM-DD"));
+                $("#NotesEdit").val(data.data.Notes);
+                $("#idTicketEdit").val(data.data.TicketId);
+                $("#editForm").modal('toggle');
+            }
+        })
+       
+    })
+    $(".saveEdit").click(function(){
+        let LicensePlatesNameEdit = $("#LicensePlatesNameEdit").val();
+        let TypeOfTicketEdit =  $("#TypeOfTicketEdit").val() ;
+        let MoneyEdit = $("#MoneyEdit").val() ;
+        let StationsEdit = $("#StationsEdit").val();
+        let dateStartEdit = $("#dateStartEdit").val( );
+        let dateEndEdit = $("#dateEndEdit").val();
+        let NotesEdit = $("#NotesEdit").val();
+        let idTicketEdit = $("#idTicketEdit").val();
+        if(LicensePlatesNameEdit=='' && MoneyEdit==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin');
+        }
+        $.ajax({
+            url:"/ticketmonth/updateticket",
+            method:"post",
+            data:{
+                TicketId:idTicketEdit,
+                LicensePlates:LicensePlatesNameEdit,
+                NameStations:StationsEdit,
+                TypeOfTicket:TypeOfTicketEdit,
+                Money:MoneyEdit,
+                DateStart:dateStartEdit,
+                DateEnd:dateEndEdit,
+                Notes:NotesEdit
+            },
+            success:function(data){
+                if(!data.error){
+                    LoadListTicket();
+                    $('#editForm').modal('hide');
+                    Swal.fire(
+                        'Thành Công!',
+                        'Cập Nhật Thông Tin Thành Công!',
+                        'success'
+                      )
+                }
+                else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Đã Có Lỗi Xảy Ra!',
+                        
+                      })
+                }
+                
+            }
+        })
+    })
+    $(".btn-search-form").click(function(){
+        let LicensePlatesSearch = $("#LicensePlatesSearch").val();
+        let StationsSearch = $("#StationsSearch").val();
+        let DateEndSearch = $("#DateEndSearch").val();
+        let data={};
+        if(LicensePlatesSearch!=''){
+            data.LicensePlates= LicensePlatesSearch ;
+        }
+        if(StationsSearch!='all'){
+            data.Stations= StationsSearch ;
+        }
+        if(DateEndSearch!=''){
+            data.DateEnd= DateEndSearch ;
+        }
+        console.log(data);
+        $.ajax({
+            url:'/ticketmonth/search',
+            method:'post',
+            data:data,
+            success:function(data){
+                console.log(data);
+                let array = data.data.map((item,index)=>{
+                    let text = `
+                    <tr role="row" class="odd"> <td class="sorting_1">${index+1}</td> 
+                    <td>${item.LicensePlates}</td>
+                    <td>${item.StationsName}</td> 
+                    <td>${item.TypeOfTicketName}</td> 
+                    <td>${item.Money}</td> 
+                    <td>${moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
+                    <td>${moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
+                    <td>${item.Notes}</td> 
+                    <td width="5%"> 
+                    <div class="btn btn-group-xs"> `;
+                    if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id="${item.TicketId}"><i class="fa fa-pencil"></i> Sửa</button>`}
+                    if(item.canDelete){text += ` <button type="button" class="del btn btn-danger deleteTicket" data-id="${item.TicketId}"><i class="fa fa-trash"></i> Xóa</button>`}      
+                           
+                    text += ` </div> 
+                      </td> 
+                      </tr>
+                    `
+                    return text ;
+                })
+                let result = array.join('');
+                console.log(result);
+                $("#datatable > tbody").empty();
+                table.clear();
+                table.destroy();
+                $("#datatable> tbody").append(result);
+                table = $('#datatable').DataTable();
+            }
+        })
+    })
+    $(".btn-clear-search").click(function(){
+        $("#LicensePlatesSearch").val('');
+        $("#StationsSearch").val('all').change();
+        $("#DateEndSearch").val('');
+        LoadListTicket();
+    })
 })

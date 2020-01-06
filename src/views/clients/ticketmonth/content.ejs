@@ -34,13 +34,11 @@
                                                 <div class="col-md-3">
                                                         <div class="input-group" >
                                                             <div class="input-group-prepend"><span class="input-group-text">Trạm:</span></div>
-                                                            <select class="form-control" id="TypeOffSaleOffSearch" name="TypeOffSaleOffSearch">
+                                                            <select class="form-control" id="StationsSearch" name="StationsSearch">
                                                                     <option value="all"">TẤT CẢ</option>
                                                                     <% listStations.forEach((item)=>{ %>
                                                                         <option value="<%=item.StationsID%>"><%=item.StationsName%></option>
                                                                    <% })%>
-                                                                        
-                                                               
                                                             </select>
                                                         </div>
                                                 </div>
@@ -49,7 +47,7 @@
                                                             <div class="input-group-prepend">
                                                             <span class="input-group-text">Ngày kết thúc:</span>
                                                             </div>
-                                                            <input id="DateEndSearch" type="text" class="form-control dateinput flatpickr-input"  readonly="readonly">
+                                                            <input id="DateEndSearch" type="text" class="form-control dateinputSearch flatpickr-input"  readonly="readonly">
                                                         </div>
                                             </div>
                                             <div class="col-md-3">
@@ -155,7 +153,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <% listTicketMonth.forEach((item,index)=>{ %>
+                                <% listTicketExpriedDay.forEach((item,index)=>{ %>
                                     <tr>
                                         <td><%=index+1%></td>
                                         <td><%=item.LicensePlates%></td>
@@ -195,62 +193,74 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!-- Để ẩn đi vậy nha--><!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
-                 <h4 class="modal-title">Thêm vé tháng/quý</h4>
+                 <h4 class="modal-title">Sửa Thông Tin Vé Tháng/Quý</h4>
              </div>
              <div class="modal-body">
                  <div class="row">
-                     <div class="col-md-10">
+                     <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-3" class="control-label">Biển số xe:</label>
-                             <input type="text" class="form-control" id="field-1" placeholder="">
+                             <input type="text" class="form-control" id="LicensePlatesNameEdit" placeholder="">
                          </div>
                      </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Loại vé:</label>
+                            <select class="form-control" id="TypeOfTicketEdit" name="TypeOfTicketAdd">
+                                <% listTypeOfTickets.forEach((item)=>{ %>
+                                    <option value="<%=item.TypeOfTicketID%>"><%=item.TypeOfTicketName%></option>
+                               <% })%>
+                            </select>
+                        </div>
+                    </div>
  
                  </div>
                  <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="field-2" class="control-label">Loại vé:</label>
-                             <input type="text" class="form-control" id="field-2" placeholder="">
-                         </div>
-                     </div>
+                     
                      <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-2" class="control-label">Giá tiền:</label>
-                             <input type="text" class="form-control" id="field-3" placeholder="">
-                         </div>
-                     </div>
-                 </div>
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="field-4" class="control-label">Trạm:</label>
-                             <select class="form-control" id="TypeOffSaleOffSearch" name="TypeOffSaleOffSearch">
-                                <% listStations.forEach((item)=>{ %>
-                                    <option value="<%=item.StationsID%>"><%=item.StationsName%></option>
-                               <% })%>
-                            </select>
+                             <input type="text" class="form-control" id="MoneyEdit" placeholder="">
                          </div>
                      </div>
                      <div class="col-md-6">
-                         <div class="form-group">
-                             <label for="field-4" class="control-label">Ngày bắt đầu:</label>
-                             <input type="text" class="form-control" id="field-4" placeholder="">
-                         </div>
-                     </div>    
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Trạm:</label>
+                            <select class="form-control" id="StationsEdit" name="StationsEdit">
+                               <% listStations.forEach((item)=>{ %>
+                                   <option value="<%=item.StationsID%>"><%=item.StationsName%></option>
+                              <% })%>
+                           </select>
+                        </div>
+                    </div>
                  </div>
                  <div class="row">
-                     <div class="col-md-12">
-                         <div class="form-group no-margin">
-                             <label for="field-7" class="control-label">Ngày kết thúc:</label>
-                             <textarea class="form-control" id="field-7" placeholder=""></textarea>
-                         </div>
-                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Ngày bắt đầu:</label>
+                            <input type="text" class="form-control dateinput" id="dateStartEdit" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Ngày kết thúc:</label>
+                            <input type="text" class="form-control dateinput" id="dateEndEdit" placeholder="">
+                        </div>
+                    </div>   
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Ghi chú:</label>
+                            <textarea class="form-control" id="NotesEdit" placeholder=""></textarea>
+                            <input type="hidden"  id="idTicketEdit">
+                        </div>
+                    </div>
                  </div>
              </div>
              <div class="modal-footer">
                  <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                 <button type="button" class="btn btn-success waves-effect waves-light">Lưu thay đổi</button>
+                 <button type="button" class="btn btn-success waves-effect waves-light saveEdit">Lưu thay đổi</button>
              </div>
         </div>
     </div>

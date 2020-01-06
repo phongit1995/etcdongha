@@ -63,6 +63,43 @@ let getListTicket = async (req,res)=>{
     })
     return ResponseHelper.json(res,null,listTicketMonths);
 }
+let getInfo = async(req,res)=>{
+    let {id}= req.body ;
+    let result = await TicketModels.getinfoTicket(id);
+    return ResponseHelper.json(res,null,result);
+}
+let updateTicket = async(req,res)=>{
+    // console.log(req.body);
+    let {Id} = req.user;
+    let result = await TicketModels.updateTicket(req.body,Id);
+    console.log(result);
+    return ResponseHelper.json(res,null,result);
+}
+let searchTicket = async (req,res)=>{
+    console.log(req.body);
+    let {Group,Role} = req.user ;
+    let resultSearch = await TicketModels.searchTicket(Role,Group,req.body);
+    // console.log(resultSearch[0]);
+    let listResult = resultSearch[0].map(item=>{
+        if(req.user.Role<3){
+            item['canEdit']=true;
+            item['canDelete']=true;
+        }
+        else if(req.user.Id==item.CreateByUser) {
+            item['canEdit']=true;
+            item['canDelete']=false;
+        }
+        else{
+            item['canEdit']=false;
+            item['canDelete']=false;
+        }
+        return item;
+    })
+    return ResponseHelper.json(res,null,listResult);
+
+}
 module.exports = {
-    index ,createTicket ,deleteTicket,getListTicket
+    index ,createTicket ,deleteTicket,getListTicket ,getInfo ,
+    updateTicket,
+    searchTicket
 }
