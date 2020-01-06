@@ -15,7 +15,7 @@ let {checkIsLogin} = require('./../commons/checkPermisson');
 
 
 router.get("/",checkIsLogin,(req,res)=>{
-    console.log(req.user);
+    // console.log(req.user);
     res.render('clients/index',{user:req.user});
 })
 router.get("/login",(req,res,next)=>{

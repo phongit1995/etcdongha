@@ -7,6 +7,7 @@ const path = require('path');
 const router = require('./routers/index');
 const db = require("./databases/connectdb");
 const initPassportLocal = require("./commons/passport");
+const notifications = require('./commons/notifications');
 let app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
@@ -24,6 +25,15 @@ app.use(require('flash')());
 initPassportLocal(); //  Passport Local
 app.set('views',path.join(__dirname,'/views'));
 app.set('view engine','ejs');
+app.use(async(req,res,next)=>{
+    if(req.isAuthenticated()){
+        let notification = await notifications(req);
+        // console.log(notifications);
+        req.user.notifications = notification ;
+    }
+   
+    next();
+})
 app.use("/",router);
 
 app.listen(process.env.PORT,()=>{
