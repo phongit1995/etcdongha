@@ -5,6 +5,7 @@ let moment = require('moment-timezone');
 let TicketModels = require('./../models/ticket');
 const ExpriedDays =3 ;
 let index = async(req,res)=>{
+    console.log(req.user);
     let {Group,Role} = req.user ;
     let listStation = await getListStations();
     let listTypeOfTicket = await getListTypeOfTicket();

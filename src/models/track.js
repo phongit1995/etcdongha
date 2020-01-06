@@ -90,6 +90,20 @@ let searchTrack = async(Role,Group,data)=>{
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
+let getNotificationTrack = async (Role,Group,IDUser,day)=>{
+    let Sql=`select TrackId,LicensePlates,NameCustomer,Lane,TrackTime,CreateByUser ,Image , Track.Status ,Notes , Track.createdAt,Track.
+    updatedAt , Users.UserName, Users.Id ,Fees.IdFee , Fees.FeeNumbers from Track left join Lane on Track.Lane= Lane.LaneID left join Users on Track.CreateByUser = Users.Id  
+    left join Fees on Track.TrackFee = Fees.IdFee where Track.Status=1 and DATE(Track.createdAt) = DATE(DATE_SUB(NOW(),INTERVAL ${day} DAY))`
+    if(Role!=1){
+        Sql+= ` and Users.Group= ${Group}`
+    }
+    if(Role==3){
+        Sql+= ` and UsersId.= ${IDUser}` ;
+    }
+    Sql+= ` ORDER  BY createdAt DESC` ;
+    return await sequelize.query(Sql) ;
+}
 module.exports = {
-    create,getListTrack,DeleteTrack,GetInfoTrack,updateTrack,searchTrack
+    create,getListTrack,DeleteTrack,GetInfoTrack,updateTrack,searchTrack,
+    getNotificationTrack
 }
