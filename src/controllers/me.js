@@ -2,9 +2,10 @@ let groupsModels = require('./../models/group');
 let UserModels = require('./../models/users');
 let index = async (req,res)=>{
     let users = await UserModels.getUserById(req.user.Id);
-    
+    console.log(req.user);
     let userInfo = users[0].dataValues;
-    let {Group} = req.user;
+    let {Group,notifications} = req.user;
+    userInfo.notifications = notifications;
     let groups = await groupsModels.GetInfoGroups(Group);
     userInfo.GroupName= groups.dataValues.GroupName ;
     let infoGroup = await UserModels.getListUserInGroup(Group);
