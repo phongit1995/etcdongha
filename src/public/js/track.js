@@ -22,7 +22,7 @@ $(document).ready(function(){
        let Fee = $('select[name=Fee]').val();
        let TrackTime = $('#TrackTime').val();
        console.log(LicensePlates , NameCustomers ,Lane,Notes,Fee,TrackTime);
-       if(LicensePlates=='' || NameCustomers==''||TrackTime==''){
+       if(LicensePlates=='' ||TrackTime==''){
         return alertify.error('Vui Lòng Nhập Đủ Thông Tin');
        }
        let data = {};
