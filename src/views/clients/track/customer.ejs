@@ -11,7 +11,7 @@
                      <div class="col-md-10">
                          <div class="form-group">
                              <label for="field-3" class="control-label">Biển số xe:</label>
-                             <input type="text" class="form-control" id="field-1" placeholder="">
+                             <input type="text" class="form-control" id="LicensePlatesEdit" placeholder="">
                          </div>
                      </div>
  
@@ -20,13 +20,17 @@
                      <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-2" class="control-label">Tên khách hàng:</label>
-                             <input type="text" class="form-control" id="field-2" placeholder="">
+                             <input type="text" class="form-control" id="NameCustomerEdit" placeholder="">
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-2" class="control-label">Làn:</label>
-                             <input type="text" class="form-control" id="field-3" placeholder="">
+                             <select class="form-control" id="LaneEdit" name="Lane">
+                                <% listLane.forEach((item)=>{ %>
+                                    <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
+                               <% })%>
+                            </select>
                          </div>
                      </div>
                  </div>
@@ -34,13 +38,17 @@
                      <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-4" class="control-label">Thời gian:</label>
-                             <input type="text" class="form-control" id="field-4" placeholder="">
+                             <input type="text" class="form-control" id="TrackTimeEdit" placeholder="">
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="form-group">
                              <label for="field-4" class="control-label">Mệnh giá:</label>
-                             <input type="text" class="form-control" id="field-4" placeholder="">
+                             <select class="form-control" id="FeeEdit" name="Fee">
+                                <% listFee.forEach((item)=>{ %>
+                                    <option value="<%=item.IdFee%>"><%=item.FeeNumbers%></option>
+                               <% })%>
+                            </select>
                          </div>
                      </div>    
                  </div>
@@ -48,14 +56,15 @@
                      <div class="col-md-12">
                          <div class="form-group no-margin">
                              <label for="field-7" class="control-label">Ghi chú:</label>
-                             <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                             <textarea class="form-control" id="NotesEdit" placeholder=""></textarea>
+                             <input type="hidden" id="idTrackEdit"  />
                          </div>
                      </div>
                  </div>
              </div>
              <div class="modal-footer">
                  <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                 <button type="button" class="btn btn-success waves-effect waves-light">Lưu thay đổi</button>
+                 <button type="button" class="btn btn-success waves-effect waves-light" id="UpdateTrack">Lưu thay đổi</button>
              </div>
         </div>
     </div>
@@ -75,7 +84,7 @@
                     <div class="col-md-10">
                         <div class="form-group">
                             <label for="field-3" class="control-label">Biển số xe:</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="">
+                            <input type="text" class="form-control" id="LicensePlates" placeholder="">
                         </div>
                     </div>
 
@@ -84,13 +93,17 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Tên khách hàng:</label>
-                            <input type="text" class="form-control" id="field-2" placeholder="">
+                            <input type="text" class="form-control" id="NameCustomers" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Làn:</label>
-                            <input type="text" class="form-control" id="field-3" placeholder="">
+                            <select class="form-control" id="TypeOfTicketEdit" name="Lane">
+                                <% listLane.forEach((item)=>{ %>
+                                    <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
+                               <% })%>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -98,13 +111,17 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Thời gian:</label>
-                            <input type="text" class="form-control" id="field-4" placeholder="">
+                            <input type="text" class="form-control datetimeinput" id="TrackTime" placeholder="">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Mệnh giá:</label>
-                            <input type="text" class="form-control" id="field-4" placeholder="">
+                            <select class="form-control" id="TypeOfTicketEdit" name="Fee">
+                                <% listFee.forEach((item)=>{ %>
+                                    <option value="<%=item.IdFee%>"><%=item.FeeNumbers%></option>
+                               <% })%>
+                            </select>
                         </div>
                     </div>    
                 </div>
@@ -112,14 +129,14 @@
                     <div class="col-md-12">
                         <div class="form-group no-margin">
                             <label for="field-7" class="control-label">Ghi chú:</label>
-                            <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                            <textarea class="form-control" id="Notes" placeholder=""></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                <button type="button" class="btn btn-success waves-effect waves-light">Lưu</button>
+                <button type="button" class="btn btn-success waves-effect waves-light add-track" >Lưu</button>
             </div>
         </div>
     </div>

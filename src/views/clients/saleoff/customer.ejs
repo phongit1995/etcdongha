@@ -11,7 +11,7 @@
                      <div class="col-md-10">
                          <div class="form-group">
                              <label for="field-3" class="control-label">Biển số xe:</label>
-                             <input type="text" class="form-control" id="field-1" placeholder="">
+                             <input type="text" class="form-control" id="LicensePlatesEdit" placeholder="">
                          </div>
                      </div>
  
@@ -19,28 +19,36 @@
                  <div class="row">
                      <div class="col-md-6">
                          <div class="form-group">
-                             <label for="field-2" class="control-label">Tên khách hàng:</label>
-                             <input type="text" class="form-control" id="field-2" placeholder="">
+                             <label for="field-2" class="control-label">Loại Giảm giá</label>
+                             <select class="form-control" id="TypeOffSaleOffEdit" name="TypeOffSaleOff">
+                                <% listTypeOffSaleOff.forEach((item)=>{ %>
+                                    <option value="<%=item.TypeOfSaleOffID%>"><%=item.TypeOfSaleOffName%></option>
+                               <% })%>
+                            </select>
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="form-group">
-                             <label for="field-2" class="control-label">Làn:</label>
-                             <input type="text" class="form-control" id="field-3" placeholder="">
+                             <label for="field-2" class="control-label">Mệnh Giá:</label>
+                             <select class="form-control" id="DenomintationsEdit" name="Denominations">
+                                <% listDenomintations.forEach((item)=>{ %>
+                                    <option value="<%=item.DenominationsID%>"><%=item.DenominationsNumbers%></option>
+                               <% })%>
+                            </select>
                          </div>
                      </div>
                  </div>
                  <div class="row">
                      <div class="col-md-6">
                          <div class="form-group">
-                             <label for="field-4" class="control-label">Thời gian:</label>
-                             <input type="text" class="form-control" id="field-4" placeholder="">
+                             <label for="field-4" class="control-label">Ngày Bắt Đầu</label>
+                             <input type="text" class="form-control" id="DateStartEdit" placeholder="">
                          </div>
                      </div>
                      <div class="col-md-6">
                          <div class="form-group">
-                             <label for="field-4" class="control-label">Mệnh giá:</label>
-                             <input type="text" class="form-control" id="field-4" placeholder="">
+                             <label for="field-4" class="control-label">Ngày Kết Thúc:</label>
+                             <input type="text" class="form-control" id="DateEndEdit" placeholder="">
                          </div>
                      </div>    
                  </div>
@@ -48,14 +56,24 @@
                      <div class="col-md-12">
                          <div class="form-group no-margin">
                              <label for="field-7" class="control-label">Ghi chú:</label>
-                             <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                             <textarea class="form-control" id="NotesEdit" placeholder=""></textarea>
+                             <input type="hidden" id="idSaleOffEdit" />
                          </div>
                      </div>
                  </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <label for="field-7" class="control-label">Hình ảnh:</label>
+                            <div id="image-priview-edit" style="padding: 5px"></div>
+                            <input type="file" class="form-control"  id="ImageEdit">
+                        </div>
+                    </div>
+                </div>
              </div>
              <div class="modal-footer">
                  <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                 <button type="button" class="btn btn-success waves-effect waves-light">Lưu thay đổi</button>
+                 <button type="button" class="btn btn-success waves-effect waves-light" id="UpdateSaleOff">Lưu thay đổi</button>
              </div>
         </div>
     </div>
@@ -75,7 +93,7 @@
                     <div class="col-md-10">
                         <div class="form-group">
                             <label for="field-3" class="control-label">Biển số xe:</label>
-                            <input type="text" class="form-control" id="field-1" placeholder="">
+                            <input type="text" class="form-control" id="LicensePlates" placeholder="">
                         </div>
                     </div>
 
@@ -84,13 +102,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Loại giảm giá:</label>
-                            <input type="text" class="form-control" id="field-2" placeholder="">
+                            <select class="form-control" id="TypeOffSaleOff" name="TypeOffSaleOff">
+                                <% listTypeOffSaleOff.forEach((item)=>{ %>
+                                    <option value="<%=item.TypeOfSaleOffID%>"><%=item.TypeOfSaleOffName%></option>
+                               <% })%>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Mệnh giá:</label>
-                            <input type="text" class="form-control" id="field-3" placeholder="Select/Menu">
+                            <select class="form-control" id="Denominations" name="Denominations">
+                                <% listDenomintations.forEach((item)=>{ %>
+                                    <option value="<%=item.DenominationsID%>"><%=item.DenominationsNumbers%></option>
+                               <% })%>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -98,13 +124,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Ngày bắt đầu:</label>
-                            <input type="text" class="form-control" id="field-4" placeholder="Datetimepicker">
+                            <input type="text" class="form-control dateinput" id="DateStart" >
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Ngày kết thúc:</label>
-                            <input type="text" class="form-control" id="field-4" placeholder="Datetimepicker">
+                            <input type="text" class="form-control dateinput" id="DateEnd" >
                         </div>
                     </div>    
                 </div>
@@ -112,7 +138,7 @@
                     <div class="col-md-12">
                         <div class="form-group no-margin">
                             <label for="field-7" class="control-label">Ghi chú:</label>
-                            <textarea class="form-control" id="field-7" placeholder=""></textarea>
+                            <textarea class="form-control" id="Notes" placeholder=""></textarea>
                         </div>
                     </div>
                 </div>
@@ -120,14 +146,15 @@
                     <div class="col-md-12">
                         <div class="form-group no-margin">
                             <label for="field-7" class="control-label">Hình ảnh:</label>
-                            <input type="upload" class="form-control" id="field-4" placeholder="upload">
+                            <div id="image-priview-add" style="padding: 5px"></div>
+                            <input type="file" class="form-control"  id="SaleoffImage">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
-                <button type="button" class="btn btn-success waves-effect waves-light">Lưu</button>
+                <button type="button" class="btn btn-success waves-effect waves-light add-saleoff">Lưu</button>
             </div>
         </div>
     </div>
