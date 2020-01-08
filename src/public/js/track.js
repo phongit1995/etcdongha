@@ -17,7 +17,7 @@ $(document).ready(function(){
         console.log('phong');
        let LicensePlates = $('#LicensePlates').val();
        let NameCustomers = $('#NameCustomers').val();
-       let Lane = $('select[name=Lane]').val();
+       let Lane = $('select[name=LaneAdd]').val();
        let Notes = $('#Notes').val();
        let Fee = $('select[name=Fee]').val();
        let TrackTime = $('#TrackTime').val();
@@ -32,6 +32,7 @@ $(document).ready(function(){
        data['Notes']=Notes;
        data['TrackFee']=Fee;
        data['TrackTime']=TrackTime;
+       console.log(data);
        $.ajax({
         url : "/track/create",
         method:'post',
