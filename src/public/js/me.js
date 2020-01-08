@@ -46,7 +46,16 @@ $(document).ready(function(){
             processData:false,
             data:formData,
             success:function(data){
-
+                if(!data.error){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Cập Nhật Thành Công',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                    location.reload();
+                }
             }
         })
     })

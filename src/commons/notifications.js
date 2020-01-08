@@ -21,21 +21,21 @@ let notificationsTrack = async (req)=>{
     if(Role==1){
         return {
             number:listTrackNotification[0].length,
-            link:"/saleoff",
-            message:`Tổng Hôm Qua Nhập Được ${listTrackNotification[0].length} giảm giá`
+            link:"/track",
+            message:`Tổng Hôm Qua Nhập Được ${listTrackNotification[0].length} vượt trạm`
         }
     }
     if(Role==2){
         return {
             number:listTrackNotification[0].length,
-            link:"/saleoff/",
-            message:`Nhóm Bạn Hôm Qua Nhập Được ${listTrackNotification[0].length} giảm giá`
+            link:"/track",
+            message:`Nhóm Bạn Hôm Qua Nhập Được ${listTrackNotification[0].length} vượt trạm`
         }
     }
     if(Role==3){
         return {
             number:listTrackNotification[0].length,
-            link:"/saleoff/",
+            link:"/track",
             message:` Bạn Hôm Qua Nhập Được ${listTrackNotification[0].length} giảm giá`
         }
     }

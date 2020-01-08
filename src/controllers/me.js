@@ -20,9 +20,13 @@ let updateUser = async (req,res)=>{
     return res.json({error:null})
 }
 let updateImage = async (req,res)=>{
-    let {Id} = req.user;
-    let users = await UserModels.UpdateUser(Id,{Avatar:req.file.filename});
-    console.log(req.file);
+    try {
+        let {Id} = req.user;
+        let users = await UserModels.UpdateUser(Id,{Avatar:req.file.filename});
+        return res.json({error:null})
+    } catch (error) {
+        
+    }
 }
 module.exports = {
     index,updateUser,updateImage

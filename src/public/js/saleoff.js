@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log('saleoff page');
+    const URLIMAGES = 'http://wooeu.net/home/uploads/';
     let table = $('#datatable').DataTable({
         "searching": false
     });
@@ -178,7 +178,7 @@ $(document).ready(function(){
                     $('#image-priview-edit').empty();
                     
                     if(data.data.Image){
-                        let img =`<img src="/images/saleoffimages/${data.data.Image}" class='image-preview'/>`;
+                        let img =`<img src="${URLIMAGES+data.data.Image}" class='image-preview'/>`;
                         $('#image-priview-edit').append(img);
                     }
                     $('#editForm').modal('toggle');
@@ -276,7 +276,7 @@ $(document).ready(function(){
             let imageshow = document.getElementById("imageshow");
             imageshow.classList.remove("hide");
             let Imagesshows = document.querySelector('#imageshow > div.popup-iamge > div > img');
-            Imagesshows.src = `/images/saleoffimages/${link}`;
+            Imagesshows.src = `${URLIMAGES+link}`;
             let linkimageshow = document.querySelector('#imageshow > div.popup-iamge > a');
             // linkimageshow.href = `/images/saleoffimages/${link}`;
         }

@@ -5,6 +5,7 @@ $(document).ready(function(){
         enableTime: true,
         dateFormat: "Y-m-d H:i",
     })
+    const URLIMAGES = 'http://wooeu.net/home/uploads/';
     let table = $('#datatable').DataTable();
     document.querySelectorAll('.dateinput').flatpickr({
         enableTime: false,
@@ -182,7 +183,7 @@ $(document).ready(function(){
                     $('#image-priview-edit').empty();
                     $('#idOperatingDiary').val(data.data.OperatingDiaryId);
                     if(data.data.Image){
-                        let img =`<img src="/images/operatingdiaryimages/${data.data.Image}" class='image-preview'/>`;
+                        let img =`<img src="${URLIMAGES+data.data.Image}" class='image-preview'/>`;
                      
                         $('#image-priview-edit').append(img);
                     }
@@ -279,7 +280,7 @@ $(document).ready(function(){
             let imageshow = document.getElementById("imageshow");
             imageshow.classList.remove("hide");
             let Imagesshows = document.querySelector('#imageshow > div.popup-iamge > div > img');
-            Imagesshows.src = `/images/operatingdiaryimages/${link}`;
+            Imagesshows.src = `${URLIMAGES+link}`;
             let linkimageshow = document.querySelector('#imageshow > div.popup-iamge > a');
             // linkimageshow.href = `/images/operatingdiaryimages/${link}`;
         }
