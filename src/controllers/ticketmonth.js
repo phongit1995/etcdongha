@@ -99,8 +99,19 @@ let searchTicket = async (req,res)=>{
     return ResponseHelper.json(res,null,listResult);
 
 }
+let importTicket = async (req,res)=>{
+    try {
+        let {Id} = req.user ;
+        let result = await TicketModels.ImportTicket(req.body.data,Id);
+        return ResponseHelper.json(res,null,result);
+    } catch (error) {
+        return ResponseHelper.json(res,error,null);
+    }
+    
+}
 module.exports = {
     index ,createTicket ,deleteTicket,getListTicket ,getInfo ,
     updateTicket,
-    searchTicket
+    searchTicket,
+    importTicket
 }

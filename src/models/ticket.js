@@ -2,6 +2,10 @@ let {TicketMonthDB,TicketMonthFiles} = require('./../databases/ticketmonth');
 let sequelize = require('./../databases/connectdb');
 let Texthelper = require('./../commons/TextHelper');
 let moment = require('moment-timezone');
+let {getListStations} = require('./../models/stations');
+let  {getListTypeOfTicket} = require('./../models/typeofticket');
+let {TypeOfTicketFields} = require('./../databases/typeofticket');
+let {StationsFields} = require('./../databases/stations');
 let getlistTicketMonth = async (Role,Group)=>{
     let Sql = `SELECT Ticket.* , Users.UserName, Users.Id,TypeOfTicket.TypeOfTicketName ,Stations.StationsName    FROM Ticket LEFT JOIN Users ON Ticket.CreateByUser =Users.Id LEFT JOIN Stations On Ticket.NameStations=Stations.StationsID  LEFT JOIN TypeOfTicket ON 
     Ticket.TypeOfTicket = TypeOfTicket.TypeOfTicketID where Ticket.Status=1 `;
@@ -95,9 +99,47 @@ let  searchTicket = async (Role,Group,data)=>{
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
+let ImportTicket = async(data,IdUser)=>{
+    try {
+        let listStations =JSON.parse(JSON.stringify( await getListStations()));
+    let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
+    let dataResult = data.map((item)=>{
+        let result = {};
+        result[TicketMonthFiles.TypeOfTicket] =1 ;
+        result[TicketMonthFiles.NameStations] =1 ;
+        listStations.forEach((valuestation)=>{
+            if(valuestation[StationsFields.StationsName].toLowerCase()==item['Trạm'].toLowerCase()){
+                result[TicketMonthFiles.NameStations]= valuestation[StationsFields.StationsID];
+            }
+        })
+        listTypeoffTicket.forEach((valuetype)=>{
+            if(valuetype[TypeOfTicketFields.TypeOfTicketName].toLowerCase()==item['Loại vé'].toLowerCase()){
+                result[TicketMonthFiles.TypeOfTicket]= valuetype[TypeOfTicketFields.TypeOfTicketID];
+            }
+        })
+        result[TicketMonthFiles.Money] = item['Giá tiền'];
+        result[TicketMonthFiles.LicensePlates]=item['Biển số'];
+        result[TicketMonthFiles.DateStart] = moment(item['Ngày bắt đầu'],"DD/MM/YYYY").format("YYYY-MM-DD");
+        result[TicketMonthFiles.DateEnd] = moment(item['Ngày kết thúc'],"DD/MM/YYYY").format("YYYY-MM-DD");
+        if(item['Ghi chú']){
+            result[TicketMonthFiles.Notes] = item['Ghi chú'];
+        }
+        return result;
+    })
+    let arrayPromise = dataResult.map((item)=>{
+        return createTicket(item,IdUser);
+    })
+    let resultCreate = await Promise.all(arrayPromise);
+    return resultCreate ;
+    } catch (error) {
+        return new Error(error);
+    }
+    
+}
 module.exports ={
     getlistTicketMonth,createTicket,deleteTicket ,getListTicketExpired ,
     getinfoTicket,
     updateTicket,
-    searchTicket
+    searchTicket,
+    ImportTicket
 }

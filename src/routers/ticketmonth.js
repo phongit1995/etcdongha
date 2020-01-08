@@ -9,4 +9,5 @@ router.get('/getlist',checkIsLogin,TicketMonth.getListTicket);
 router.post('/getinfo',checkIsLogin,TicketMonth.getInfo);
 router.post("/updateticket",checkIsLogin,TicketMonth.updateTicket);
 router.post("/search",checkIsLogin,TicketMonth.searchTicket);
+router.post("/import",checkIsLogin,TicketMonth.importTicket);
 module.exports  = router ;

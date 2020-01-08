@@ -99,6 +99,14 @@ $(document).ready(function(){
             success:function(data){
                 console.log(data);
                 let array = data.data.map((item,index)=>{
+                    let notes ;
+                    if(item.Notes==null|| item.Notes=='null'){
+                        notes='';
+                    }
+                    else {
+                        notes = item.Notes ;
+                    }
+
                     let text = `
                     <tr role="row" class="odd"> <td class="sorting_1">${index+1}</td> 
                     <td>${item.LicensePlates}</td>
@@ -107,7 +115,7 @@ $(document).ready(function(){
                     <td>${item.Money}</td> 
                     <td>${moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
                     <td>${moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
-                    <td>${item.Notes}</td> 
+                    <td>${notes}</td> 
                     <td width="5%"> 
                     <div class="btn btn-group-xs"> `;
                     if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id="${item.TicketId}"><i class="fa fa-pencil"></i> Sửa</button>`}
@@ -120,7 +128,7 @@ $(document).ready(function(){
                     return text ;
                 })
                 let result = array.join('');
-                console.log(result);
+                // console.log(result);
                     $("#datatable > tbody").empty();
                     table.clear();
                     table.destroy();
@@ -222,6 +230,13 @@ $(document).ready(function(){
             success:function(data){
                 console.log(data);
                 let array = data.data.map((item,index)=>{
+                    let notes ;
+                    if(item.Notes=='null'){
+                        notes='';
+                    }
+                    else {
+                        notes = item.Notes ;
+                    }
                     let text = `
                     <tr role="row" class="odd"> <td class="sorting_1">${index+1}</td> 
                     <td>${item.LicensePlates}</td>
@@ -230,7 +245,7 @@ $(document).ready(function(){
                     <td>${item.Money}</td> 
                     <td>${moment(item.DateStart).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
                     <td>${moment(item.DateEnd).tz("Asia/Bangkok").format("DD-MM-YYYY")}</td> 
-                    <td>${item.Notes}</td> 
+                    <td>${notes}</td> 
                     <td width="5%"> 
                     <div class="btn btn-group-xs"> `;
                     if(item.canEdit){ text += `<button type="button" class="edit btn btn-success" data-id="${item.TicketId}"><i class="fa fa-pencil"></i> Sửa</button>`}
@@ -257,5 +272,40 @@ $(document).ready(function(){
         $("#StationsSearch").val('all').change();
         $("#DateEndSearch").val('');
         LoadListTicket();
+    })
+    // Import Ticket 
+    $("#importTicket").change(function(){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            var result = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+           console.log(result);
+           $.ajax({
+               url:"/ticketmonth/import",
+               method:"post",
+               data:{data:result},
+               success:function(data){
+                    console.log(data);
+                    if(!data.error){
+                        Swal.fire(
+                            'Thành Công!',
+                            'Import Ticket Thành Công !',
+                            'success'
+                          )
+                          LoadListTicket();
+                    }else 
+                    {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Đã Có Lỗi Xảy Ra!',
+                            
+                          })
+                    }
+               }
+           })
+        }
+        reader.readAsBinaryString(event.target.files[0]);
     })
 })
