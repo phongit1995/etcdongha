@@ -98,7 +98,7 @@ let getNotificationTrack = async (Role,Group,IDUser,day)=>{
         Sql+= ` and Users.Group= ${Group}`
     }
     if(Role==3){
-        Sql+= ` and UsersId.= ${IDUser}` ;
+        Sql+= ` and Users.Id= ${IDUser}` ;
     }
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
