@@ -1,5 +1,5 @@
 let genId = () =>{
-    var id = Math.floor(Math.random() * 1000000) + '' + Math.floor(Math.random() * 1000000);
+    var id = Math.floor(Math.random() * 10000) + '' + Math.floor(Math.random() * 10000);
     return id;
 }
 module.exports = {

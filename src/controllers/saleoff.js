@@ -7,13 +7,13 @@ let index = async (req,res)=>{
     let {Group,Role} = req.user ;
     let [listDenomintations,listTypeOffSaleOff,listSaleOff] = await Promise.all([GetListDenomintations(),getListTypeOffSaleOff(),SaleOffModel.GetListSaleOff(Role,Group)]);
     // console.log(JSON.parse(JSON.stringify(listDenomintations)));
-    console.log(listSaleOff[0]);
+    console.log(listSaleOff[1][0]);
     res.render('clients/saleoff/index',{user:req.user,listDenomintations:JSON.parse(JSON.stringify(listDenomintations)),
         listTypeOffSaleOff:JSON.parse(JSON.stringify(listTypeOffSaleOff)) , moment:moment,listSaleOff:listSaleOff[0]})
 }
 let create = async (req,res)=>{
     try{
-        // console.log(req.body ,req.file);
+        console.log(req.user.Id);
         let result = await  SaleOffModel.create(req.body,req.user.Id,req.file);
        ResponseHelper.json(res,null,result);
     }

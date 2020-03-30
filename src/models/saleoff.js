@@ -9,6 +9,7 @@ let create = async (data,IdUser,Image)=>{
     if(Image){
         data[SaleOffFields.Image] = Image.filename ;
     }
+    console.log(data);
     // console.log(data);
     let result = await SaleOffDB.create({...data});
     return result ;
