@@ -359,5 +359,24 @@ $(document).ready(function(){
         LoadSaleOff();
     })
     // Import Ticket
-   
-})
+    $('#importSaleOff').change(function(){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            var result = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+           console.log(result);
+           $.ajax({
+            url : "/saleoff/import",
+            method:'post',
+            data:{
+                data:result
+            },
+            success: function(data){
+                
+            }
+        })
+        }
+        reader.readAsBinaryString(event.target.files[0]);
+    })
+})  

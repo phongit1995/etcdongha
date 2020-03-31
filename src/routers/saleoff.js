@@ -21,5 +21,6 @@ router.post('/getlist',checkIsLogin,SaleOffController.getlistSaleOff);
 router.post('/delete',checkIsLogin,SaleOffController.deleteSaleoff);
 router.post('/getInfo',checkIsLogin,SaleOffController.getInfo);
 router.post('/update',checkIsLogin,upload.single('FileImages'),uploadFileToServer,SaleOffController.updateSaleOff);
-router.post('/search',checkIsLogin,SaleOffController.search)
+router.post('/search',checkIsLogin,SaleOffController.search);
+
 module.exports  = router ;

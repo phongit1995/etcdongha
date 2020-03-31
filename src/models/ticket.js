@@ -37,7 +37,7 @@ let deleteTicket = async (IdTicket,IdUser) =>{
             [TicketMonthFiles.TicketId]:IdTicket
         }
     })
-    console.log(Ticket);
+    // console.log(Ticket);
     let NotesAdmin= Ticket.dataValues[TicketMonthFiles.NotesAdmin] ;
     let Note ={ type:'Delete',UserId:IdUser,Time:moment().tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")};
     if(!NotesAdmin){ NotesAdmin=[] ; NotesAdmin.push(Note) }else{
@@ -102,36 +102,42 @@ let  searchTicket = async (Role,Group,data)=>{
 let ImportTicket = async(data,IdUser)=>{
     try {
         let listStations =JSON.parse(JSON.stringify( await getListStations()));
-    let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
-    let dataResult = data.map((item)=>{
+        let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
+        // console.log(listStations , listTypeoffTicket);
+        let dataResult = data.map((item)=>{
         let result = {};
-        result[TicketMonthFiles.TypeOfTicket] =1 ;
-        result[TicketMonthFiles.NameStations] =1 ;
-        listStations.forEach((valuestation)=>{
-            if(valuestation[StationsFields.StationsName].toLowerCase()==item['Trạm'].toLowerCase()){
-                result[TicketMonthFiles.NameStations]= valuestation[StationsFields.StationsID];
+        result[TicketMonthFiles.TypeOfTicket]=listTypeoffTicket[0].TypeOfTicketID;
+        result[TicketMonthFiles.NameStations]=listStations[0].StationsID ;
+        result[TicketMonthFiles.Money]=item['__EMPTY_2'];
+        result[TicketMonthFiles.DateStart] =  moment(item['__EMPTY_11'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.DateEnd] = moment( item['__EMPTY_12'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.AccountID]=item['__EMPTY_8'];
+        result[TicketMonthFiles.Etag]=item['__EMPTY_9'];
+        result[TicketMonthFiles.Agency]=item['__EMPTY_4'];
+        result[TicketMonthFiles.LicensePlates]=item['__EMPTY_10'];
+        result[TicketMonthFiles.DateSell]=item['__EMPTY_6'];
+        listStations.forEach((itemStations)=>{
+            if(itemStations.StationsName.toUpperCase()==item['__EMPTY'].toUpperCase()){
+                result[TicketMonthFiles.NameStations]=itemStations.StationsID ;
             }
         })
-        listTypeoffTicket.forEach((valuetype)=>{
-            if(valuetype[TypeOfTicketFields.TypeOfTicketName].toLowerCase()==item['Loại vé'].toLowerCase()){
-                result[TicketMonthFiles.TypeOfTicket]= valuetype[TypeOfTicketFields.TypeOfTicketID];
+        listTypeoffTicket.forEach((itemTicket)=>{
+            if(itemTicket.TypeOfTicketName.toUpperCase()==item['__EMPTY_3'].toUpperCase()){
+                result[TicketMonthFiles.TypeOfTicket]=itemTicket.TypeOfTicketID;
             }
         })
-        result[TicketMonthFiles.Money] = item['Giá tiền'];
-        result[TicketMonthFiles.LicensePlates]=item['Biển số'];
-        result[TicketMonthFiles.DateStart] = moment(item['Ngày bắt đầu'],"DD/MM/YYYY").format("YYYY-MM-DD");
-        result[TicketMonthFiles.DateEnd] = moment(item['Ngày kết thúc'],"DD/MM/YYYY").format("YYYY-MM-DD");
-        if(item['Ghi chú']){
-            result[TicketMonthFiles.Notes] = item['Ghi chú'];
-        }
         return result;
     })
+    // console.log(dataResult);
+    // let resut = await createTicket(dataResult[0],IdUser);
+    // console.log(resut);
     let arrayPromise = dataResult.map((item)=>{
         return createTicket(item,IdUser);
     })
     let resultCreate = await Promise.all(arrayPromise);
     return resultCreate ;
     } catch (error) {
+        console.log(error);
         return new Error(error);
     }
     

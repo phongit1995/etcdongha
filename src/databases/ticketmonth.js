@@ -12,7 +12,11 @@ const TicketMonthFiles = {
     Image:'Image', // Hình Ảnh
     Status:'Status', // Trạng Thái
     Notes:'Notes', // Notes
-    NotesAdmin:'NotesAdmin'
+    NotesAdmin:'NotesAdmin',
+    DateSell:'DateSell', // Kiểu Trạm Import
+    Etag:'Etag',// Etag Import
+    Agency:'Agency' , // Đại Lý Import
+    AccountID:'AccountID'
 }
 const TicketMonthDB = db.define('Ticket',{
     [TicketMonthFiles.TicketId]:{
@@ -41,6 +45,18 @@ const TicketMonthDB = db.define('Ticket',{
         type:Sequelize.DataTypes.TIME
     },
     [TicketMonthFiles.Image]:{
+        type:Sequelize.DataTypes.STRING
+    },
+    [TicketMonthFiles.Etag]:{
+        type:Sequelize.DataTypes.STRING
+    },
+    [TicketMonthFiles.DateSell]:{
+        type:Sequelize.DataTypes.TIME
+    },
+    [TicketMonthFiles.Agency]:{
+        type:Sequelize.DataTypes.STRING
+    },
+    [TicketMonthFiles.AccountID]:{
         type:Sequelize.DataTypes.STRING
     },
     [TicketMonthFiles.Status]:{

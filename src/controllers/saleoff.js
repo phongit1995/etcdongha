@@ -107,6 +107,7 @@ let search = async (req,res)=>{
     }
     
 }
+
 module.exports = {
-    index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff,search
+    index,create,getlistSaleOff,deleteSaleoff,getInfo,updateSaleOff,search 
 }
