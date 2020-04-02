@@ -103,32 +103,32 @@ let ImportTicket = async(data,IdUser)=>{
     try {
         let listStations =JSON.parse(JSON.stringify( await getListStations()));
         let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
-        // console.log(data);
+        console.log(data);
         let ThangQuy  = await sequelize.query('Select * from ThangQuy');
         let dataResult = data.map((item)=>{
         let result = {};
-        ThangQuy[0].forEach((itemthangquy)=>{
-            if(itemthangquy.Rate==item['__EMPTY']){
-                item['__EMPTY']= itemthangquy.Name ;
-            }
-        })
         result[TicketMonthFiles.TypeOfTicket]=listTypeoffTicket[0].TypeOfTicketID;
         result[TicketMonthFiles.NameStations]=listStations[0].StationsID ;
-        result[TicketMonthFiles.Money]=item['__EMPTY_1'];
-        result[TicketMonthFiles.DateStart] =  moment(item['__EMPTY_10'],"DD/MM/YYYY").format();
-        result[TicketMonthFiles.DateEnd] = moment( item['__EMPTY_11'],"DD/MM/YYYY").format();
-        result[TicketMonthFiles.AccountID]=item['__EMPTY_7'];
-        result[TicketMonthFiles.Etag]=item['__EMPTY_8'];
-        result[TicketMonthFiles.Agency]=item['__EMPTY_3'];
-        result[TicketMonthFiles.LicensePlates]=item['__EMPTY_9'];
-        result[TicketMonthFiles.DateSell]=item['__EMPTY_6'];
+        result[TicketMonthFiles.Money]=item['Giá tiền'];
+        result[TicketMonthFiles.DateStart] =  moment(item['Ngày bắt đầu'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.DateEnd] = moment( item['Ngày kết thúc'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.AccountID]=item['Mã tài khoản'];
+        result[TicketMonthFiles.Etag]=item['Mã thẻ etag'];
+        result[TicketMonthFiles.Agency]=item['Đại lý'];
+        result[TicketMonthFiles.LicensePlates]=item['Biển số xe'];
+        result[TicketMonthFiles.DateSell]=moment( item['Thời gian bán'],"DD/MM/YYYY HH:mm:ss").format();
         listStations.forEach((itemStations)=>{
-            if(itemStations.StationsName.toUpperCase()==item['__EMPTY_5'].toUpperCase()){
+            if(itemStations.StationsName.toUpperCase()==item['Trạm/Đoạn'].toUpperCase()){
                 result[TicketMonthFiles.NameStations]=itemStations.StationsID ;
             }
         })
+        ThangQuy[0].forEach((itemthangquy)=>{
+            if(itemthangquy.Rate==item['Giá tiền']){
+                item['typeTicket']= itemthangquy.Name ;
+            }
+        })
         listTypeoffTicket.forEach((itemTicket)=>{
-            if(itemTicket.TypeOfTicketName.toUpperCase()==item['__EMPTY'].toUpperCase()){
+            if(itemTicket.TypeOfTicketName.toUpperCase()==item['typeTicket'].toUpperCase()){
                 result[TicketMonthFiles.TypeOfTicket]=itemTicket.TypeOfTicketID;
             }
         })
@@ -136,8 +136,8 @@ let ImportTicket = async(data,IdUser)=>{
         return result;
     })
     // console.log(dataResult);
-    // let resut = await createTicket(dataResult[0],IdUser);
-    // console.log(resut);
+    let resut = await createTicket(dataResult[0],IdUser);
+    console.log(resut);
     let arrayPromise = dataResult.map((item)=>{
         return createTicket(item,IdUser);
     })
