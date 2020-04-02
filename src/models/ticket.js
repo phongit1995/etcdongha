@@ -103,39 +103,46 @@ let ImportTicket = async(data,IdUser)=>{
     try {
         let listStations =JSON.parse(JSON.stringify( await getListStations()));
         let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
-        console.log(data);
+        // console.log(data);
+        let ThangQuy  = await sequelize.query('Select * from ThangQuy');
         let dataResult = data.map((item)=>{
         let result = {};
+        ThangQuy[0].forEach((itemthangquy)=>{
+            if(itemthangquy.Rate==item['__EMPTY']){
+                item['__EMPTY']= itemthangquy.Name ;
+            }
+        })
         result[TicketMonthFiles.TypeOfTicket]=listTypeoffTicket[0].TypeOfTicketID;
         result[TicketMonthFiles.NameStations]=listStations[0].StationsID ;
-        result[TicketMonthFiles.Money]=item['__EMPTY_2'];
-        result[TicketMonthFiles.DateStart] =  moment(item['__EMPTY_11'],"DD/MM/YYYY").format();
-        result[TicketMonthFiles.DateEnd] = moment( item['__EMPTY_12'],"DD/MM/YYYY").format();
-        result[TicketMonthFiles.AccountID]=item['__EMPTY_8'];
-        result[TicketMonthFiles.Etag]=item['__EMPTY_9'];
-        result[TicketMonthFiles.Agency]=item['__EMPTY_4'];
-        result[TicketMonthFiles.LicensePlates]=item['__EMPTY_10'];
+        result[TicketMonthFiles.Money]=item['__EMPTY_1'];
+        result[TicketMonthFiles.DateStart] =  moment(item['__EMPTY_10'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.DateEnd] = moment( item['__EMPTY_11'],"DD/MM/YYYY").format();
+        result[TicketMonthFiles.AccountID]=item['__EMPTY_7'];
+        result[TicketMonthFiles.Etag]=item['__EMPTY_8'];
+        result[TicketMonthFiles.Agency]=item['__EMPTY_3'];
+        result[TicketMonthFiles.LicensePlates]=item['__EMPTY_9'];
         result[TicketMonthFiles.DateSell]=item['__EMPTY_6'];
         listStations.forEach((itemStations)=>{
-            if(itemStations.StationsName.toUpperCase()==item['__EMPTY'].toUpperCase()){
+            if(itemStations.StationsName.toUpperCase()==item['__EMPTY_5'].toUpperCase()){
                 result[TicketMonthFiles.NameStations]=itemStations.StationsID ;
             }
         })
         listTypeoffTicket.forEach((itemTicket)=>{
-            if(itemTicket.TypeOfTicketName.toUpperCase()==item['__EMPTY_3'].toUpperCase()){
+            if(itemTicket.TypeOfTicketName.toUpperCase()==item['__EMPTY'].toUpperCase()){
                 result[TicketMonthFiles.TypeOfTicket]=itemTicket.TypeOfTicketID;
             }
         })
+        
         return result;
     })
     // console.log(dataResult);
     // let resut = await createTicket(dataResult[0],IdUser);
     // console.log(resut);
-    // let arrayPromise = dataResult.map((item)=>{
-    //     return createTicket(item,IdUser);
-    // })
-    // let resultCreate = await Promise.all(arrayPromise);
-    // return resultCreate ;
+    let arrayPromise = dataResult.map((item)=>{
+        return createTicket(item,IdUser);
+    })
+    let resultCreate = await Promise.all(arrayPromise);
+    return resultCreate ;
     } catch (error) {
         console.log(error);
         return new Error(error);
