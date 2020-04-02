@@ -28,6 +28,22 @@ let updateImage = async (req,res)=>{
         
     }
 }
+let changepassword = async (req,res)=>{
+    let {Id} = req.user;
+    console.log(req.user);
+    console.log(req.body);
+    if(req.user.Password !=req.body.password){
+        return res.json({
+            error:'Mật Khẩu Sai'
+        })
+    }else{
+        let result = await  UserModels.updatePassword(Id,req.body.newpassword);
+        return res.json({
+            error:null,
+            message:'Cập Nhật Mật Khẩu Thành Công'
+        })
+    }
+}
 module.exports = {
-    index,updateUser,updateImage
+    index,updateUser,updateImage ,changepassword
 }

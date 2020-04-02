@@ -103,7 +103,7 @@ let ImportTicket = async(data,IdUser)=>{
     try {
         let listStations =JSON.parse(JSON.stringify( await getListStations()));
         let listTypeoffTicket = JSON.parse(JSON.stringify(await getListTypeOfTicket()));
-        // console.log(listStations , listTypeoffTicket);
+        console.log(data);
         let dataResult = data.map((item)=>{
         let result = {};
         result[TicketMonthFiles.TypeOfTicket]=listTypeoffTicket[0].TypeOfTicketID;
@@ -131,11 +131,11 @@ let ImportTicket = async(data,IdUser)=>{
     // console.log(dataResult);
     // let resut = await createTicket(dataResult[0],IdUser);
     // console.log(resut);
-    let arrayPromise = dataResult.map((item)=>{
-        return createTicket(item,IdUser);
-    })
-    let resultCreate = await Promise.all(arrayPromise);
-    return resultCreate ;
+    // let arrayPromise = dataResult.map((item)=>{
+    //     return createTicket(item,IdUser);
+    // })
+    // let resultCreate = await Promise.all(arrayPromise);
+    // return resultCreate ;
     } catch (error) {
         console.log(error);
         return new Error(error);

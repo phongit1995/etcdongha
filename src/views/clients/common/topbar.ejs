@@ -70,8 +70,8 @@
                     </a>
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="mdi mdi-settings"></i> <span>Đổi Mật Khẩu</span>
+                    <a class="dropdown-item notify-item">
+                        <i class="mdi mdi-settings"></i> <span  data-toggle="modal" data-target="#changepassword">Đổi Mật Khẩu</span>
                     </a>
 
                     <!-- item-->
@@ -103,6 +103,46 @@
     </nav>
 
 </div>
+<div id="changepassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+               <!-- Để ẩn đi vậy nha--><!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <h4 class="modal-title">Đổi Mật Khẩu</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Mật Khẩu Cũ</label>
+                            <input type="text" class="form-control" id="change_password" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-2" class="control-label">Mật Khẩu Mới</label>
+                            <input type="password" class="form-control " id="change_newpassword" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">Xác Nhận Mật Khẩu</label>
+                            <input type="password" class="form-control" id="change_confirmpassword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Tắt</button>
+                <button type="button" class="btn btn-success waves-effect waves-light " id="change_password_button">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->
 <style>
     .item-noti {
         padding: 10px 20px;
@@ -119,3 +159,54 @@
         flex-basis: 63px;
     }
 </style>
+<script>
+    $(document).ready(function(){
+        $('#change_password_button').click(function(){
+            let change_password = $('#change_password').val();
+            let change_newpassword = $('#change_newpassword').val();
+            let change_confirmpassword = $('#change_confirmpassword').val();
+            if(change_password=='' || change_newpassword=='' || change_confirmpassword==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin');
+            }
+            if(change_newpassword!=change_confirmpassword){
+            return alertify.error('2 mật khẩu chưa giống nhau');
+            }
+            $.ajax({
+            url:"/me/changepassword",
+            method:"post",
+            data:{
+                password:change_password,
+                newpassword:change_newpassword,
+                confirmpassword:change_confirmpassword
+            },
+            success:(data)=>{
+                if(!data.error){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Đổi Mật Khẩu Thành Công',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(()=>{
+                        window.location.href="/logout";
+                    },1000)
+                   
+                }
+                else{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: data.error,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $('#change_password').val('');
+                $('#change_newpassword').val('');
+                $('#change_confirmpassword').val('');
+            }
+            })
+        })
+    })
+</script>

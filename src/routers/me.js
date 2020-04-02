@@ -16,5 +16,6 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage })
 router.get("/",checkIsLogin ,Me.index);
 router.post("/update",checkIsLogin,Me.updateUser);
-router.post("/updateavatar",upload.single("image"), uploadFileToServer,Me.updateImage)
+router.post("/updateavatar",upload.single("image"), uploadFileToServer,Me.updateImage);
+router.post('/changepassword',Me.changepassword)
 module.exports  = router ;

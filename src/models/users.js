@@ -125,9 +125,19 @@ let UpdateUser = async (idUser,data) =>{
     })
      return newUser ;
 }
+let updatePassword = async (IdUser,password)=>{
+    let user = await UsersDB.findOne({
+        where:{
+            [UsersField.Id]:IdUser
+        }
+    })
+    user.Password= password ;
+    user.save();
+}
 module.exports={
     createUser,getUserByPermissions,changePasswordUser,getUserByUsername,delteUser,
     getListUserInGroup,
     getUserById,
-    UpdateUser
+    UpdateUser,
+    updatePassword
 }
