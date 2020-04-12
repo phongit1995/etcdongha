@@ -1,7 +1,21 @@
 $(document).ready(function(){
         //Buttons examples
     let table = $('#datatable').DataTable({
-        "searching": false
+        "searching": true,
+        paging:true,
+        buttons: [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: [
+                    'copy',
+                    'excel',
+                    'csv',
+                    'pdf',
+                    'print'
+                ]
+            }
+        ]
     });
 
     // console.log('phong');

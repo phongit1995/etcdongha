@@ -13,6 +13,7 @@
                 <li>
                     <a href="/saleoff"><i class="fi-briefcase"></i> <span>Giảm giá</span></a>
                 </li>
+                <% if(user.ShowPage == 0) {%>
                 <li>
                     <a href="/operatingdiary"><i class="fi-paper-stack"></i> <span>Vận hành</span></a>
                 </li>
@@ -22,6 +23,7 @@
                 <li>
                     <a href="taskboard.html"><i class="fi-clock"></i> <span>Nhật ký trạm</span></a>
                 </li>
+                <% }%>
                 <li>
                     <a href="javascript: void(0);">
                         <i class="fi-air-play"></i><span class="badge badge-success pull-right">2</span> <span>Hỗ trợ</span>

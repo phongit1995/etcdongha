@@ -13,7 +13,8 @@ const UsersField = {
     Role:'Role',
     Group:'Group',
     NotesAdmin:'NotesAdmin',
-    Status:'Status'
+    Status:'Status',
+    Showpage:'Showpage'
 }
 const UsersRole = [
     {
@@ -81,6 +82,10 @@ const UsersDB=  db.define('Users',{
                 return JSON.parse(this.getDataValue(UsersField.NotesAdmin));
             }
         }
+    },
+    [UsersField.Showpage]:{
+        type:Boolean,
+        default:false
     }
 })
 module.exports = {
