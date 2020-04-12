@@ -19,9 +19,9 @@ File: Main Css
   list-style: none;
 }
 
-.nav-second-level li a, .nav-thrid-level li a {
+.nav-second-level li a, .nav-thrid-level li a { /*Mau chu trong menu */
   padding: 8px 20px 8px 10px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(96, 5, 99);
   display: block;
 }
 
@@ -30,8 +30,8 @@ File: Main Css
 }
 
 .nav-second-level li a:hover, .nav-thrid-level li a:hover {
-  background-color: #343c49;
-  color: #ffffff;
+  background-color: #a1a09f9f;
+  color: #0d7237;
 }
 
 .nav-second-level > li > a {
@@ -40,7 +40,7 @@ File: Main Css
 
 .nav-second-level li.active > a {
   color: #ffffff;
-  background-color: #343c49;
+  background-color: #48085c86 ;
 }
 
 .nav-third-level > li > a {
@@ -60,7 +60,7 @@ File: Main Css
 }
 
 .topbar .topbar-left {
-  background: #313a46;
+  background: #d4d2d2a9;  /* bg logo trai */
   float: left;
   text-align: center;
   height: 70px;
@@ -155,7 +155,7 @@ File: Main Css
 .side-menu {
   width: 240px;
   z-index: 10;
-  background: #343c49;
+  background: #d4d2d4bd;
   bottom: 0;
   margin-top: 0;
   padding-bottom: 30px;
@@ -191,8 +191,8 @@ File: Main Css
   font-size: 16px;
 }
 
-#sidebar-menu > ul > li > a {
-  color: rgba(255, 255, 255, 0.6);
+#sidebar-menu > ul > li > a {   /* Mau chu menu trai */
+  color: rgb(96, 5, 99);
   display: block;
   padding: 14px 20px;
   margin: 2px 0;
@@ -201,9 +201,9 @@ File: Main Css
 }
 
 #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
-  color: #ffffff;
+  color: #0d7237;   /* Mau chu bg menu trai */
   text-decoration: none;
-  background-color: #2f3642;
+  background-color: #a19fa19f;   /* Mau  bg menu trai */
 }
 
 #sidebar-menu > ul > li > a > span {
@@ -266,9 +266,9 @@ File: Main Css
   margin-right: 0;
 }
 
-#sidebar-menu > ul > li > a.active {
+#sidebar-menu > ul > li > a.active {  /* mau Bg menu active*/
   color: #ffffff !important;
-  background-color: #2f3642;
+  background-color: #48085cb9;
 }
 
 .menu-title {
@@ -276,9 +276,9 @@ File: Main Css
   letter-spacing: .05em;
   pointer-events: none;
   cursor: default;
-  font-size: 11px;
+  font-size: 13px;
   text-transform: uppercase;
-  color: #98a6ad;
+  color: #930bbd6e;  /* Color title Menu trai */
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -1233,7 +1233,7 @@ a:focus {
 }
 
 .bg-success {
-  background-color: #32c861 !important;
+  background-color: ##24a15c !important;
 }
 
 .bg-info {
