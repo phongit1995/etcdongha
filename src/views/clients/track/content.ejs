@@ -86,7 +86,10 @@
                                         </div>
                                         <div class="row" style="margin-top:20px">
                                             <div class="col-md-8">
-                                                <div class="message-search"></div>
+                                                <div class="message-search">
+                                                    <div>Tổng Số Lần : <span id="totaltimes"></span></div>
+                                                    <div>Tổng Số Tiền : <span id="totalmoneys"></span></div>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <button type="button" class="btn btn-success waves-effect btn-search-form "><i class="fa fa-search"></i> Tìm Kiếm</button>
@@ -131,7 +134,7 @@
                                 <tr>
                                     <td><%=index+1 %></td>
                                     <td><%=item.UserName %></td>
-                                    <td><%=item.LicensePlates %></td>
+                                    <td><%=item.LicensePlates.toUpperCase() %></td>
                                     <td><%=item.NameCustomer %></td>
                                     <td><%=item.Lane %></td>
                                     <td><%=moment(item.TrackTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")  %></td>

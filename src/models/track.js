@@ -76,7 +76,7 @@ let searchTrack = async(Role,Group,data)=>{
         Sql+= ` and Users.Group= ${Group}`
     }
     if(data.LicensePlates){
-        Sql+= ` and LicensePlates= '${data.LicensePlates}'`
+        Sql+= ` and LOWER(LicensePlates)= LOWER('${data.LicensePlates}')`
     }
     if(data.DateStart){
         Sql+= ` and  DATE_FORMAT(TrackTime,'%Y-%m-%d') >= '${data.DateStart}'`

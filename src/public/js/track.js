@@ -18,7 +18,8 @@ $(document).ready(function(){
         ]
     });
 
-    // console.log('phong');
+    // Hide message - search
+    $(".message-search").hide();
     // DateTime Picker
     document.querySelectorAll('.datetimeinput').flatpickr({
         enableTime: true,
@@ -81,7 +82,7 @@ $(document).ready(function(){
                     let array = data.data.map((item,index)=>{
                         let text= `<tr>  <td>${index+1}</td> 
                         <td>${item.UserName}</td>
-                        <td>${item.LicensePlates}</td>
+                        <td>${item.LicensePlates.toUpperCase()}</td>
                         <td>${item.NameCustomer}</td>
                         <td>${item.Lane}</td>
                         <td>${ moment(item.TrackTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")}</td>
@@ -103,6 +104,13 @@ $(document).ready(function(){
                     table.destroy();
                     $("#datatable> tbody").append(result);
                     table = $('#datatable').DataTable();
+                    let totalMoney = 0 ;
+                    data.data.forEach((item)=>{
+                        totalMoney+= item.FeeNumbers ;
+                    })
+                    $(".message-search").show();
+                    $("#totalmoneys").text(totalMoney);
+                    $("#totaltimes").text(data.data.length);
                 }
             }
         })
@@ -249,7 +257,7 @@ $(document).ready(function(){
                     let array = data.data.map((item,index)=>{
                         let text= `<tr>  <td>${index+1}</td> 
                         <td>${item.UserName}</td>
-                        <td>${item.LicensePlates}</td>
+                        <td>${item.LicensePlates.toUpperCase()}</td>
                         <td>${item.NameCustomer}</td>
                         <td>${item.Lane}</td>
                         <td>${ moment(item.TrackTime).tz("Asia/Bangkok").format("DD-MM-YYYY HH:mm")}</td>
@@ -265,12 +273,21 @@ $(document).ready(function(){
                         return text ;
                         
                     })
+                   
                     let result = array.join('');
                     $("#datatable > tbody").empty();
                     table.clear();
                     table.destroy();
                     $("#datatable> tbody").append(result);
                     table = $('#datatable').DataTable({ "searching": false});
+                    // show message 
+                    let totalMoney = 0 ;
+                    data.data.forEach((item)=>{
+                        totalMoney+= item.FeeNumbers ;
+                    })
+                    $(".message-search").show();
+                    $("#totalmoneys").text(totalMoney);
+                    $("#totaltimes").text(data.data.length);
                 }
             }
         })
