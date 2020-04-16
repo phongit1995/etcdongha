@@ -21,16 +21,16 @@ File: Main Css
 
 .nav-second-level li a, .nav-thrid-level li a { /*Mau chu trong menu */
   padding: 8px 20px 8px 10px;
-  color: rgb(96, 5, 99);
+  color: rgb(0, 125, 61);
   display: block;
 }
 
 .nav-second-level li a:focus, .nav-thrid-level li a:focus {
-  background-color: #343c49;
+  background-color: #73c76e;
 }
 
 .nav-second-level li a:hover, .nav-thrid-level li a:hover {
-  background-color: #a1a09f9f;
+  background-color: #73c76e;
   color: #0d7237;
 }
 
@@ -39,8 +39,8 @@ File: Main Css
 }
 
 .nav-second-level li.active > a {
-  color: #ffffff;
-  background-color: #48085c86 ;
+  color: #008A43;;
+  background-color:  rgb(222, 241, 231);
 }
 
 .nav-third-level > li > a {
@@ -60,7 +60,7 @@ File: Main Css
 }
 
 .topbar .topbar-left {
-  background: #d4d2d2a9;  /* bg logo trai */
+  background: #008A43;  /* bg logo trai */
   float: left;
   text-align: center;
   height: 70px;
@@ -81,7 +81,7 @@ File: Main Css
   background-color: #64c5b1;
   border-radius: 0;
   margin-bottom: 0;
-  padding: 0 10px;
+  padding: -1 10px;
   margin-left: 240px;
   min-height: 70px;
 }
@@ -155,12 +155,13 @@ File: Main Css
 .side-menu {
   width: 240px;
   z-index: 10;
-  background: #d4d2d4bd;
+  background: rgb(222, 241, 231);;
   bottom: 0;
   margin-top: 0;
   padding-bottom: 30px;
   position: fixed;
   top: 70px;
+  border: 1px solid #008A43;;
 }
 
 .side-menu .waves-effect .waves-ripple {
@@ -192,18 +193,20 @@ File: Main Css
 }
 
 #sidebar-menu > ul > li > a {   /* Mau chu menu trai */
-  color: rgb(96, 5, 99);
+  color:rgb(0, 125, 61);
   display: block;
   padding: 14px 20px;
-  margin: 2px 0;
+  margin: 0px 0;
   font-size: 1rem;
   position: relative;
+  border-bottom: 1px dotted rgb(123, 131, 127);
 }
 
 #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
   color: #0d7237;   /* Mau chu bg menu trai */
   text-decoration: none;
-  background-color: #a19fa19f;   /* Mau  bg menu trai */
+  background-color: #73c76e;   /* Mau  bg menu trai */
+
 }
 
 #sidebar-menu > ul > li > a > span {
@@ -211,7 +214,15 @@ File: Main Css
 }
 
 #sidebar-menu {
-  padding-top: 10px;
+  padding-top: 0px; 
+}
+.table-button{
+  float: right;
+}
+.table-message{
+  float: left;
+  background-color: rgb(222, 241, 231);
+  color: rgb(0, 125, 61);
 }
 
 #sidebar-menu .menu-arrow {
@@ -268,18 +279,20 @@ File: Main Css
 
 #sidebar-menu > ul > li > a.active {  /* mau Bg menu active*/
   color: #ffffff !important;
-  background-color: #48085cb9;
+  background-color: #73c76e;
 }
 
 .menu-title {
-  padding: 12px 20px !important;
+  padding: 15px 20px !important;
   letter-spacing: .05em;
   pointer-events: none;
   cursor: default;
   font-size: 13px;
   text-transform: uppercase;
-  color: #930bbd6e;  /* Color title Menu trai */
+  background-color: #008A43;;
+  color: #fff;  /* Color title Menu trai */
   font-family: "Nunito Sans", sans-serif;
+
 }
 
 .enlarged .slimScrollDiv, .enlarged .slimscroll-menu {
@@ -311,7 +324,7 @@ File: Main Css
   padding-bottom: 5px;
   padding-top: 5px;
   z-index: 9999;
-  background-color: #343c49;
+  background-color: #008A43;;
 }
 
 .enlarged #wrapper .left.side-menu {
@@ -320,13 +333,13 @@ File: Main Css
 }
 
 .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a {
-  padding: 15px 20px;
+  padding: 10px 20px;
   min-height: 56px;
 }
 
 .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:hover, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:active, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:focus {
-  color: #ffffff !important;
-  background-color: #2f3642;
+  color: #008A43;
+  background-color: #73c76e;
 }
 
 .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a i {
@@ -352,7 +365,7 @@ File: Main Css
   position: relative;
   width: 260px;
   color: #ffffff !important;
-  background-color: #2f3642;
+  background-color: #73c76e;
 }
 
 .enlarged #wrapper .left.side-menu #sidebar-menu ul > li:hover > ul {
@@ -429,7 +442,7 @@ File: Main Css
 .enlarged #wrapper .topbar .topbar-left .logo i {
   display: block;
   line-height: 70px;
-  color: #64c5b1 !important;
+  color: #008A43; !important;
 }
 
 .enlarged #wrapper #sidebar-menu > ul > li:hover > a.open :after {
@@ -518,7 +531,7 @@ File: Main Css
 }
 
 .page-title-box {
-  padding: 15px 20px;
+  padding: 13px 20px;
   margin: 0 -25px 20px -25px;
   background-color: #ffffff;
   border-bottom: 1px solid #e2e2e2;

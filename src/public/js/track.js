@@ -119,8 +119,8 @@ $(document).ready(function(){
     $(document).on('click','.deleteTrack',function(){
         let TrackId= $(this).attr("data-id");
         Swal.fire({
-            title: 'Xóa Thông Tin?',
-            text: "Bạn Có Chắc Chắn Xóa Thông Tin này không!",
+            title: 'Xóa thông tin?',
+            text: "Bạn có chắc chắn xóa thông tin này?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
