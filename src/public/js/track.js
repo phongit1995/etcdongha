@@ -337,4 +337,26 @@ $(document).ready(function(){
         }
         reader.readAsBinaryString(event.target.files[0]);
     })
+    //sugget 
+    $("#tracksuggesst").click(function(){
+        let LicensePlates = $("#LicensePlates").val();
+        console.log(LicensePlates);
+        if(LicensePlates==''){
+            return alertify.error('Vui Lòng Nhập Đủ Thông Tin Khi Tìm Kiếm');
+        }
+        $.ajax({
+            url : "/track/suggest",
+            method:'post',
+            data:{
+                LicensePlates
+            },
+            success:function(data){
+                console.log(data);
+                if(data.data){
+                    $("#NameCustomers").val(data.data.NameCustomer);
+                    $("select[name=Fee]").val(data.data.TrackFee).change();
+                }
+            }
+        })
+    })
 })

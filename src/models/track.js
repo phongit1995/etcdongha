@@ -103,7 +103,18 @@ let getNotificationTrack = async (Role,Group,IDUser,day)=>{
     Sql+= ` ORDER  BY createdAt DESC` ;
     return await sequelize.query(Sql) ;
 }
+let suggestTrack = async (id)=>{
+    return await TrackDB.findOne({
+        where:{
+            [TrackFields.LicensePlates]:id
+        },
+        order:[
+            ['createdAt','DESC']
+        ]
+    })
+}
 module.exports = {
     create,getListTrack,DeleteTrack,GetInfoTrack,updateTrack,searchTrack,
-    getNotificationTrack
+    getNotificationTrack,
+    suggestTrack
 }

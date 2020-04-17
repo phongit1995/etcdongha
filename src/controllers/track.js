@@ -101,6 +101,15 @@ let search = async (req,res)=>{
     }
     
 }
+let suggest = async(req,res)=>{
+    try {
+        let resultSuggest = await TrackModel.suggestTrack(req.body.LicensePlates);
+        return ResponseHelper.json(res,null,resultSuggest);
+    } catch (error) {
+        console.log(error);
+        return ResponseHelper.json(res,'Lỗi',error);
+    }
+}
 module.exports = {
-    index,create,getListTrack,DeleteTrack,GetInfo,update,search
+    index,create,getListTrack,DeleteTrack,GetInfo,update,search,suggest
 }

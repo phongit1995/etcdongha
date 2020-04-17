@@ -10,4 +10,5 @@ router.post('/delete',checkIsLogin,trackController.DeleteTrack);
 router.post('/getInfo',checkIsLogin,trackController.GetInfo);
 router.post('/update',checkIsLogin,trackController.update);
 router.post('/search',checkIsLogin,trackController.search);
+router.post('/suggest',checkIsLogin,trackController.suggest);
 module.exports  = router ;
