@@ -2,7 +2,7 @@ let {TrackFields, TrackDB} = require('./../databases/track');
 let sequelize = require('./../databases/connectdb');
 let Texthelper = require('./../commons/TextHelper');
 let moment = require('moment-timezone');
-
+const NUMBER_LIMIT =100 ;
 let create = async (data,IDUser)=>{
     data[TrackFields.CreateByUser]=IDUser;
     data[TrackFields.TrackId] = Texthelper.genId();
@@ -16,7 +16,7 @@ let getListTrack = async (Role,Group)=>{
     if(Role!=1){
         Sql+= ` and Users.Group= ${Group}`
     }
-    Sql+= ` ORDER  BY createdAt DESC` ;
+    Sql+= ` ORDER  BY createdAt DESC LIMIT ${NUMBER_LIMIT}` ;
     return await sequelize.query(Sql) ;
 }
 let DeleteTrack = async (data,Id)=>{
