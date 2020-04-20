@@ -1,5 +1,6 @@
 let {TrackFields, TrackDB} = require('./../databases/track');
 let sequelize = require('./../databases/connectdb');
+const Sequelize = require('sequelize');
 let Texthelper = require('./../commons/TextHelper');
 let moment = require('moment-timezone');
 const NUMBER_LIMIT =100 ;
@@ -105,9 +106,9 @@ let getNotificationTrack = async (Role,Group,IDUser,day)=>{
 }
 let suggestTrack = async (id)=>{
     return await TrackDB.findOne({
-        where:{
-            [TrackFields.LicensePlates]:id
-        },
+        where:
+            sequelize.where(sequelize.fn('lower', sequelize.col(TrackFields.LicensePlates)),sequelize.fn('lower', id))
+        ,
         order:[
             ['createdAt','DESC']
         ]

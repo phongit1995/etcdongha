@@ -106,7 +106,7 @@ let suggest = async(req,res)=>{
         let resultSuggest = await TrackModel.suggestTrack(req.body.LicensePlates);
         return ResponseHelper.json(res,null,resultSuggest);
     } catch (error) {
-        console.log(error);
+        console.log('Lỗi'+error);
         return ResponseHelper.json(res,'Lỗi',error);
     }
 }

@@ -34,7 +34,7 @@ $(document).ready(function(){
        let NameCustomers = $('#NameCustomers').val();
        let Lane = $('select[name=LaneAdd]').val();
        let Notes = $('#Notes').val();
-       let Fee = $('select[name=Fee]').val();
+       let Fee = $('#TypeOfTicketEdit').val();
        let TrackTime = $('#TrackTime').val();
        console.log(LicensePlates , NameCustomers ,Lane,Notes,Fee,TrackTime);
        if(LicensePlates=='' ||TrackTime==''){
