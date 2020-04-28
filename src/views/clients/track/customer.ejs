@@ -102,7 +102,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-2" class="control-label">Làn:</label>
-                            <select class="form-control" id="TypeOfTicketEdit" name="LaneAdd">
+                            <select class="form-control" id="TypeOfLanetAdd" name="LaneAdd">
                                 <% listLane.forEach((item)=>{ %>
                                     <option value="<%=item.LaneID%>"><%=item.LaneName%></option>
                                <% })%>
@@ -120,7 +120,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="field-4" class="control-label">Mệnh giá:</label>
-                            <select class="form-control" id="TypeOfTicketEdit" name="Fee">
+                            <select class="form-control" id="TypeOfTicketAdd" name="Fee">
                                 <% listFee.forEach((item)=>{ %>
                                     <option value="<%=item.IdFee%>"><%=item.FeeNumbers%></option>
                                <% })%>
