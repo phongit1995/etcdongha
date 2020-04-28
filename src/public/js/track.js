@@ -65,6 +65,7 @@ $(document).ready(function(){
                 $('#NameCustomers').val('');
                 $('#Notes').val('');
                 $('#TrackTime').val('');
+                $("#closeModalAdd").click();
                 LoadTrack();
             }
         }
