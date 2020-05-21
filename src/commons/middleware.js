@@ -21,7 +21,8 @@ let uploadFileToServer = async(req,res,next)=>{
         };
         next();
     } catch (error) {
-        
+        // console.log(error);
+        next();
     }
 }
 module.exports = {
