@@ -3,7 +3,7 @@ let sequelize = require('./../databases/connectdb');
 const Sequelize = require('sequelize');
 let Texthelper = require('./../commons/TextHelper');
 let moment = require('moment-timezone');
-const NUMBER_LIMIT =100 ;
+const NUMBER_LIMIT =200 ; // Hien thi so dong ra index
 let create = async (data,IDUser)=>{
     data[TrackFields.CreateByUser]=IDUser;
     data[TrackFields.TrackId] = Texthelper.genId();
